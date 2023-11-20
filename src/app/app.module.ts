@@ -12,6 +12,13 @@ import { RegisterComponent } from './components/register/register.component';
 import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { HomeScreenComponent } from './screens/home-screen/home-screen.component';
+import { HeaderComponent } from './components/constants/header/header.component';
+import { SidebarComponent } from './components/constants/sidebar/sidebar.component';
+import {MatIconModule} from '@angular/material/icon';
+import { MatBadgeModule } from '@angular/material/badge';
+import { HomePostComponent } from './components/home/home-post/home-post.component';
+import { PostScreenComponent } from './screens/post-screen/post-screen.component';
+import { PostComponent } from './components/post/post/post.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +28,11 @@ import { HomeScreenComponent } from './screens/home-screen/home-screen.component
     LoginComponent,
     RegisterComponent,
     HomeScreenComponent,
+    HeaderComponent,
+    SidebarComponent,
+    HomePostComponent,
+    PostScreenComponent,
+    PostComponent,
 
   ],
   imports: [
@@ -29,6 +41,8 @@ import { HomeScreenComponent } from './screens/home-screen/home-screen.component
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
+    MatIconModule,
+    MatBadgeModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({
       timeOut: 3000,

@@ -1,0 +1,62 @@
+<div class="h-screen sticky top-0 bg-primary-color-dark text-primary-color-extra-light  text-base list-none divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 ">
+    <ul class="flex items-center py-16 flex-col select-none" aria-labelledby="sidebar">
+        <a href="/home" class="flex justify-center items-center w-full hover:bg-primary-color hover:underline cursor-pointer">
+        <span  class="block py-6 text-xl font-semibold text-primary-color-extra-light  flex items-center ">Anasayfa</span>
+        </a>
+        <a href="/profile" class="flex justify-center items-center w-full hover:bg-primary-color hover:underline cursor-pointer">
+        <span   class="block py-6 text-xl font-semibold text-primary-color-extra-light flex items-center ">Profil</span>
+        </a>
+        <a class="flex justify-center items-center w-full hover:bg-primary-color hover:underline cursor-pointer">
+        <span routerLink="/friends" class="block py-6 text-xl font-semibold text-primary-color-extra-light flex items-center ">Arkadaşlar</span>
+        </a>
+        <li class="flex justify-center items-center w-full hover:bg-primary-color hover:underline cursor-pointer">
+        <span routerLink="/messages" class="block py-6 text-xl font-semibold text-primary-color-extra-light flex items-center ">Mesajlar</span>
+        </li>
+        <li class="flex justify-center py-2 items-center w-full cursor-pointer">
+            <button data-modal-target="post-modal" data-modal-toggle="post-modal" type="button" class="block py-4 px-10 rounded-full bg-primary-color hover:bg-primary-color-dark shadow hover:border-solid hover:border-2 hover:border-black text-white flex items-center">Paylaş <mat-icon>add</mat-icon></button>
+        </li>
+        
+      </ul>
+</div>
+
+<div id="post-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow ">
+            
+            
+            <!-- Modal body -->
+            <div class="p-4 md:p-5 space-y-1">
+                <div class="flex items-center justify-between p-2  border-b rounded-t dark:border-gray-600">
+               
+                    <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="post-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <div class="relative w-full h-full">
+                <textarea name="postarea" id="post-area"  rows="8" class="relative w-full h-full rounded-md" placeholder="Fikirlerinizi paylaşın.." maxlength="255" [(ngModel)]="postarea"></textarea>
+                <div class="absolute w-full bottom-3 left-1">
+                    <hr class="text-gray-500 py-1">
+                    <div class="flex flex-row  divide-x divide-gray-400">
+                        <div>
+                            <input type="file" name="post-image" id="post-image-file" (change)="postImageSelected($event)" accept=".png,.jpg" ngf-max-size="5MB" class="hidden">
+                            <mat-icon class="cursor-pointer text-primary-color-dark hover:text-primary-color hover:bg-gray-100" (click)="photoFileClick()"> insert_photo</mat-icon>
+                        </div>
+                        
+                        <mat-icon class="cursor-pointer text-primary-color-dark hover:text-primary-color hover:bg-gray-100"> insert_emoticon</mat-icon>
+                    </div>
+                </div>
+                </div>
+                <div *ngIf="postImage != undefined">
+                    <img [src]="getPostImage()" alt="image"  height="500" class="cursor-pointer hover:opacity-90 border-2 border-solid border-stone-500" (click)="deleteImage()">
+                </div>
+                <div class="flex flex-col items-end">
+                    <button type="button" class="rounded-md bg-primary-color-dark hover:bg-primary-color text-white px-8 py-4" (click)="Post()">Paylaş</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
