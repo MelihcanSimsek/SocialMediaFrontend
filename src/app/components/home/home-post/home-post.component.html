@@ -1,7 +1,7 @@
 <div class="px-10 py-8 ">
     <div class="post w-full py-6" *ngFor="let post of postDetail">
     <!-- post header section -->
-    <div class="bg-white w-4/5 flex flex-row justify-between px-6 py-2 shadow-lg cursor-pointer " >
+    <div class="bg-white w-4/5 flex flex-row justify-between px-6 py-2 shadow-lg cursor-pointer " routerLink="/posts/{{post.id}}" routerLinkActive="active" >
         <div class="flex flex-row gap-1">
         <img [src]="getUserProfileImage(post.profileImage)" alt="profile-image" class="rounded-full cursor-pointer hover:opacity-90" width="50" height="50">
         <span class="bold text-lg text-black">{{post.name}}</span>
@@ -10,7 +10,7 @@
     </div>
     <hr class="w-4/5 h-1 bg-primary-color-extra-light">
     <!-- post body section -->
-    <div class="bg-white w-4/5 pb-4 shadow-lg cursor-pointer" >
+    <div class="bg-white w-4/5 pb-4 shadow-lg cursor-pointer" routerLink="/posts/{{post.id}}" routerLinkActive="active">
         <div class="w-full pl-10 pr-6 pt-4">
             <p class="flex flex-wrap text-[1.1rem]">{{post.message}}</p>
         </div>
