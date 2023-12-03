@@ -1,20 +1,20 @@
 
 
-<nav class="bg-primary-color-dark sticky top-0 z-50">
+<nav class="bg-primary-color-dark  top-0 z-20 ">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <a routerLink="/home" class="flex items-center space-x-3 rtl:space-x-reverse">
         <span class="self-center text-2xl font-semibold whitespace-nowrap text-white select-none">SocialMedia</span>
     </a>
     <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-        <div class="flex items-center space-x-5">
-          <button type="button" class="flex text-sm bg-primary-color-dark rounded-full md:me-0 focus:ring-2 focus:ring-primary-color-light" id="user-notification-button" aria-expanded="false" data-dropdown-toggle="notification-dropdown">
+        <div class="flex items-center space-x-5"  id="navbar-user" >
+          <button type="button" class="flex text-sm bg-primary-color-dark rounded-full md:me-0 focus:ring-2 focus:ring-primary-color-light" id="user-theme-button" aria-expanded="false" data-dropdown-toggle="notification-dropdown">
             <span class="sr-only">Theme</span>
             <mat-icon class="text-primary-color-extra-light">wb_sunny</mat-icon>
             <mat-icon *ngIf="false">tonality</mat-icon>
           </button>
         <button type="button" class="flex text-sm bg-primary-color-dark rounded-full md:me-0 focus:ring-2 focus:ring-primary-color-light" id="user-notification-button" aria-expanded="false" data-dropdown-toggle="notification-dropdown">
             <span class="sr-only">Open notification menu</span>
-            <mat-icon  mat-raised-button [matBadge]="notificationNumber" matBadgePosition="after" matBadgeColor="warn" class="text-primary-color-extra-light" arria-hidden="true">notifications</mat-icon>
+            <mat-icon  mat-raised-button [matBadge]="notificationNumber" matBadgePosition="after" matBadgeColor="warn" aria-hidden="false" class="text-primary-color-extra-light" >notifications</mat-icon>
           </button>
         <button type="button" class="flex text-sm bg-primary-color-dark rounded-full md:me-0 focus:ring-2 focus:ring-primary-color-light" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-trigger="hover">
           <span class="sr-only">Open user menu</span>
@@ -29,6 +29,9 @@
             <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{user.email}}</span>
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
+            <li *ngIf="dashboardRole">
+              <a href="dashboard" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white flex items-center"><mat-icon class="text-sm">dashboard</mat-icon>Dashboard</a>
+              </li>
             <li>
             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white flex items-center"><mat-icon class="text-sm">settings</mat-icon>Ayarlar</a>
             </li>
@@ -59,10 +62,10 @@
             <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">Görülmeyen gönderi yorumu var.</span>
           </div>
           </div>
-
-        <button data-collapse-toggle="navbar-user" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-primary-color-extra-light rounded-lg md:hidden hover:bg-primary-color focus:outline-none focus:ring-2 focus:ring-gray-200 " aria-controls="navbar-user" aria-expanded="false">
+          <!-- data-collapse-toggle="navbar-user" -->
+        <button  type="button"  class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-primary-color-extra-light rounded-lg md:hidden hover:bg-primary-color focus:outline-none focus:ring-2 focus:ring-gray-200 " aria-controls="navbar-user" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
-            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <svg class="w-5 h-5" aria-hidden="false" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
             </svg>
         </button>

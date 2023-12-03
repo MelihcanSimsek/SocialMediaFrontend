@@ -1,4 +1,4 @@
-<div class="px-10 py-8 ">
+<div class="px-10 py-8 z-50">
     <div class="post w-full py-6" *ngFor="let post of postDetail">
     <!-- post header section -->
     <div class="bg-white w-4/5 flex flex-row justify-between px-6 py-2 shadow-lg cursor-pointer " routerLink="/posts/{{post.id}}" routerLinkActive="active" >
@@ -23,13 +23,24 @@
     <div class="bg-white w-4/5 shadow-lg">
         <div class="w-full pl-10 pr-6 py-4 flex flex-row justify-around space-around">
             <div >
-                <mat-icon mat-raised-button [matBadge]="post.comment" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  arria-hidden="true" class="cursor-pointer text-slate-700 hover:text-slate-500"> comment</mat-icon>
+                <mat-icon mat-raised-button [matBadge]="post.comment" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" class="cursor-pointer text-slate-700 hover:text-slate-500"> comment</mat-icon>
             </div>
             <div>
-                <mat-icon mat-raised-button [matBadge]="post.fav.length" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  arria-hidden="true" class="cursor-pointer text-slate-700 hover:text-slate-500">favorite_border</mat-icon>
+                <mat-icon mat-raised-button [matBadge]="post.fav.length" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" class="cursor-pointer text-slate-700 hover:text-slate-500">favorite_border</mat-icon>
             </div>
             <div>
                 <mat-icon  class="cursor-pointer text-slate-700 hover:text-slate-500">share</mat-icon>
+            </div>
+            <div>
+                <button type="button" [matMenuTriggerFor]="menu" >
+                    <mat-icon class="cursor-pointer text-slate-700 hover:text-slate-500" >report</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu" yPosition="above">
+                    <button mat-menu-item *ngFor="let rpt of reports" (click)="report(rpt.id,post.id)">
+                      <span>{{rpt.reason}}</span>
+                    </button>
+                </mat-menu>
+               
             </div>
         </div>
         
@@ -60,3 +71,4 @@
     </div>
 </div>
 </div>
+

@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Post } from 'src/app/models/entities/post';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   selector: 'app-sidebar',
@@ -24,7 +25,7 @@ export class SidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    initFlowbite();
   }
 
   photoFileClick()
@@ -71,6 +72,7 @@ export class SidebarComponent implements OnInit {
           this.postImage = undefined;
           this.postarea = "";
           this.toastrService.info("Paylaşım yapıldı..");
+          location.reload();
         },responseError=>{
           this.postImage = undefined;
           this.postarea = "";
@@ -91,6 +93,7 @@ export class SidebarComponent implements OnInit {
           this.postImage = undefined;
           this.postarea = "";
           this.toastrService.info("Paylaşım yapıldı..");
+          location.reload();
         },responseError=>{
           this.postImage = undefined;
           this.postarea = "";
@@ -115,6 +118,7 @@ export class SidebarComponent implements OnInit {
           this.postImage = undefined;
           this.postarea = "";
           this.toastrService.info("Paylaşım yapıldı..");
+          location.reload();
         },responseError=>{
           this.postImage = undefined;
           this.postarea = "";

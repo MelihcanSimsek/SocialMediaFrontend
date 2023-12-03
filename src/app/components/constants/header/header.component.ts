@@ -6,6 +6,7 @@ import { Profile } from 'src/app/models/entities/profile';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { ProfileService } from 'src/app/services/profile.service';
+import { RoleService } from 'src/app/services/role.service';
 
 @Component({
   selector: 'app-header',
@@ -19,10 +20,12 @@ export class HeaderComponent implements OnInit {
   notificationNumber = 99;
   profile:Profile;
   imageUrl = "https://localhost:7223/Uploads/images/"
+  dashboardRole:boolean;
   constructor(private authService:AuthService,
     private localStorageService:LocalstorageService,
     private router:Router,
-    private profileService:ProfileService) {}
+    private profileService:ProfileService,
+    private roleService:RoleService) {}
 
   ngOnInit(): void {
     initFlowbite();
@@ -35,6 +38,7 @@ export class HeaderComponent implements OnInit {
   getUserInfo()
   {
     this.user =  this.authService.getUserInfo();
+    this.checkUserRole(this.user.roles);
   }
 
   getUserProfile()
@@ -44,6 +48,11 @@ export class HeaderComponent implements OnInit {
     })
   }
 
+  checkUserRole(roles:string[])
+  {
+  this.dashboardRole = this.roleService.checkRolesForAdmin(roles);
+  }
+  
 
   getUserHeaderPhoto()
   {

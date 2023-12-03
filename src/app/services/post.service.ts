@@ -37,9 +37,10 @@ export class PostService {
     
   }
 
-  Delete(id:number)
+  Delete(post:Post):Observable<ResponseModel>
   {
-    
+    let newUrl = this.apiUrl + '/delete';
+    return this.httpClient.post<ResponseModel>(newUrl,post);
   }
 
   getAllPostDetail():Observable<ListResponseModel<PostDetailDto>>

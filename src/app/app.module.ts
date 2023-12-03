@@ -19,6 +19,9 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { HomePostComponent } from './components/home/home-post/home-post.component';
 import { PostScreenComponent } from './screens/post-screen/post-screen.component';
 import { PostComponent } from './components/post/post/post.component';
+import { DashboardScreenComponent } from './screens/dashboard-screen/dashboard-screen.component';
+import { ReportComponent } from './components/dashboard/report/report.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,8 @@ import { PostComponent } from './components/post/post/post.component';
     HomePostComponent,
     PostScreenComponent,
     PostComponent,
+    DashboardScreenComponent,
+    ReportComponent,
 
   ],
   imports: [
@@ -42,6 +47,7 @@ import { PostComponent } from './components/post/post/post.component';
     BrowserAnimationsModule,
     FormsModule,
     MatIconModule,
+    MatMenuModule,
     MatBadgeModule,
     ReactiveFormsModule,
     ToastrModule.forRoot({

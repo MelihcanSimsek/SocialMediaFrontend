@@ -4,8 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { PostDetailDto } from 'src/app/models/dtos/postDetailDto';
 import { Post } from 'src/app/models/entities/post';
+import { Report } from 'src/app/models/entities/report';
+import { UserReport } from 'src/app/models/entities/userReport';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
+import { ReportService } from 'src/app/services/report.service';
 
 @Component({
   selector: 'app-post',
@@ -19,11 +22,13 @@ export class PostComponent implements OnInit{
   commentPostDetailDto:PostDetailDto[];
   commentImage:any = undefined;
   commentArea:string = "";
+  reports:Report[];
   constructor(private postService:PostService,
     private activatedRouter:ActivatedRoute,
     private sanitizer: DomSanitizer,
     private toastrService:ToastrService,
-    private authService:AuthService) {
+    private authService:AuthService,
+    private reportService:ReportService) {
      
   }
 
@@ -32,6 +37,7 @@ export class PostComponent implements OnInit{
       this.postid = Number(params["postid"]);
       this.getMainPost(this.postid);
       this.getCommentsPost(this.postid);
+      this.getAllReports();
       window.scroll({ 
         top: 0, 
         left: 0, 
@@ -40,6 +46,13 @@ export class PostComponent implements OnInit{
     })
   }
   
+  getAllReports()
+  {
+    this.reportService.GetAllReports().subscribe(response=>{
+      this.reports = response.data;
+    })
+  }
+
   getMainPost(id:number)
   {
     this.postService.getPostDetailById(id).subscribe(response=>{
@@ -115,6 +128,7 @@ export class PostComponent implements OnInit{
           this.commentImage = undefined;
           this.commentArea = "";
           this.toastrService.info("Paylaşım yapıldı..");
+          location.reload();
         },responseError=>{
           this.commentImage = undefined;
           this.commentArea = "";
@@ -135,6 +149,7 @@ export class PostComponent implements OnInit{
           this.commentImage = undefined;
           this.commentArea = "";
           this.toastrService.info("Paylaşım yapıldı..");
+          location.reload();
         },responseError=>{
           this.commentImage = undefined;
           this.commentArea = "";
@@ -159,6 +174,7 @@ export class PostComponent implements OnInit{
           this.commentImage = undefined;
           this.commentArea = "";
           this.toastrService.info("Paylaşım yapıldı..");
+          location.reload();
         },responseError=>{
           this.commentImage = undefined;
           this.commentArea = "";
@@ -169,6 +185,23 @@ export class PostComponent implements OnInit{
         this.toastrService.error("Lütfen düşünceleriniz paylaşın..");
       }
     }
+  }
+
+
+  report(reportId:number,postId:number)
+  {
+    let userReport:UserReport = Object.assign({},{
+      id:0,
+      userId:this.authService.getUserInfo().id,
+      postId:postId,
+      reportId:reportId
+    })
+    
+    this.reportService.AddUserReport(userReport).subscribe(response=>{
+      this.toastrService.info("Kullanıcı ve gönderi içeriği bildirilmiştir...");
+    },responseError=>{
+      this.toastrService.error(responseError.error.message);
+    })
   }
 
 }

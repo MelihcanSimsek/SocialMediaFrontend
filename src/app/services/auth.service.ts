@@ -68,13 +68,17 @@ export class AuthService {
   
           let tokenInfoId = Object.keys(decodedToken).filter(x=>x.endsWith("/nameidentifier"))[0];
           var userId = Number(decodedToken[tokenInfoId]);
+
+          let claimInfo = Object.keys(decodedToken).filter(x=>x.endsWith("/role"))[0];
+          var roles = decodedToken[claimInfo];
   
           var emailInfo = decodedToken.email;
           
           const user:UserModel = Object.assign({},{
             name:username,
             id:userId,
-            email:emailInfo
+            email:emailInfo,
+            roles:roles
           })
           
           return user;

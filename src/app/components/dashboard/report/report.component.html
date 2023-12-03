@@ -1,0 +1,48 @@
+<div class="px-10 py-8 ">
+    <div class="report  w-full py-6" *ngIf="dashboardRole == true" >
+        <div class="flex py-6 h-1/4 flex-row gap-2" *ngFor="let report of userReports">
+            <!-- left user component -->
+            <div class="w-3/12 shadow flex flex-col justify-center items-center px-10 py-4 bg-white">
+                <img [src]="getUserProfileImage(report.reportedUserImage)" class="rounded-lg border-1 border-black cursor-pointer hover:opacity-90" width="100" height="100" alt="image">
+                <span class="font-semibold text-xl">{{report.reportedUserName}}</span>
+                <div class="bg-red-500 hover:opacity-90 px-4 py-2 rounded-md shadow-lg cursor-pointer" (click)="Ban(report)">
+                    <span class="text-white bg- text-sm">Yasakla</span>
+                </div>
+            </div>
+            <!-- right post component -->
+            <div class="w-9/12 shadow flex flex-col bg-white">
+                <div class="w-full flex px-2 justify-end">
+                    <mat-icon class="cursor-pointer hover:opacity-80 text-primary-color-dark" (click)="ReportClose(report)">close</mat-icon>
+                </div>
+                <div class="w-full flex px-4 gap-2 py-2 flex-row">
+                    <div class="w-1/3 flex flex-wrap" *ngIf="report.reportedContentType != 3">
+                        <p class="text-sm">{{report.reportedContentMessage}}</p>
+                    </div>
+                    <div class="w-1/3" *ngIf="report.reportedContentType > 1">
+                        <img [src]="getUserContentImage(report.reportedContentImagePath)" class="w-9/12 select-none cursor-pointer hover:opacity-80" alt="content-image">
+                    </div>
+                    <div class="w-1/3"  >
+                        <div class="w-full flex flex-col" >
+                         <span class="flex py-2 flex-row items-center font-semibold" *ngFor="let reason of report.reportReasons" >
+                              <mat-icon class="text-sm">remove_circle</mat-icon> {{ reason}}
+                         </span>
+
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="w-full px-4 py-2 flex justify-between items-center flex-row">
+                    <span class="text-sm">{{report.reportedContentCreationDate |date:"dd/MMM/y"}}</span>
+                    <div class="px-4 py-2 bg-slate-600 rounded-md cursor-pointer hover:opacity-90" (click)="PostDelete(report)">
+                        <span class="text-sm text-white">Gönderiyi Kaldır</span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="flex h-screen justify-center items-center flex-col" *ngIf="dashboardRole == false">
+        <p class="text-slate-700 text-2xl font-semibold">Erişim Başarısız</p>
+    </div>
+</div>
+
