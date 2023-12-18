@@ -5,12 +5,14 @@ import { RegisterScreenComponent } from './screens/register-screen/register-scre
 import { HomeScreenComponent } from './screens/home-screen/home-screen.component';
 import { PostScreenComponent } from './screens/post-screen/post-screen.component';
 import { DashboardScreenComponent } from './screens/dashboard-screen/dashboard-screen.component';
+import { ProfileScreenComponent } from './screens/profile-screen/profile-screen.component';
 
 const routes: Routes = [
   {path:"login",component:LoginScreenComponent},
   {path:"signup",component:RegisterScreenComponent},
   {path:"home",component:HomeScreenComponent},
   {path:"posts/:postid",component:PostScreenComponent},
+  {path:"profile/:profileid",component:ProfileScreenComponent},
   {path:"dashboard",component:DashboardScreenComponent}
 ];
 

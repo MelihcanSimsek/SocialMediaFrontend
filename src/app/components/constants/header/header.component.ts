@@ -2,7 +2,7 @@ import { Component, OnInit,  } from '@angular/core';
 import { Router } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 import { UserModel } from 'src/app/models/auth/userModel';
-import { Profile } from 'src/app/models/entities/profile';
+import { UserProfileDto } from 'src/app/models/dtos/userProfileDto';
 import { AuthService } from 'src/app/services/auth.service';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { ProfileService } from 'src/app/services/profile.service';
@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   
   user:UserModel;
   notificationNumber = 99;
-  profile:Profile;
+  profile:UserProfileDto;
   imageUrl = "https://localhost:7223/Uploads/images/"
   dashboardRole:boolean;
   constructor(private authService:AuthService,

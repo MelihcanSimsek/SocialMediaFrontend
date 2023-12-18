@@ -22,6 +22,10 @@ import { PostComponent } from './components/post/post/post.component';
 import { DashboardScreenComponent } from './screens/dashboard-screen/dashboard-screen.component';
 import { ReportComponent } from './components/dashboard/report/report.component';
 import {MatMenuModule} from '@angular/material/menu';
+import { ProfileScreenComponent } from './screens/profile-screen/profile-screen.component';
+import { ProfileHeaderComponent } from './components/profile/profile-header/profile-header.component';
+import { ProfileFooterComponent } from './components/profile/profile-footer/profile-footer.component';
+
 
 @NgModule({
   declarations: [
@@ -38,6 +42,10 @@ import {MatMenuModule} from '@angular/material/menu';
     PostComponent,
     DashboardScreenComponent,
     ReportComponent,
+    ProfileScreenComponent,
+    ProfileHeaderComponent,
+    ProfileFooterComponent,
+ 
 
   ],
   imports: [

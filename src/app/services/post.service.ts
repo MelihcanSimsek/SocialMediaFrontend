@@ -62,16 +62,25 @@ export class PostService {
     return this.httpClient.get<ListResponseModel<PostDetailDto>>(newUrl);
   }
 
-  GetAllUserPosts(id:number)
+  GetAllUserPosts(id:number):Observable<ListResponseModel<PostDetailDto>>
   {
     let newUrl = this.apiUrl + '/getalluserpost?id='+id;
-   return this.httpClient.get(newUrl);
+    return this.httpClient.get<ListResponseModel<PostDetailDto>>(newUrl);
   }
 
-  GetAllPostsByUserId()
+  GetAllUserComment(id:number):Observable<ListResponseModel<PostDetailDto>>
   {
-
+    let newUrl = this.apiUrl + '/getallusercomment?id='+id;
+    return this.httpClient.get<ListResponseModel<PostDetailDto>>(newUrl);
   }
+
+  GetAllFavedPost(id:number):Observable<ListResponseModel<PostDetailDto>>
+  {
+    let newUrl = this.apiUrl + '/getallfavedpostuserid?id='+id;
+    return this.httpClient.get<ListResponseModel<PostDetailDto>>(newUrl);
+  }
+
+ 
 
   GetAll()
   {

@@ -5,6 +5,7 @@ import { Post } from 'src/app/models/entities/post';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { initFlowbite } from 'flowbite';
+import { UserModel } from 'src/app/models/auth/userModel';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,6 +16,7 @@ export class SidebarComponent implements OnInit {
 
   postImage:any = undefined;
   postarea:string = "";
+  user:UserModel;
   constructor(
     private sanitizer: DomSanitizer,
     private toastrService:ToastrService,
@@ -26,6 +28,12 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     initFlowbite();
+    this.getUser();
+  }
+
+  getUser()
+  {
+    this.user =  this.authService.getUserInfo();
   }
 
   photoFileClick()
