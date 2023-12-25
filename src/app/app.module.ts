@@ -25,6 +25,12 @@ import {MatMenuModule} from '@angular/material/menu';
 import { ProfileScreenComponent } from './screens/profile-screen/profile-screen.component';
 import { ProfileHeaderComponent } from './components/profile/profile-header/profile-header.component';
 import { ProfileFooterComponent } from './components/profile/profile-footer/profile-footer.component';
+import { FriendsScreenComponent } from './screens/friends-screen/friends-screen.component';
+import { FriendComponent } from './components/friends/friend/friend.component';
+import { FollowerComponent } from './components/friends/follower/follower.component';
+import { MessagesScreenComponent } from './screens/messages-screen/messages-screen.component';
+import { MessageComponent } from './components/messages/message/message.component';
+
 
 
 @NgModule({
@@ -45,6 +51,12 @@ import { ProfileFooterComponent } from './components/profile/profile-footer/prof
     ProfileScreenComponent,
     ProfileHeaderComponent,
     ProfileFooterComponent,
+    FriendsScreenComponent,
+    FriendComponent,
+    FollowerComponent,
+    MessagesScreenComponent,
+    MessageComponent,
+
  
 
   ],

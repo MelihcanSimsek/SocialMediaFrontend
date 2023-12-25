@@ -4,6 +4,7 @@ import { Follower } from '../models/entities/follower';
 import { Observable } from 'rxjs';
 import { ResponseModel } from '../models/responsemodel/responseModel';
 import { ListResponseModel } from '../models/responsemodel/listResponseModel';
+import { UserFollowerDto } from '../models/dtos/userFollowerDto';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +36,23 @@ export class FollowerService {
   {
     let newUrl = this.apiUrl + '/getallfollowerbyuserid?id='+userid;
     return this.httpClient.get<ListResponseModel<number>>(newUrl);
+  }
+
+  GetAllUserFriends(userid:number):Observable<ListResponseModel<UserFollowerDto>>
+  {
+    let newUrl = this.apiUrl + '/getalluserfriends?id='+userid;
+    return this.httpClient.get<ListResponseModel<UserFollowerDto>>(newUrl);
+  }
+
+  GetAllFollowerListWithoutFriends(userid:number):Observable<ListResponseModel<UserFollowerDto>>
+  {
+    let newUrl = this.apiUrl + '/getalluserfollowerlistwithoutfriends?id='+userid;
+    return this.httpClient.get<ListResponseModel<UserFollowerDto>>(newUrl);
+  }
+
+  GetAllFollowedListWithoutFriends(userid:number):Observable<ListResponseModel<UserFollowerDto>>
+  {
+    let newUrl = this.apiUrl + '/getalluserfollowedlistwithoutfriends?id='+userid;
+    return this.httpClient.get<ListResponseModel<UserFollowerDto>>(newUrl); 
   }
 }

@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Profile } from 'src/app/models/entities/profile';
 import { UserService } from 'src/app/services/user.service';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
+import { ChatService } from 'src/app/services/chat.service';
 @Component({
   selector: 'app-profile-header',
   templateUrl: './profile-header.component.html',
@@ -41,7 +42,8 @@ export class ProfileHeaderComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private toastrService:ToastrService,
     private userService:UserService,
-    private localStorageService:LocalstorageService) {
+    private localStorageService:LocalstorageService,
+    private chatService:ChatService) {
     
     
   }
@@ -294,4 +296,25 @@ export class ProfileHeaderComponent implements OnInit {
     })
   }
 
+  CheckUserIsFriend()
+  {
+    if(this.followerIds.includes(this.authService.getUserInfo().id) && this.followedIds.includes(this.authService.getUserInfo().id))
+    {
+      return true;
+    }
+    return false;
+  }
+
+  SendMessage()
+  {
+    this.chatService.CheckUsersHaveChatRoom(this.authService.getUserInfo().id,this.currentUserId).subscribe(response=>{
+      if(response.data.open)
+      {
+
+      }
+      else{
+        
+      }
+    })
+  }
 }
