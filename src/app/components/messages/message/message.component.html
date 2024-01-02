@@ -1,41 +1,49 @@
-<div class="flex flex-col items-center justify-center h-screen max-h-1/2 divide-y-2  overflow-y-hidden py-20 ">
-    <div class="w-4/5 flex flex-row bg-white">
+<div class="flex flex-col items-center justify-center h-screen divide-y-2  overflow-y-hidden  ">
+    <div class="w-full flex flex-row bg-white">
         <div class="w-1/4 flex flex-col px-4 py-4">
 
             <div class="flex flex-row  w-full justify-center items-center">
                 
-                <input type="text" placeholder="Kullanıcı Ara" class="w-11/12">
+                <input type="text" placeholder="Kullanıcı Ara" class="w-11/12" [(ngModel)]="chatFilterText">
                 <mat-icon class="text-2xl w-1/12">search</mat-icon>
             </div>
             
         </div>
         <div class="w-3/4 w-full flex justify-center  items-center">
             
-                <div class="flex flex-row items-start space-x-2">
-                    <img src="https://localhost:7223/Uploads/images/7fdd721a-0fcc-4e37-89d1-32af56e4e191_12_18_2023.jpg" height="50px" width="50px" class="rounded-full" alt="user-vatar">
-                    <span class="text-2xl text-black font-semibold">Melihcan Şimşek</span>
+                <div class="flex flex-row items-start space-x-2" *ngIf="this.CurrentChatProfile != undefined">
+                    <img [src]="GetUserAvatar(CurrentChatProfile.profileImage)" height="50px" width="50px" class="rounded-full" alt="user-vatar">
+                    <span class="text-2xl text-black font-semibold">{{CurrentChatProfile.name}}</span>
                 </div>
            
         </div>
     </div>
-    <div class="w-4/5 h-full flex flex-row  bg-white">
-        <div class="flex flex-col w-1/4 divide-y-4 overflow-y-auto overflow-x-hidden">
+    <div class="w-full h-full flex flex-row  bg-white">
+        <div class="flex flex-col w-1/4 divide-y-4 overflow-y-auto overflow-x-hidden" >
 
-            <div
-                class="flex flex-row w-full py-2 px-2 bg-white cursor-pointer shadow-lg hover:bg-primary-color-dark hover:opacity-80 text-black hover:text-white">
-                <div class="flex flex-col justify-start px-2 py-2 ">
-                    <img src="https://localhost:7223/Uploads/images/7fdd721a-0fcc-4e37-89d1-32af56e4e191_12_18_2023.jpg"
+            <div  *ngFor="let friend of FriendMessageList | chatFilter:chatFilterText ">
+            <div 
+                [class]="GetMessageListClass(friend.chatId)" (click)="SelectUser(friend.chatId)">
+                <div class="flex flex-row  justify-between px-2 pt-2  " >
+                    <div class="flex flex-row space-x-2">
+                        <img [src]="GetUserAvatar(friend.profileImage)"
                         width="50" height="50" class="rounded-full cursor-pointer hover:opacity-90" alt="avatar">
-                    <span class="text-sm font-semibold">Melihcan</span>
-                </div>
-                <div class="w-full flex flex-col hover:text-primary-color-extra-light space-y-1 py-2">
-                    <div class="flex flex-row justify-between">
-                        <span class=" ">12/12/2023</span>
-                        <span>12:25</span>
+                      <span class="text-sm font-semibold flex-wrap text-left" >{{friend.name}}</span>
                     </div>
-                    <span class="text-sm ">Lorem ipsum dolor sit.</span>
+                    <div *ngIf="friend.notShowedMessagesCount > 0">
+                        <span  [matBadge]="friend.notShowedMessagesCount" matBadgeSize="medium" matBadgePosition="below" matBadgeColor="warn"> </span>
+                    </div>
+                </div>
+                <div class="w-full flex flex-col justify-between hover:text-primary-color-extra-light py-2">
+                    <span class="text-sm py-2">{{GetShortMessageContent(friend.lastMessage) }}</span>
+                    <div class="flex flex-row items-end justify-between">
+                        <span  class="">{{friend.lastMessageDate |date:"dd/MMM/y"}}</span>
+                        <span>{{friend.lastMessageDate |date:"HH:mm:ss"}}</span>
+                    </div>
                 </div>
             </div>
+            </div>
+            
             
       
 
@@ -44,55 +52,107 @@
 
 
         <div class="h-full w-3/4 border-l-4 border-slate-500">
-            <div class="chat  h-5/6 w-full px-4 py-2 bg-slate-300  overflow-y-auto overflow-x-hidden ">
-                <div class="flex justify-start">
-                    <div class="w-1/2 px-4 py-2 bg-white rounded-lg">
-                        <div class="flex flex-wrap space-y-2">
-                            <img src="https://localhost:7223/Uploads/images/7fdd721a-0fcc-4e37-89d1-32af56e4e191_12_18_2023.jpg"
-                                alt="image">
-                            <span class="text-sm text-slate-700">Lorem ipsum dolor sit, amet consectetur adipisicing
-                                elit. Illum deleniti dolorem facere pariatur provident consequuntur mollitia laudantium
-                                assumenda incidunt iusto!</span>
+            <div id="chat" class="flex flex-col  h-[540px]  w-full px-4 py-2 bg-slate-300  overflow-y-scroll overflow-y-hidden" (scroll)="UpdateScrollEvent($event)"  *ngIf="CurrentChatProfile != undefined">
+               <div *ngIf=" messages.length > 0 && messages != undefined" >
+                <div class="z-10" *ngFor="let message of messages"   >
+                    
+                        <div class="flex justify-start my-2" *ngIf="message.userId != myid">
+                            <div class="w-1/2 px-4 py-2 bg-white rounded-lg">
+                                <div class="flex flex-wrap space-y-2">
+                                    <div *ngIf="message.type > 1">
+                                        <img [src]="GetMessageImage(message.imagePath)"
+                                        alt="image">
+                                    </div>
+                                    <span class="text-sm text-slate-700">{{message.content}}</span>
+                                </div>
+                                <div class="flex flex-row justify-between pt-2" >
+                                    <span class="text-sm">{{message.creationDate |date:"HH:mm:ss"}}</span>
+                                    <span class="text-sm">{{message.creationDate |date:"dd/MMM/y"}}</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="flex flex-row justify-between pt-2">
-                            <span class="text-sm">15:40</span>
-                            <span class="text-sm">12/12/2023</span>
+                    
+                        <div class="flex justify-end my-2" *ngIf="message.userId == myid">
+                            <div class="w-1/2 px-4 py-2 bg-primary-color-dark opacity-80 rounded-lg">
+                                <div class="flex flex-wrap space-y-2">
+                                    <div *ngIf="message.type > 1">
+                                        <img [src]="GetMessageImage(message.imagePath)"
+                                        alt="image">
+                                    </div>
+                                    
+                                    <span class="text-sm text-primary-color-extra-light">{{message.content}}</span>
+                                </div>
+                                <div class="flex flex-row justify-between pt-2">
+                                    <span class="text-sm text-white">{{message.creationDate |date:"HH:mm:ss"}}</span>
+                                    <span class="text-sm text-white">{{message.creationDate |date:"dd/MMM/y"}}</span>
+                                </div>
+                            </div>
+                        </div>
+                
+            </div>
+        </div>
+        <div class="flex flex-row flex-wrap justify-center" *ngIf="messages.length == 0 || messages == undefined">
+            <p class="text-sm text-slate-400 font-semibold">Henüz gönderilen bir mesaj bulunmamakta</p>
+        </div>
+            <div class="sticky flex flex-row justify-end bottom-0  z-50" *ngIf="chatDictionary[CurrentChatProfile.chatId].image != undefined">
+                <img [src]="GetChatImage()" class="cursor-pointer hover:opacity-90" height="200" width="200" alt="send-image" (click)="DeleteChatImage()">
+            </div>
+           
+            </div>
+            <div class="chat  h-3/4 w-full flex justify-center items-center px-4 py-2 bg-white " *ngIf="CurrentChatProfile == undefined">
+                <div class="bg-primary-color-dark px-6 py-4 flex justify-center items-center cursor-pointer hover:bg-primary-color text-white hover:text-black  rounded-full shadow-lg" (click)="OpenMessageBoxModal()">
+                    <span class="text-sm">Mesajlaşma Başlat</span>
+                </div>
+            </div>
+            <div id="message-box-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div class="p-4 bg-primary-color-light rounded-lg w-full max-w-xl max-h-full">
+                    <!-- Modal content -->
+                    <div class="w-full flex flex-row justify-between">
+                        <div class="flex w-full flex-row py-2 ">
+                            <input type="text" class="w-full" placeholder="Kullancı Ara" [(ngModel)]="friendFilterText">
+                        </div>
+                       <div class="flex flex-row justify-end px-2 py-2">
+                        <button (click)="CloseMessageBoxModal()"><mat-icon class="hover:bg-primary-color-white hover:text-white rounded-md">close</mat-icon></button>
+                       </div>
+                    </div>
+                    <div class="w-full divide-y-2">
+                    <div class="px-4 py-4 bg-primary-color rounded-lg  w-full flex flex-row justify-between " *ngFor="let friend of FriendList |friendFilter:friendFilterText">
+                        <div class="flex flex-row w-full justify-between">
+                            <div class="flex flex-row space-x-2">
+                                <img [src]="GetUserAvatar(friend.profileImage)"
+                        width="50" height="50" class="rounded-full cursor-pointer hover:opacity-90" alt="avatar">
+                                <span class="text-2xl text-white">{{friend.name}}</span>
+                            </div>
+                            <div class="flex justify-center items-center px-6 py-2  bg-slate-100 hover:opacity-90  cursor-pointer rounded-md" (click)="SendMessage(friend.userId)">
+                                <mat-icon class="text-2xl text-black"> mail_outline</mat-icon>
+                            </div>
                         </div>
                     </div>
-                </div>
-               
-                <div class="flex justify-end">
-                    <div class="w-1/2 px-4 py-2 bg-primary-color-dark opacity-80 rounded-lg">
-                        <div class="flex flex-wrap space-y-2">
-                            <img src="https://localhost:7223/Uploads/images/7fdd721a-0fcc-4e37-89d1-32af56e4e191_12_18_2023.jpg"
-                                alt="image">
-                            <span class="text-sm text-primary-color-extra-light">Lorem ipsum dolor sit, amet consectetur adipisicing
-                                elit. Illum deleniti dolorem facere pariatur provident consequuntur mollitia laudantium
-                                assumenda incidunt iusto!</span>
-                        </div>
-                        <div class="flex flex-row justify-between pt-2">
-                            <span class="text-sm text-white">15:40</span>
-                            <span class="text-sm text-white">12/12/2023</span>
-                        </div>
                     </div>
                 </div>
-
-            
-
             </div>
 
-            <div class="h-1/6 flex flex-row px-2 py-2">
+            <div class="h-[150px] flex flex-col px-2 py-2" *ngIf="CurrentChatProfile != undefined">
                 <div class="flex flex-row justify-between w-full">
-                <div class="w-11/12">
-                <textarea name="chatarea" id="chat-textarea" class=" w-full overflow-y-auto overflow-x-hidden h-full"
-                    rows="3"></textarea>
-                <!-- <div class="relative w-full  px-10  z-50">
+                <div  class="w-11/12">
+                <textarea name="chatarea"  (keyup.enter)="Send()" [(ngModel)]="chatDictionary[CurrentChatProfile.chatId].message"  id="chat-textarea" class=" w-full overflow-y-auto overflow-x-hidden h-full"
+                    rows="1" maxlength="255"></textarea>
+                  
+              
+                </div>
+                <div
+                    class="flex  justify-center w-1/12  cursor-pointer items-center bg-primary-color-dark hover:opacity-80" (click)="Send()">
+                    <span class="text-sm font-semibold text-white">Gönder</span>
+                </div>
+                 </div>
+            <div>
+            <div class="w-full py-2">
                     <div class="flex flex-row  divide-x divide-gray-400">
                         <div>
-                            <input type="file" name="post-image" id="post-image-file" accept=".png,.jpg"
-                                ngf-max-size="5MB" class="hidden">
+                            <input type="file" name="post-image" id="chat-image-file"  accept=".png,.jpg"
+                                ngf-max-size="5MB" class="hidden" (change)="ChatImageSelected($event)">
                             <mat-icon
-                                class="cursor-pointer text-primary-color-dark hover:text-primary-color hover:bg-gray-100">
+                                class="cursor-pointer text-primary-color-dark hover:text-primary-color hover:bg-gray-100" (click)="OpenImageFile()">
                                 insert_photo</mat-icon>
                         </div>
                         <mat-icon
@@ -100,13 +160,11 @@
                             insert_emoticon
                         </mat-icon>
                     </div>
-                </div> -->
-                </div>
-                <div
-                    class="flex  justify-center w-1/12  cursor-pointer items-center bg-primary-color-dark hover:opacity-80">
-                    <span class="text-sm font-semibold text-white">Gönder</span>
                 </div>
             </div>
+            </div>
+            <div class="h-1/4 bg-white flex flex-row px-2 py-2" *ngIf="CurrentChatProfile == undefined">
+
             </div>
         </div>
     </div>

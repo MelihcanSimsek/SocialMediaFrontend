@@ -1,16 +1,16 @@
 <div class="px-10 py-8 z-50">
-    <div class="post w-full py-6" *ngFor="let post of postDetail">
+    <div class="post w-full pb-10" *ngFor="let post of postDetail">
     <!-- post header section -->
-    <div class="bg-white w-4/5 flex flex-row justify-between px-6 py-2 shadow-lg cursor-pointer "  >
+    <div class="bg-white w-full flex flex-row justify-between px-6 py-2 shadow-lg cursor-pointer "  >
         <div class="flex flex-row gap-1">
         <img [src]="getUserProfileImage(post.profileImage)" alt="profile-image" class="rounded-full cursor-pointer hover:opacity-90" width="50" height="50" routerLink="/profile/{{post.userId}}">
         <span class="bold text-lg text-black">{{post.name}}</span>
         </div>
         <span class="text-sm text-slate-900 mute">{{post.creationDate |date:"dd/MMM/y"}}</span>
     </div>
-    <hr class="w-4/5 h-1 bg-primary-color-extra-light">
+    <hr class="w-full h-1 bg-primary-color-extra-light">
     <!-- post body section -->
-    <div class="bg-white w-4/5 pb-4 shadow-lg cursor-pointer" routerLink="/posts/{{post.id}}" routerLinkActive="active">
+    <div class="bg-white w-full pb-4 shadow-lg cursor-pointer" routerLink="/posts/{{post.id}}" routerLinkActive="active">
         <div class="w-full pl-10 pr-6 pt-4">
             <p class="flex flex-wrap text-[1.1rem]">{{post.message}}</p>
         </div>
@@ -18,9 +18,9 @@
             <img [src]="getPostContentImage(post.imagePath)" alt="post-image" class="w-4/5 rounded-lg cursor-pointer">
         </div>
     </div>
-    <hr class="w-4/5 h-1 bg-primary-color-extra-light">
+    <hr class="w-full h-1 bg-primary-color-extra-light">
     <!-- post footer section -->
-    <div class="bg-white w-4/5 shadow-lg">
+    <div class="bg-white w-full shadow-lg">
         <div class="w-full pl-10 pr-6 py-4 flex flex-row justify-around space-around">
             <div >
                 <mat-icon mat-raised-button [matBadge]="post.comment" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" class="cursor-pointer text-slate-700 hover:text-slate-500"> comment</mat-icon>

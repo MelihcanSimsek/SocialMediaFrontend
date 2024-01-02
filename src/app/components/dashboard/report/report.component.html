@@ -1,5 +1,5 @@
 <div class="px-10 py-8 ">
-    <div class="report  w-full py-6" *ngIf="dashboardRole == true" >
+    <div class="report  w-full py-6" >
         <div class="flex py-6 h-1/4 flex-row gap-2" *ngFor="let report of userReports">
             <!-- left user component -->
             <div class="w-3/12 shadow flex flex-col justify-center items-center px-10 py-4 bg-white">
@@ -41,8 +41,6 @@
             </div>
         </div>
     </div>
-    <div class="flex h-screen justify-center items-center flex-col" *ngIf="dashboardRole == false">
-        <p class="text-slate-700 text-2xl font-semibold">Erişim Başarısız</p>
-    </div>
+   
 </div>
 

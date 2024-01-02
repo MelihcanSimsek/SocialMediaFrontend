@@ -50,7 +50,7 @@
             
             <div class="flex flex-row space-x-1 relative">
                 <textarea name="commentarea" id="comment-area" class="relative w-full peer placeholder-transparent focus:outline-none focus:borer-rose-600 text-gray-900" [(ngModel)]="commentArea" rows="5"></textarea>
-                <button type="button" class="relative px-2 py-4 bg-primary-color-dark hover:opacity-90 rounded-md text-white text-sm" (click)="Comment(post.id)">Gönder</button>
+                <button type="button" class="relative px-2 py-4 bg-primary-color-dark hover:opacity-90 rounded-md text-white text-sm" (click)="Comment(post.id,post.userId)">Gönder</button>
                 <div class="absolute w-full bottom-0 left-1">
                     
                     <div class="flex flex-row  divide-x divide-gray-400">

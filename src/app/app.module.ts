@@ -30,6 +30,11 @@ import { FriendComponent } from './components/friends/friend/friend.component';
 import { FollowerComponent } from './components/friends/follower/follower.component';
 import { MessagesScreenComponent } from './screens/messages-screen/messages-screen.component';
 import { MessageComponent } from './components/messages/message/message.component';
+import { FriendFilterPipe } from './pipes/friend-filter.pipe';
+import { ChatFilterPipe } from './pipes/chat-filter.pipe';
+import { UnbanComponent } from './components/dashboard/unban/unban.component';
+import { UnbanPipe } from './pipes/unban.pipe';
+import { HomeSearchComponent } from './components/home/home-search/home-search.component';
 
 
 
@@ -56,6 +61,11 @@ import { MessageComponent } from './components/messages/message/message.componen
     FollowerComponent,
     MessagesScreenComponent,
     MessageComponent,
+    FriendFilterPipe,
+    ChatFilterPipe,
+    UnbanComponent,
+    UnbanPipe,
+    HomeSearchComponent,
 
  
 

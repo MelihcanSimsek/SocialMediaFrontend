@@ -3,12 +3,16 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { PostDetailDto } from 'src/app/models/dtos/postDetailDto';
+import { Notification } from 'src/app/models/entities/notification';
 import { Post } from 'src/app/models/entities/post';
 import { Report } from 'src/app/models/entities/report';
 import { UserReport } from 'src/app/models/entities/userReport';
 import { AuthService } from 'src/app/services/auth.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { PostService } from 'src/app/services/post.service';
 import { ReportService } from 'src/app/services/report.service';
+import { SignalService } from 'src/app/services/signal.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-post',
@@ -28,7 +32,9 @@ export class PostComponent implements OnInit{
     private sanitizer: DomSanitizer,
     private toastrService:ToastrService,
     private authService:AuthService,
-    private reportService:ReportService) {
+    private reportService:ReportService,
+    private notificationService:NotificationService,
+    private signalrService:SignalService) {
      
   }
 
@@ -108,8 +114,19 @@ export class PostComponent implements OnInit{
     this.commentImage = undefined;
   }
 
-  Comment(parentid:number)
+  Comment(parentid:number,userId:number)
   {
+    const entity:Notification = Object.assign({},{
+      id:uuidv4(),
+      userId:this.authService.getUserInfo().id,
+      targetId:userId,
+      notificationIntId:parentid,
+      notificationUniqueId:null,
+      type:4,
+      creationDate:new Date(),
+      isRead:false
+    });
+    
     if(this.commentImage != undefined)
     {
       if(this.commentArea.length > 0)
@@ -128,7 +145,17 @@ export class PostComponent implements OnInit{
           this.commentImage = undefined;
           this.commentArea = "";
           this.toastrService.info("Paylaşım yapıldı..");
-          location.reload();
+          if(this.authService.getUserInfo().id != userId)
+          {
+            this.notificationService.Add(entity).subscribe(newResponse=>{
+              this.signalrService.SendNotification(userId);
+              location.reload(); 
+            })  
+          }
+          else
+          {
+            location.reload(); 
+          }     
         },responseError=>{
           this.commentImage = undefined;
           this.commentArea = "";
@@ -149,7 +176,20 @@ export class PostComponent implements OnInit{
           this.commentImage = undefined;
           this.commentArea = "";
           this.toastrService.info("Paylaşım yapıldı..");
-          location.reload();
+
+          if(this.authService.getUserInfo().id != userId)
+          {
+            this.notificationService.Add(entity).subscribe(newResponse=>{
+              this.signalrService.SendNotification(userId);
+              location.reload(); 
+            })  
+          }
+          else
+          {
+            location.reload(); 
+          }
+          
+          
         },responseError=>{
           this.commentImage = undefined;
           this.commentArea = "";
@@ -174,7 +214,17 @@ export class PostComponent implements OnInit{
           this.commentImage = undefined;
           this.commentArea = "";
           this.toastrService.info("Paylaşım yapıldı..");
-          location.reload();
+          if(this.authService.getUserInfo().id != userId)
+          {
+            this.notificationService.Add(entity).subscribe(newResponse=>{
+              this.signalrService.SendNotification(userId);
+              location.reload(); 
+            })  
+          }
+          else
+          {
+            location.reload(); 
+          }
         },responseError=>{
           this.commentImage = undefined;
           this.commentArea = "";

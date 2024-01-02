@@ -16,7 +16,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ReportComponent implements OnInit {
 
-  dashboardRole:boolean;
+  
   userReports:ReportDetailDto[];
   imageUrl:string = 'https://localhost:7223/Uploads/images/'
   constructor(private authService:AuthService,
@@ -30,14 +30,11 @@ export class ReportComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.checkUserRole(this.authService.getUserInfo().roles);
+    
     this.getAllUserReports();
   }
 
-  checkUserRole(roles:string[])
-  {
-   this.dashboardRole = this.roleService.checkRolesForAdmin(roles);
-  }
+ 
 
   getAllUserReports()
   {

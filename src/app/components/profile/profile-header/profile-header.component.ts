@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserProfileDto } from 'src/app/models/dtos/userProfileDto';
 import { Follower } from 'src/app/models/entities/follower';
 import { AuthService } from 'src/app/services/auth.service';
@@ -13,6 +13,14 @@ import { Profile } from 'src/app/models/entities/profile';
 import { UserService } from 'src/app/services/user.service';
 import { LocalstorageService } from 'src/app/services/localstorage.service';
 import { ChatService } from 'src/app/services/chat.service';
+import { v4 as uuidv4 } from 'uuid';
+import { UserChat } from 'src/app/models/entities/userChat';
+import { NotificationService } from 'src/app/services/notification.service';
+import { Notification } from 'src/app/models/entities/notification';
+import { SignalService } from 'src/app/services/signal.service';
+import { SocketNotificationModel } from 'src/app/models/dtos/socketNotificationModel';
+
+
 @Component({
   selector: 'app-profile-header',
   templateUrl: './profile-header.component.html',
@@ -35,7 +43,8 @@ export class ProfileHeaderComponent implements OnInit {
   newProfileImage:any = undefined;
   newBackgroundImage:any = undefined;
   
-  constructor(private profileService:ProfileService,
+  constructor(
+    private profileService:ProfileService,
     private activatedRoute:ActivatedRoute,
     private followerService:FollowerService,
     private authService:AuthService,
@@ -43,7 +52,10 @@ export class ProfileHeaderComponent implements OnInit {
     private toastrService:ToastrService,
     private userService:UserService,
     private localStorageService:LocalstorageService,
-    private chatService:ChatService) {
+    private chatService:ChatService,
+    private router:Router,
+    private notificationService:NotificationService,
+    private signalrService:SignalService) {
     
     
   }
@@ -277,8 +289,25 @@ export class ProfileHeaderComponent implements OnInit {
       creationDate:new Date()
     });
 
+    
+    const entity:Notification = Object.assign({},{
+      id:uuidv4(),
+      userId:this.authService.getUserInfo().id,
+      targetId:this.currentUserId,
+      notificationIntId:null,
+      notificationUniqueId:null,
+      type:1,
+      creationDate:new Date(),
+      isRead:false
+    })
+
+
+
     this.followerService.add(follow).subscribe(response=>{
       this.followerIds.push(this.authService.getUserInfo().id);
+      this.notificationService.Add(entity).subscribe(newResponse=>{
+        this.signalrService.SendNotification(this.currentUserId);
+      })
     })
   }
 
@@ -291,8 +320,22 @@ export class ProfileHeaderComponent implements OnInit {
       creationDate:new Date()
     });
 
+    const entity:Notification = Object.assign({},{
+      id:uuidv4(),
+      userId:this.authService.getUserInfo().id,
+      targetId:this.currentUserId,
+      notificationIntId:null,
+      notificationUniqueId:null,
+      type:2,
+      creationDate:new Date(),
+      isRead:false
+    })
+
     this.followerService.delete(follow).subscribe(response=>{
       this.followerIds.splice(this.followerIds.indexOf(this.authService.getUserInfo().id),1);
+      this.notificationService.Add(entity).subscribe(newResponse=>{
+        this.signalrService.SendNotification(this.currentUserId);
+      })
     })
   }
 
@@ -310,10 +353,29 @@ export class ProfileHeaderComponent implements OnInit {
     this.chatService.CheckUsersHaveChatRoom(this.authService.getUserInfo().id,this.currentUserId).subscribe(response=>{
       if(response.data.open)
       {
-
+        sessionStorage.setItem("chat",response.data.chatId);
+        this.router.navigate(["/messages"]);
       }
       else{
-        
+        const uuid = uuidv4();
+        let firstUserChat:UserChat = Object.assign({},{
+          id:0,
+          userId:this.currentUserId,
+          chatId:uuid
+        });
+
+        let secondUserChat:UserChat = Object.assign({},{
+          id:0,
+          userId:this.authService.getUserInfo().id,
+          chatId:uuid
+        });
+
+        this.chatService.ChatUserAdd(firstUserChat).subscribe(response=>{
+          this.chatService.ChatUserAdd(secondUserChat).subscribe(response=>{
+            sessionStorage.setItem("chat",uuid);
+            this.router.navigate(["/messages"]);
+          })
+        })
       }
     })
   }

@@ -26,7 +26,7 @@ export class PostService {
     if(file != null)
     {
       formData.append("image",file);
-      console.log(JSON.stringify(post));
+      
       return this.httpClient.post<ResponseModel>(newUrl,formData);
     }
     else
