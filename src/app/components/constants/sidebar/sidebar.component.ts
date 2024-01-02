@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Post } from 'src/app/models/entities/post';
 import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
-import { initFlowbite } from 'flowbite';
+import { Modal,initFlowbite } from 'flowbite';
 import { UserModel } from 'src/app/models/auth/userModel';
 
 @Component({
@@ -29,6 +29,17 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     initFlowbite();
     this.getUser();
+  }
+
+  OpenPostModal()
+  {
+    let modal =new Modal(document.getElementById("post-modal")); 
+    modal.show();
+  }
+
+  ClosePostModal(){
+    let modal = new Modal(document.getElementById("post-modal"));
+    modal.hide();
   }
 
   getUser()
