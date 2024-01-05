@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import Modal from 'flowbite/lib/esm/components/modal';
 import { ChatProfileDto } from 'src/app/models/dtos/chatProfileDto';
 import { ChatUserDto } from 'src/app/models/dtos/chatUserDto';
@@ -42,7 +43,8 @@ export class MessageComponent implements OnInit {
     private followerService:FollowerService,
     private sanitizer: DomSanitizer,
     private signalService:SignalService,
-    private notificationService:NotificationService
+    private notificationService:NotificationService,
+    private router:Router
    ) {
     
   }
@@ -259,6 +261,15 @@ export class MessageComponent implements OnInit {
     })
   }
 
+  Search()
+  {
+    if(this.chatFilterText.trim() !== "")
+    {
+      sessionStorage.setItem("search",this.chatFilterText);
+      this.router.navigate(["search"]);
+    }
+  }
+
   Send(){
 
     const entity:Notification = Object.assign({},{
@@ -274,7 +285,7 @@ export class MessageComponent implements OnInit {
 
     if(this.chatDictionary[this.CurrentChatProfile.chatId].image != undefined)
     {
-      if(this.chatDictionary[this.CurrentChatProfile.chatId].message != '')
+      if(this.chatDictionary[this.CurrentChatProfile.chatId].message.trim() !== '')
       {
         const messageId:string = uuidv4();
         let message:ChatMessage = Object.assign({},{
@@ -347,7 +358,7 @@ export class MessageComponent implements OnInit {
       }
     }
     else{
-      if(this.chatDictionary[this.CurrentChatProfile.chatId].message != "")
+      if(this.chatDictionary[this.CurrentChatProfile.chatId].message.trim() !== "")
       {
         const messageId:string = uuidv4();
         let message:ChatMessage = Object.assign({},{

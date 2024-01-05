@@ -8,6 +8,8 @@ import { TokenModel } from '../models/auth/tokenModel';
 import { Observable } from 'rxjs';
 import { RegisterModel } from '../models/auth/registerModel';
 import { UserModel } from '../models/auth/userModel';
+import { UserForUpdateDto } from '../models/dtos/userForUpdateDto';
+import { ResponseModel } from '../models/responsemodel/responseModel';
 
 @Injectable({
   providedIn: 'root'
@@ -85,5 +87,11 @@ export class AuthService {
         }
       }
       return null;
+    }
+
+    UpdatePassword(entity:UserForUpdateDto):Observable<ResponseModel>
+    {
+      let newUrl = this.apiUrl + '/updatepassword';
+      return this.httpClient.post<ResponseModel>(newUrl,entity);
     }
 }

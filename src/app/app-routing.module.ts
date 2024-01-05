@@ -8,6 +8,8 @@ import { DashboardScreenComponent } from './screens/dashboard-screen/dashboard-s
 import { ProfileScreenComponent } from './screens/profile-screen/profile-screen.component';
 import { FriendsScreenComponent } from './screens/friends-screen/friends-screen.component';
 import { MessagesScreenComponent } from './screens/messages-screen/messages-screen.component';
+import { SearchScreenComponent } from './screens/search-screen/search-screen.component';
+import { SettingsScreenComponent } from './screens/settings-screen/settings-screen.component';
 
 const routes: Routes = [
   {path:"login",component:LoginScreenComponent},
@@ -17,7 +19,9 @@ const routes: Routes = [
   {path:"profile/:profileid",component:ProfileScreenComponent},
   {path:"dashboard",component:DashboardScreenComponent},
   {path:"friends",component:FriendsScreenComponent},
-  {path:"messages",component:MessagesScreenComponent}
+  {path:"messages",component:MessagesScreenComponent},
+  {path:"search",component:SearchScreenComponent},
+  {path:"settings",component:SettingsScreenComponent}
 ];
 
 @NgModule({

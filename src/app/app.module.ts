@@ -35,6 +35,12 @@ import { ChatFilterPipe } from './pipes/chat-filter.pipe';
 import { UnbanComponent } from './components/dashboard/unban/unban.component';
 import { UnbanPipe } from './pipes/unban.pipe';
 import { HomeSearchComponent } from './components/home/home-search/home-search.component';
+import { SearchScreenComponent } from './screens/search-screen/search-screen.component';
+import { SearchComponent } from './components/search/search/search.component';
+import { ProfileSearchComponent } from './components/profile/profile-search/profile-search.component';
+import { SettingsScreenComponent } from './screens/settings-screen/settings-screen.component';
+import { PasswordComponent } from './components/settings/password/password.component';
+import { NotificationSettingsComponent } from './components/settings/notification-settings/notification-settings.component';
 
 
 
@@ -66,6 +72,12 @@ import { HomeSearchComponent } from './components/home/home-search/home-search.c
     UnbanComponent,
     UnbanPipe,
     HomeSearchComponent,
+    SearchScreenComponent,
+    SearchComponent,
+    ProfileSearchComponent,
+    SettingsScreenComponent,
+    PasswordComponent,
+    NotificationSettingsComponent,
 
  
 

@@ -4,7 +4,7 @@
     </div>
 
     <div class="flex flex-row flex-wrap w-full " *ngIf="friendsList.length > 0">
-    <div class="bg-white shadow-lg flex flex-row items-center justify-center w-64 py-4  mx-2 my-2" *ngFor="let friend of friendsList">
+    <div class="bg-white shadow-lg flex flex-row items-center justify-center w-64 py-4  mx-2 my-2" *ngFor="let friend of friendsList | friendFilter:friendFilter">
         <div class="flex flex-col items-center justify-center  ">
             <img [src]="getUserAvatar(friend.profileImage)" alt="avatar" height="50" width="50" class="rounded-full">
             <span class="text-black text-sm font-semibold">{{friend.name}}</span>

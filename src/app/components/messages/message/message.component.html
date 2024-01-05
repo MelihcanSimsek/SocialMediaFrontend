@@ -5,7 +5,9 @@
             <div class="flex flex-row  w-full justify-center items-center">
                 
                 <input type="text" placeholder="Kullanıcı Ara" class="w-11/12" [(ngModel)]="chatFilterText">
-                <mat-icon class="text-2xl w-1/12">search</mat-icon>
+                <div class="px-4 py-2 bg-primary-color-dark cursor-pointer hover:opacity-90" (click)="Search()">
+                    <mat-icon class="text-2xl text-white ">search</mat-icon>
+                </div>
             </div>
             
         </div>
@@ -58,12 +60,15 @@
                     
                         <div class="flex justify-start my-2" *ngIf="message.userId != myid">
                             <div class="w-1/2 px-4 py-2 bg-white rounded-lg">
-                                <div class="flex flex-wrap space-y-2">
-                                    <div *ngIf="message.type > 1">
+                                <div class="flex flex-col space-y-2">
+                                    <div class="flex justify-start" *ngIf="message.type > 1">
                                         <img [src]="GetMessageImage(message.imagePath)"
                                         alt="image">
                                     </div>
-                                    <span class="text-sm text-slate-700">{{message.content}}</span>
+                                    <div class="flex flex-wrap">
+                                        <span class="text-sm text-slate-700">{{message.content}}</span>
+                                    </div>
+                                    
                                 </div>
                                 <div class="flex flex-row justify-between pt-2" >
                                     <span class="text-sm">{{message.creationDate |date:"HH:mm:ss"}}</span>
@@ -74,13 +79,15 @@
                     
                         <div class="flex justify-end my-2" *ngIf="message.userId == myid">
                             <div class="w-1/2 px-4 py-2 bg-primary-color-dark opacity-80 rounded-lg">
-                                <div class="flex flex-wrap space-y-2">
-                                    <div *ngIf="message.type > 1">
+                                <div class="flex-col space-y-2">
+                                    <div class="flex justify-start" *ngIf="message.type > 1">
                                         <img [src]="GetMessageImage(message.imagePath)"
                                         alt="image">
                                     </div>
-                                    
-                                    <span class="text-sm text-primary-color-extra-light">{{message.content}}</span>
+                                    <div class="flex flex-wrap">
+                                        <span class="text-sm text-primary-color-extra-light">{{message.content}}</span>
+                                    </div>
+                                   
                                 </div>
                                 <div class="flex flex-row justify-between pt-2">
                                     <span class="text-sm text-white">{{message.creationDate |date:"HH:mm:ss"}}</span>
@@ -94,10 +101,9 @@
         <div class="flex flex-row flex-wrap justify-center" *ngIf="messages.length == 0 || messages == undefined">
             <p class="text-sm text-slate-400 font-semibold">Henüz gönderilen bir mesaj bulunmamakta</p>
         </div>
-            <div class="sticky flex flex-row justify-end bottom-0  z-50" *ngIf="chatDictionary[CurrentChatProfile.chatId].image != undefined">
-                <img [src]="GetChatImage()" class="cursor-pointer hover:opacity-90" height="200" width="200" alt="send-image" (click)="DeleteChatImage()">
             </div>
-           
+            <div class="absolute  flex flex-row justify-end bottom-28 right-10  z-50" *ngIf=" CurrentChatProfile != undefined &&chatDictionary[CurrentChatProfile.chatId].image != undefined">
+                <img [src]="GetChatImage()" class="cursor-pointer hover:opacity-90" height="200" width="200" alt="send-image" (click)="DeleteChatImage()">
             </div>
             <div class="chat  h-3/4 w-full flex justify-center items-center px-4 py-2 bg-white " *ngIf="CurrentChatProfile == undefined">
                 <div class="bg-primary-color-dark px-6 py-4 flex justify-center items-center cursor-pointer hover:bg-primary-color text-white hover:text-black  rounded-full shadow-lg" (click)="OpenMessageBoxModal()">

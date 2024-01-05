@@ -3,12 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-home-search',
-  templateUrl: './home-search.component.html',
-  styleUrls: ['./home-search.component.css']
+  selector: 'app-profile-search',
+  templateUrl: './profile-search.component.html',
+  styleUrls: ['./profile-search.component.css']
 })
-export class HomeSearchComponent implements OnInit{
-
+export class ProfileSearchComponent implements OnInit {
   searchInput:string;
   constructor(
     private router:Router) {
@@ -20,7 +19,7 @@ export class HomeSearchComponent implements OnInit{
   
   }
 
-  
+ 
 
   Search()
   {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserFollowerDto } from 'src/app/models/dtos/userFollowerDto';
 import { UserChat } from 'src/app/models/entities/userChat';
@@ -15,6 +15,7 @@ import { v4 as uuidv4 } from 'uuid';
 })
 export class FriendComponent implements OnInit{
 
+  @Input() friendFilter:string;
   friendsList:UserFollowerDto[];
   imageUrl = "https://localhost:7223/Uploads/images/";
   constructor(private authService:AuthService,

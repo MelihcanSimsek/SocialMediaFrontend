@@ -2,7 +2,15 @@
 <div class="grid grid-cols-7 bg-primary-color-extra-light">
     <app-sidebar class="col-start-1 col-end-1 "></app-sidebar>
     <div class="col-start-2 col-span-6">
-        <app-friend></app-friend>
-        <app-follower></app-follower>
+        <div class="flex justify-center px-10 py-4">
+            <div class="flex flex-row justify-center w-4/5  items-center">
+                <input type="text" [(ngModel)]="searchInput" name="search" id="search-input" placeholder="Kullanıcı Ara" class="w-full font-semibold">
+                <div class="px-4 py-2 bg-primary-color-dark cursor-pointer hover:opacity-90" (click)="Search()">
+                    <mat-icon class="text-2xl text-white ">search</mat-icon>
+                </div>
+            </div>
+        </div>
+        <app-friend [friendFilter]="searchInput"></app-friend>
+        <app-follower [followerFilter]="searchInput"></app-follower>
     </div>
 </div>

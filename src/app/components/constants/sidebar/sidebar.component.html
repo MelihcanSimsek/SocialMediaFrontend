@@ -1,22 +1,42 @@
-<div class="h-screen sticky top-0 z-10 bg-primary-color-dark text-primary-color-extra-light  text-base list-none divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600 ">
-    <ul class="flex items-center py-16 flex-col select-none" aria-labelledby="sidebar">
-        <a href="/home" class="flex justify-center items-center w-full hover:bg-primary-color hover:underline cursor-pointer">
-        <span  class="block py-6 text-xl font-semibold text-primary-color-extra-light  flex items-center ">Anasayfa</span>
+<div class="h-screen sticky top-0   z-10 bg-gradient-to-r from-primary-color-dark to-primary-color text-white  shadow-2xl">
+    <div class="flex flex-col h-full w-full items-center justify-center divide-y-2 divide-slate-300 space-y-4 ">
+        <a class="flex justify-start w-3/4" href="/home">
+            <div  class="flex flex-row items-center space-x-1 w-full  cursor-pointer ">  
+                <div class="w-full py-6  transition ease-in-out delay-150 hover:translate-x-10 hover:text-blue-700 duration-300  ">
+                    <span  class="block text-2xl  font-semibold  tracking-wider w-full ">Anasayfa</span>
+                </div>
+            </div>
         </a>
-        <a routerLink="/profile/{{user.id}}" class="flex justify-center items-center w-full hover:bg-primary-color hover:underline cursor-pointer">
-        <span   class="block py-6 text-xl font-semibold text-primary-color-extra-light flex items-center ">Profil</span>
-        </a>
-        <a class="flex justify-center items-center w-full hover:bg-primary-color hover:underline cursor-pointer">
-        <span routerLink="/friends" class="block py-6 text-xl font-semibold text-primary-color-extra-light flex items-center ">Arkadaşlar</span>
-        </a>
-        <li class="flex justify-center items-center w-full hover:bg-primary-color hover:underline cursor-pointer">
-        <span routerLink="/messages" class="block py-6 text-xl font-semibold text-primary-color-extra-light flex items-center ">Mesajlar</span>
-        </li>
-        <li class="flex justify-center py-2 items-center w-full cursor-pointer">
-            <button  type="button" class="block py-4 px-10 rounded-full bg-primary-color hover:bg-primary-color-dark shadow hover:border-solid hover:border-2 hover:border-black text-white flex items-center" (click)="OpenPostModal()">Paylaş <mat-icon>add</mat-icon></button>
-        </li>
         
-      </ul>
+        <div class="flex justify-start w-3/4" routerLink="/profile/{{user.id}}">
+            <div  class="flex py-6  w-full   cursor-pointer transition ease-in-out delay-150 hover:translate-x-10 hover:text-blue-700 duration-300 ">
+                <span class="block  text-xl font-semibold  flex items-center tracking-widert w-full">Profil</span>
+            </div>
+        </div>
+        <div class="flex justify-start w-3/4" routerLink="/friends">
+            <div  class="flex py-6  w-full   cursor-pointer transition ease-in-out delay-150 hover:translate-x-10 hover:text-blue-700 duration-300  ">
+                <span  class="block  text-xl font-semibold t flex items-center tracking-wider w-full">Arkadaşlar</span>
+            </div>
+        </div>
+        <div class="flex justify-start w-3/4"  routerLink="/messages">
+            <div class="flex py-6  w-full   cursor-pointer transition ease-in-out delay-150 hover:translate-x-10 hover:text-blue-700 duration-300  ">
+                <span class="block text-xl font-semibold  flex items-center tracking-wider w-full ">Mesajlar</span>
+            </div>
+        </div>
+        <div class="flex justify-start w-3/4 py-6">
+            <div class="block flex flex-row justify-center w-full items-center bg-blue-700 hover:opacity-80 px-6 py-4 rounded-lg cursor-pointer space-x-1"  (click)="OpenPostModal()">
+                <div >
+                    <span class="text-xl">Paylaş</span>
+                </div>
+                <div >
+                    <mat-icon class="text-2xl">add</mat-icon>
+                </div>
+                
+            </div>
+        </div>
+       
+        
+    </div>
 </div>
 
 <div id="post-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">

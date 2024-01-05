@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UserFollowerDto } from 'src/app/models/dtos/userFollowerDto';
 import { AuthService } from 'src/app/services/auth.service';
 import { FollowerService } from 'src/app/services/follower.service';
@@ -10,6 +10,7 @@ import { FollowerService } from 'src/app/services/follower.service';
 })
 export class FollowerComponent implements OnInit{
 
+  @Input() followerFilter:string;
   followerList:UserFollowerDto[];
   followedList:UserFollowerDto[];
   imageUrl = "https://localhost:7223/Uploads/images/";

@@ -1,22 +1,22 @@
 
 
-<nav class="bg-primary-color-dark shadow-lg top-0 z-20 ">
+<nav class="bg-blue-700 shadow-2xl top-0 z-50 ">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <a routerLink="/home" class="flex items-center space-x-3 rtl:space-x-reverse">
         <span class="self-center text-2xl font-semibold whitespace-nowrap text-white select-none">SocialMedia</span>
     </a>
     <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
         <div class="flex items-center space-x-5"  id="navbar-user" >
-          <button type="button" class="flex text-sm bg-primary-color-dark rounded-full md:me-0 focus:ring-2 focus:ring-primary-color-light" id="user-theme-button">
+          <button type="button" class="flex text-sm bg-blue-700 rounded-full md:me-0 focus:ring-2 focus:ring-primary-color-light" id="user-theme-button">
             <span class="sr-only">Theme</span>
             <mat-icon class="text-primary-color-extra-light">wb_sunny</mat-icon>
             <mat-icon *ngIf="false">tonality</mat-icon>
           </button>
-        <button type="button" class="flex text-sm bg-primary-color-dark rounded-full md:me-0 focus:ring-2 focus:ring-primary-color-light" id="user-notification-button" aria-expanded="false" data-dropdown-toggle="notification-dropdown">
+        <button type="button" class="flex text-sm bg-blue-700 rounded-full md:me-0 focus:ring-2 focus:ring-primary-color-light" id="user-notification-button" aria-expanded="false" data-dropdown-toggle="notification-dropdown">
             <span class="sr-only">Open notification menu</span>
             <mat-icon  mat-raised-button [matBadge]="notifications.length" matBadgePosition="after" matBadgeColor="warn" aria-hidden="false" class="text-primary-color-extra-light" >notifications</mat-icon>
           </button>
-        <button type="button" class="flex text-sm bg-primary-color-dark rounded-full md:me-0 focus:ring-2 focus:ring-primary-color-light" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-trigger="hover">
+        <button type="button" class="flex text-sm bg-blue-700 rounded-full md:me-0 focus:ring-2 focus:ring-primary-color-light" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-trigger="hover">
           <span class="sr-only">Open user menu</span>
           <img class="w-8 h-8 rounded-full" [src]="getUserHeaderPhoto()" alt="user photo">
         </button>
@@ -33,7 +33,7 @@
               <a href="dashboard" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white flex items-center"><mat-icon class="text-sm">dashboard</mat-icon>Dashboard</a>
               </li>
             <li>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white flex items-center"><mat-icon class="text-sm">settings</mat-icon>Ayarlar</a>
+            <a href="/settings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white flex items-center"><mat-icon class="text-sm">settings</mat-icon>Ayarlar</a>
             </li>
             <li>
               <span  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white cursor-pointer" (click)="signOut()">Çıkış Yap</span>
