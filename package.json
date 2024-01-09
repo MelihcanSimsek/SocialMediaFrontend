@@ -26,6 +26,7 @@
     "@microsoft/signalr": "^8.0.0",
     "flowbite": "^2.1.1",
     "jquery": "^3.7.1",
+    "ngx-clipboard": "^16.0.0",
     "ngx-toastr": "^17.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

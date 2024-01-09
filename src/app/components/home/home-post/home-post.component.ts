@@ -8,6 +8,13 @@ import { ReportService } from 'src/app/services/report.service';
 import { ToastrService } from 'ngx-toastr';
 import { Report } from 'src/app/models/entities/report';
 import { AuthService } from 'src/app/services/auth.service';
+import { ClipboardService } from 'ngx-clipboard';
+import { FavService } from 'src/app/services/fav.service';
+import { Fav } from 'src/app/models/entities/fav';
+import { v4 as uuidv4 } from 'uuid';
+import { Notification } from 'src/app/models/entities/notification';
+import { NotificationService } from 'src/app/services/notification.service';
+import { SignalService } from 'src/app/services/signal.service';
 
 @Component({
   selector: 'app-home-post',
@@ -20,17 +27,22 @@ export class HomePostComponent implements OnInit {
   postDetail:PostDetailDto[];
   imageUrl = "https://localhost:7223/Uploads/images/";
   reports:Report[];
+  favs:number[];
   constructor(private sanitizer: DomSanitizer,
     private postService:PostService,
     private reportService:ReportService,
     private toastService:ToastrService,
-    private authService:AuthService) {
+    private authService:AuthService,
+    private clipboardService: ClipboardService,
+    private favService:FavService,
+    private notificationService:NotificationService,
+    private signalR:SignalService) {
         
   }
 
   ngOnInit(): void {
     initFlowbite();
-
+    this.getUserFavs();
     this.getAllReports();
     this.getAllPostDetail();
   }
@@ -107,5 +119,93 @@ export class HomePostComponent implements OnInit {
     },responseError=>{
       this.toastService.error(responseError.error.message);
     })
+
+    
+  }
+
+  getUserFavs()
+  {
+    this.favService.GetUserFavs(this.authService.getUserInfo().id).subscribe(response=>{
+      this.favs = response.data;
+    })
+  }
+
+  favClick(id:number,postUserId:number)
+  {
+    let entity:Fav = Object.assign({},{
+      id:0,
+      userId:this.authService.getUserInfo().id,
+      postId:id,
+      creationDate:new Date()
+    })
+
+    const notification:Notification = Object.assign({},{
+      id:uuidv4(),
+      userId:this.authService.getUserInfo().id,
+      targetId:postUserId,
+      notificationIntId:id,
+      notificationUniqueId:null,
+      type:3,
+      creationDate:new Date(),
+      isRead:false
+    });
+
+
+   
+
+    if(!this.favs.includes(id))
+    {
+      this.favs.push(id);
+      this.favService.add(entity).subscribe(response=>{
+        this.notificationService.Add(notification).subscribe(newResponse=>{
+          this.signalR.SendNotification(postUserId);
+        })
+      })
+    }
+    else{
+      this.favs.splice(this.favs.indexOf(id),1);
+      this.favService.delete(entity).subscribe(response=>{
+
+      })
+    }
+  }
+
+  getPostFavCount(id:number,count:number,favArray:number[]){
+
+    if(this.favs.includes(id) && this.favService.checkUserIsFav(this.authService.getUserInfo().id,favArray))
+    {
+      return count;
+    }
+    else if(!this.favs.includes(id) && this.favService.checkUserIsFav(this.authService.getUserInfo().id,favArray))
+    {
+      return count - 1;
+    }
+    else if(this.favs.includes(id) && !this.favService.checkUserIsFav(this.authService.getUserInfo().id,favArray))
+    {
+      return count + 1;
+    }
+    else{
+      return count;
+    }
+  
+  }
+
+  getFavClass(id:number)
+  {
+    
+    if(this.favs.includes(id))
+    {
+      return "cursor-pointer  text-red-700"
+    }
+    else
+    {
+      return "cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"
+    }
+  }
+
+  copy(id:number){
+    let postUrl = "http://localhost:4200/posts/"+id;
+    this.clipboardService.copyFromContent(postUrl);
+    this.toastService.success("Gönderi bağlantısı kopyalandı");
   }
 }

@@ -1,35 +1,35 @@
 <div class="py-8 px-10">
-    <div class="bg-white rounded-lg">
+    <div class="bg-white dark:bg-secondary-color  rounded-lg">
         <!-- header -->
         <div class="">
             <div class="relative">
-                <img [src]="getUserBackgroundImage(profile.backgroundImage)" class=" w-full h-[250px] rounded-md cursor-pointer border-2 border-black"
-                    height="150"
-                    alt="background-image">
+                <div [style.background-image]="'url(' + getUserBackgroundImage(profile.backgroundImage) + ')'" class="  h-[300px] rounded-tr-md rounded-tl-md cursor-pointer  bg-cover bg-center bg-profile"
+                    
+                    ></div>
                 <div class="px-10  w-full flex justify-between">
-                    <div class="relative flex flex-col justify-center select-none">
+                    <div class="relative bottom-20 flex flex-col items-center justify-center select-none space-y-1">
                         <img [src]="getUserProfileImage(profile.profileImage)"
-                            width="150" height="150" class="rounded-lg border-2 border-black cursor-pointer" alt="avatar">
-                        <span class="text-2xl text-center">{{profile.name}}</span>
+                            width="150" height="150" class="rounded-full cursor-pointer" alt="avatar">
+                        <span class="text-2xl text-center dark:text-white">{{profile.name}}</span>
                     </div>
                    <div class="flex flex-row space-x-3">
-                      <div class="flex flex-col py-2">
-                        <div *ngIf="CheckUserIsFriend()" class="rounded-full bg-white px-3 py-3 text-black hover:bg-primary-color-extra-light hover:text-primary-color-dark cursor-pointer" (click)="SendMessage()">
+                      <div class="flex flex-col pt-2">
+                        <div *ngIf="CheckUserIsFriend()" class="rounded-full bg-white px-3 py-3 text-black hover:bg-primary-color-extra-light hover:text-primary-color-dark dark:bg-secondary-color dark:hover:bg-secondary-color-dark dark:hover:text-secondary-color-light dark:text-white cursor-pointer" (click)="SendMessage()">
                             <mat-icon class="text-2xl font-semibold "> mail_outline</mat-icon>
                         </div>
                       </div>
-                    <div class="flex flex-col py-2">
+                    <div class="flex flex-col pt-2">
                         <div *ngIf="!CheckFollow() && !IsOwnProfile()"
-                            class="px-6 py-4 bg-primary-color-dark hover:opacity-90 flex flex-col items-center justify-center rounded-md cursor-pointer" (click)="Follow()">
-                            <span class="text-white text-xl ">Takip Et</span>
+                            class="px-6 py-4 bg-primary-color-dark hover:opacity-90 flex flex-col items-center justify-center rounded-md cursor-pointer dark:bg-secondary-color-light" (click)="Follow()">
+                            <span class="text-white text-xl dark:text-secondary-color-extra-dark">Takip Et</span>
                         </div>
                         <div *ngIf="CheckFollow() && !IsOwnProfile()"
                             class="px-6 py-4 bg-slate-500 hover:opacity-90 flex flex-col items-center justify-center rounded-md cursor-pointer" (click)="UnFollow()">
                             <span class="text-white text-xl ">Takibi Bırak</span>
                         </div>
                         <div *ngIf="IsOwnProfile()"
-                            class="px-6 py-4 bg-primary-color-light hover:opacity-90 flex flex-col items-center justify-center rounded-md cursor-pointer" (click)="OpenProfileModal()">
-                            <span class="text-white text-xl ">Düzenle</span>
+                            class="px-6 py-4 bg-primary-color-light hover:opacity-90 flex flex-col items-center justify-center rounded-md cursor-pointer dark:bg-secondary-color-extra-light " (click)="OpenProfileModal()">
+                            <span class="text-white text-xl dark:text-white ">Düzenle</span>
                         </div>
                     </div>
                    </div>
@@ -40,34 +40,34 @@
         <div id="profile-header-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="p-4 w-full max-w-4xl max-h-full">
                 <!-- Modal content -->
-                <div class="bg-primary-color-extra-light rounded-lg shadow">
+                <div class="bg-primary-color-extra-light rounded-lg dark:bg-secondary-color shadow">
                    <div class="flex flex-row justify-end px-10 py-2">
-                    <button (click)="closeProfileModal()"><mat-icon class="hover:bg-primary-color-light hover:text-white rounded-md">close</mat-icon></button>
+                    <button (click)="closeProfileModal()"><mat-icon class="hover:bg-primary-color-light hover:text-white dark:text-white dark:hover:text-secondary-color-extra-dark dark:hover:bg-secondary-color rounded-md">close</mat-icon></button>
                    </div>
                    <div class="px-10">
-                        <img [src]="getUserEditBackgroundImage()" alt="edited-profile-image" class="w-full h-[250px] rounded-md cursor-pointer border-2 border-black" (click)="openDeleteBackgroundFile()">
+                    <div [style.background-image]="'url(' + getUserEditBackgroundImage() + ')'" class=" w-full h-[300px] hover:opacity-80 rounded-tr-md rounded-tl-md cursor-pointer  bg-cover bg-center bg-profile " (click)="openDeleteBackgroundFile()"></div>
                         <input type="file" name="background-image" id="background-image-file" (change)="newBackgroundImageSelected($event)" accept=".png,.jpg" ngf-max-size="5MB" class="hidden">
-                        <div >
+                        <div>
                             <img [src]="getUserEditProfileImage()"
-                            width="150" height="150" class="rounded-lg border-2 border-black cursor-pointer" alt="edited-avatar" (click)="openDeleteProfileFile()">
+                            width="150" height="150" class="rounded-full relative bottom-20 left-10  hover:opacity-80  cursor-pointer" alt="edited-avatar" (click)="openDeleteProfileFile()">
                             <input type="file" name="profile-image" id="profile-image-file" (change)="newProfileImageSelected($event)" accept=".png,.jpg" ngf-max-size="5MB" class="hidden">
                         </div>
                         <form [formGroup]="editForm">
                             <div class="flex flex-col justify-start py-4">
-                                <label for="username">Kullanıcı Adı :</label>
-                                <input type="text" id="username" formControlName="username" maxlength="25" class="w-3/4">
+                                <label for="username" class="dark:text-white">Kullanıcı Adı :</label>
+                                <input type="text" id="username" formControlName="username" maxlength="25" class="w-3/4 focus:outline-none focus:borer-rose-600 dark:bg-secondary-color dark:text-white">
                             </div>
                             <div class="flex flex-col justify-start py-4">
-                                <label for="description">Profil Açıklaması :</label>
-                                <textarea type="text" id="description" formControlName="description"  maxlength="255" class="w-3/4"></textarea>
+                                <label for="description " class="dark:text-white">Profil Açıklaması :</label>
+                                <textarea type="text" id="description" formControlName="description"  maxlength="255" class="w-3/4 focus:outline-none focus:borer-rose-600 dark:bg-secondary-color dark:text-white"></textarea>
                             </div>
                             <div class="flex flex-col justify-start py-4">
-                                <label for="location">Konum :</label>
-                                <input type="text" id="location" formControlName="location"  maxlength="30" class="w-3/4">
+                                <label for="location" class="dark:text-white">Konum :</label>
+                                <input type="text" id="location" formControlName="location"  maxlength="30" class="w-3/4 focus:outline-none focus:borer-rose-600 dark:bg-secondary-color dark:text-white">
                             </div>
                             <div class="flex flex-row justify-end py-4">
-                                <div class="px-6 py-4 flex justify-center items-center bg-primary-color-dark rounded-lg shadow-lg hover:opacity-80 cursor-pointer" (click)="UpdateProfile()">
-                                    <span class="text-xl text-white font-semibold">Kaydet</span>
+                                <div class="px-6 py-4 flex justify-center items-center bg-primary-color-dark rounded-lg shadow-lg hover:opacity-80 cursor-pointer dark:bg-secondary-color-light  " (click)="UpdateProfile()">
+                                    <span class="text-xl text-white font-semibold dark:text-secondary-color-extra-dark">Kaydet</span>
                                 </div>
                             </div>
                         </form>
@@ -77,38 +77,38 @@
             </div>
         </div>
         <!-- body -->
-        <div class="flex justify-center py-2">
-            <hr class="w-3/4 h-1 bg-primary-color-dark">
+        <div class="flex justify-center">
+            <hr class="w-3/4 h-1 bg-primary-color-dark dark:bg-secondary-color-light">
         </div>
         <div class="px-10  justify-start py-2 ">
             <div class="flex flex-row ">
                 <div class="flex flex-row items-center pr-4">
-                    <span class="px-1 text-lg">{{followedIds.length}}</span>
-                    <span class="text-slate-500">Takip Edilen</span>
+                    <span class="px-1 text-lg dark:text-secondary-color-light">{{followedIds.length}}</span>
+                    <span class="text-slate-500 dark:text-white">Takip Edilen</span>
                 </div>
                 <div class="flex flex-row justify-around items-center">
-                    <span class="px-1 text-lg">{{followerIds.length}}</span>
-                    <span class="text-slate-500">Takipçi</span>
+                    <span class="px-1 text-lg dark:text-secondary-color-light">{{followerIds.length}}</span>
+                    <span class="text-slate-500 dark:text-white">Takipçi</span>
                 </div>
             </div>
         </div>
         <div class="flex justify-center py-2">
-            <hr class="w-3/4 h-1 bg-primary-color-dark">
+            <hr class="w-3/4 h-1 bg-primary-color-dark dark:bg-secondary-color-light">
         </div>
         <div class="py-2">
             <div class="px-10 flex flex-row items-start text-xl">
-                <span class="text-black font-semibold">Profil Açıklaması</span>
+                <span class="text-black font-semibold dark:text-white">Profil Açıklaması</span>
             </div>
             <div class="px-10 py-2 flex flex-row flex-wrap">
-                <p class="text-slate-800">{{profile.description}}</p>
+                <p class="text-slate-800 dark:text-white">{{profile.description}}</p>
             </div>
-            <div class="px-10 py-2 flex flex-row items-center" >
-                <span  class="text-slate-400 text-2xl flex flex-row items-center"><mat-icon>location_on</mat-icon></span>
-                <span class="text-slate-800">{{profile.location}}</span>
+            <div class="px-10 py-2 flex flex-row items-center" *ngIf="profile != undefined && profile.location.trim() !== ''">
+                <span  class="text-slate-400 text-2xl flex flex-row items-center dark:text-secondary-color-light"><mat-icon>location_on</mat-icon></span>
+                <span class="text-slate-800 dark:text-white">{{profile.location}}</span>
             </div>
         </div>
         <!-- footer -->
-        <hr class="w-full h-5  bg-primary-color-extra-light">
+        
        
     </div>
 

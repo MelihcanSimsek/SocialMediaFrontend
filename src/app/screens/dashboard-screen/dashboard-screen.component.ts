@@ -35,11 +35,11 @@ export class DashboardScreenComponent implements OnInit {
   {
     if(this.selectedItem == status )
     {
-      return "px-6 py-4 bg-slate-500 hover:opacity-90 rounded-lg cursor-pointer";
+      return "px-6 py-4 bg-slate-500 hover:opacity-90 rounded-lg text-white cursor-pointer";
     }
     else
     {
-      return "px-6 py-4 bg-primary-color hover:opacity-90 rounded-lg cursor-pointer";
+      return "px-6 py-4 bg-primary-color hover:opacity-90 rounded-lg text-white dark:bg-secondary-color-light dark:text-secondary-color-extra-dark cursor-pointer";
     }
   }
 }

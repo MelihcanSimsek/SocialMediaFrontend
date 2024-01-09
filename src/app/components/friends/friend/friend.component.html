@@ -4,18 +4,18 @@
     </div>
 
     <div class="flex flex-row flex-wrap w-full " *ngIf="friendsList.length > 0">
-    <div class="bg-white shadow-lg flex flex-row items-center justify-center w-64 py-4  mx-2 my-2" *ngFor="let friend of friendsList | friendFilter:friendFilter">
+    <div class="bg-white dark:bg-secondary-color shadow-lg flex flex-row items-center justify-center w-64 py-4  mx-2 my-2" *ngFor="let friend of friendsList | friendFilter:friendFilter">
         <div class="flex flex-col items-center justify-center  ">
             <img [src]="getUserAvatar(friend.profileImage)" alt="avatar" height="50" width="50" class="rounded-full">
-            <span class="text-black text-sm font-semibold">{{friend.name}}</span>
-            <span class="text-yellow-400 text-sm">Çevrim içi</span>
+            <span class="text-black text-sm font-semibold dark:text-white">{{friend.name}}</span>
+            <!-- <span class="text-yellow-400 text-sm">Çevrim içi</span> -->
         </div>
         <div class="flex flex-col space-y-1 px-4 justify-center items-center">
-            <div class="flex justify-center items-center py-4 px-6 bg-red-500 hover:opacity-90 cursor-pointer rounded-lg shadow-lg" routerLink="/profile/{{friend.userId}}">
-                <mat-icon class="text-2xl text-white">launch</mat-icon>
+            <div class="flex justify-center items-center py-4 px-6 bg-red-500 dark:bg-secondary-color-extra-light hover:opacity-90 cursor-pointer rounded-lg shadow-lg" routerLink="/profile/{{friend.userId}}">
+                <mat-icon class="text-2xl text-white dark:text-secondary-color-extra-dark">launch</mat-icon>
             </div>
-            <div class="flex justify-center items-center py-4 px-6 bg-primary-color-dark hover:opacity-90 cursor-pointer rounded-lg shadow-lg" (click)="SendMessage(friend.userId)">
-                <mat-icon class="text-2xl text-white"> mail_outline</mat-icon>
+            <div class="flex justify-center items-center py-4 px-6 bg-primary-color-dark dark:bg-secondary-color-light hover:opacity-90 cursor-pointer rounded-lg shadow-lg" (click)="SendMessage(friend.userId)">
+                <mat-icon class="text-2xl text-white dark:text-secondary-color-extra-dark"> mail_outline</mat-icon>
             </div>
         </div>
     </div> 

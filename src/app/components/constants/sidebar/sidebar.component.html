@@ -1,30 +1,30 @@
-<div class="h-screen sticky top-0   z-10 bg-gradient-to-r from-primary-color-dark to-primary-color text-white  shadow-2xl">
-    <div class="flex flex-col h-full w-full items-center justify-center divide-y-2 divide-slate-300 space-y-4 ">
+<div class="h-screen sticky top-0   z-10 bg-gradient-to-r from-primary-color-dark to-primary-color text-white transition ease-in-out  dark:from-secondary-color dark:to-secondary-color-dark  shadow-2xl">
+    <div class="flex flex-col h-full w-full items-center justify-center divide-y-[1px] divide-slate-300 space-y-4 ">
         <a class="flex justify-start w-3/4" href="/home">
             <div  class="flex flex-row items-center space-x-1 w-full  cursor-pointer ">  
-                <div class="w-full py-6  transition ease-in-out delay-150 hover:translate-x-10 hover:text-blue-700 duration-300  ">
+                <div class="w-full py-6  transition ease-in-out delay-150 hover:translate-x-10 hover:text-blue-700 dark:hover:text-black duration-300  ">
                     <span  class="block text-2xl  font-semibold  tracking-wider w-full ">Anasayfa</span>
                 </div>
             </div>
         </a>
         
-        <div class="flex justify-start w-3/4" routerLink="/profile/{{user.id}}">
-            <div  class="flex py-6  w-full   cursor-pointer transition ease-in-out delay-150 hover:translate-x-10 hover:text-blue-700 duration-300 ">
+        <a class="flex justify-start w-3/4" href="/profile/{{user.id}}">
+            <div  class="flex py-6  w-full   cursor-pointer transition ease-in-out delay-150 hover:translate-x-10 hover:text-blue-700 dark:hover:text-black duration-300 ">
                 <span class="block  text-xl font-semibold  flex items-center tracking-widert w-full">Profil</span>
             </div>
-        </div>
-        <div class="flex justify-start w-3/4" routerLink="/friends">
-            <div  class="flex py-6  w-full   cursor-pointer transition ease-in-out delay-150 hover:translate-x-10 hover:text-blue-700 duration-300  ">
+        </a>
+        <a class="flex justify-start w-3/4" href="/friends">
+            <div  class="flex py-6  w-full   cursor-pointer transition ease-in-out delay-150 hover:translate-x-10 hover:text-blue-700 dark:hover:text-black duration-300  ">
                 <span  class="block  text-xl font-semibold t flex items-center tracking-wider w-full">Arkadaşlar</span>
             </div>
-        </div>
-        <div class="flex justify-start w-3/4"  routerLink="/messages">
-            <div class="flex py-6  w-full   cursor-pointer transition ease-in-out delay-150 hover:translate-x-10 hover:text-blue-700 duration-300  ">
+        </a>
+        <a class="flex justify-start w-3/4"  href="/messages">
+            <div class="flex py-6  w-full   cursor-pointer transition ease-in-out delay-150 hover:translate-x-10 hover:text-blue-700 dark:hover:text-black duration-300  ">
                 <span class="block text-xl font-semibold  flex items-center tracking-wider w-full ">Mesajlar</span>
             </div>
-        </div>
+        </a>
         <div class="flex justify-start w-3/4 py-6">
-            <div class="block flex flex-row justify-center w-full items-center bg-blue-700 hover:opacity-80 px-6 py-4 rounded-lg cursor-pointer space-x-1"  (click)="OpenPostModal()">
+            <div class="block flex flex-row justify-center w-full items-center bg-blue-700 dark:bg-black hover:opacity-80 px-6 py-4 rounded-lg cursor-pointer space-x-1"  (click)="OpenPostModal()">
                 <div >
                     <span class="text-xl">Paylaş</span>
                 </div>
@@ -42,7 +42,7 @@
 <div id="post-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-2xl max-h-full">
         <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow ">
+        <div class="relative bg-white dark:bg-secondary-color rounded-lg shadow ">
             
             
             <!-- Modal body -->
@@ -57,16 +57,16 @@
                     </button>
                 </div>
                 <div class="relative w-full h-full">
-                <textarea name="postarea" id="post-area"  rows="8" class="relative w-full h-full rounded-md" placeholder="Fikirlerinizi paylaşın.." maxlength="255" [(ngModel)]="postarea"></textarea>
+                <textarea name="postarea" id="post-area"  rows="8" class="relative w-full h-full dark:bg-secondary-color dark:text-white rounded-md" placeholder="Fikirlerinizi paylaşın.." maxlength="255" [(ngModel)]="postarea"></textarea>
                 <div class="absolute w-full bottom-3 left-1">
                     <hr class="text-gray-500 py-1">
                     <div class="flex flex-row  divide-x divide-gray-400">
                         <div>
                             <input type="file" name="post-image" id="post-image-file" (change)="postImageSelected($event)" accept=".png,.jpg" ngf-max-size="5MB" class="hidden">
-                            <mat-icon class="cursor-pointer text-primary-color-dark hover:text-primary-color hover:bg-gray-100" (click)="photoFileClick()"> insert_photo</mat-icon>
+                            <mat-icon class="cursor-pointer text-primary-color-dark hover:text-primary-color hover:bg-gray-100 dark:text-secondary-color-light dark:hover:bg-gray-500" (click)="photoFileClick()"> insert_photo</mat-icon>
                         </div>
                         
-                        <mat-icon class="cursor-pointer text-primary-color-dark hover:text-primary-color hover:bg-gray-100"> insert_emoticon</mat-icon>
+                        <mat-icon class="cursor-pointer text-primary-color-dark hover:text-primary-color hover:bg-gray-100 dark:text-secondary-color-light dark:hover:bg-gray-500"> insert_emoticon</mat-icon>
                     </div>
                 </div>
                 </div>
@@ -74,7 +74,7 @@
                     <img [src]="getPostImage()" alt="image"  height="500" class="cursor-pointer hover:opacity-90 border-2 border-solid border-stone-500" (click)="deleteImage()">
                 </div>
                 <div class="flex flex-col items-end">
-                    <button type="button" class="rounded-md bg-primary-color-dark hover:bg-primary-color text-white px-8 py-4" (click)="Post()">Paylaş</button>
+                    <button type="button" class="rounded-md bg-primary-color-dark hover:bg-primary-color text-white px-8 py-4 dark:bg-secondary-color-light dark:text-secondary-color-extra-dark" (click)="Post()">Paylaş</button>
                 </div>
             </div>
         </div>

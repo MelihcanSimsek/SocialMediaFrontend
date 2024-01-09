@@ -1,19 +1,18 @@
 <div class="px-10 py-8">
     <div class="py-4 flex flex-row items-center space-x-1">
-        <input type="text" class="" [(ngModel)]="bannedFilter" placeholder="Kullanıcı Ara">
-        <mat-icon class="text-black">search</mat-icon>
+        <input type="text" class="dark:bg-secondary-color dark:text-white" [(ngModel)]="bannedFilter" placeholder="Kullanıcı Ara">
     </div>
     <div class="py-2 space-y-3" *ngFor="let user of bannedUsers |unban:bannedFilter">
 
     
-    <div class="flex bg-white py-4 px-6 flex flex-row justify-between">
+    <div class="flex bg-white dark:bg-secondary-color py-4 px-6 flex flex-row justify-between">
         <div class="flex flex-row space-x-2">
             <img [src]="getUserAvatar(user.imagePath)" height="50" width="50" alt="avatar-image" class=" rounded-md">
-            <span class="text-lg font-semibold">{{user.userName}}</span>
+            <span class="text-lg font-semibold dark:text-white">{{user.userName}}</span>
         </div>
-        <div class="flex flex-col items-center justify-center divide-y-2 divide-primary-color-dark">
-            <span class="text-lg">Yasaklanma Tarihi</span>
-            <span class="font-semibold text-lg">{{user.banDate |date:"dd/MMM/y"}}</span>
+        <div class="flex flex-col items-center justify-center divide-y-2 divide-primary-color-dark dark:divide-secondary-color-extra-light">
+            <span class="text-lg dark:text-white">Yasaklanma Tarihi</span>
+            <span class="font-semibold text-lg dark:text-secondary-color-light">{{user.banDate |date:"dd/MMM/y"}}</span>
         </div>
         <div class="px-6 py-4 bg-red-500 cursor-pointer hover:bg-red-900 flex justify-center items-center rounded-md" (click)="Unban(user)">
             <span class="text-sm text-white font-semibold">Yasak Kaldır</span>

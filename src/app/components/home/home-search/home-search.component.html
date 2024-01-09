@@ -1,8 +1,8 @@
-<div class="px-10 py-8">
+<div class="px-10 py-8 transition ease-in-out">
     <div  class="flex flex-row items-center">
-        <input type="text" [(ngModel)]="searchInput" class="font-semibold" placeholder="Kullanıcı Ara">
-        <div class="px-4 py-2 bg-primary-color-dark cursor-pointer hover:opacity-90" (click)="Search()">
-            <mat-icon class="text-2xl text-white ">search</mat-icon>
+        <input type="text" [(ngModel)]="searchInput" class="font-semibold dark:bg-secondary-color dark:text-white" placeholder="Kullanıcı Ara">
+        <div class="px-4 py-2 bg-primary-color-dark cursor-pointer hover:opacity-90 dark:bg-secondary-color-light " (click)="Search()">
+            <mat-icon class="text-2xl text-white dark:text-secondary-color-extra-dark ">search</mat-icon>
         </div>
     </div>
 </div>

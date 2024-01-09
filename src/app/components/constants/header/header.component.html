@@ -1,74 +1,74 @@
 
 
-<nav class="bg-blue-700 shadow-2xl top-0 z-50 ">
+<nav class="bg-blue-700 shadow-2xl top-0 z-50 dark:bg-black transition ease-in-out  ">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-    <a routerLink="/home" class="flex items-center space-x-3 rtl:space-x-reverse">
+    <a href="/home" class="flex items-center space-x-3 rtl:space-x-reverse">
         <span class="self-center text-2xl font-semibold whitespace-nowrap text-white select-none">SocialMedia</span>
     </a>
     <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
         <div class="flex items-center space-x-5"  id="navbar-user" >
-          <button type="button" class="flex text-sm bg-blue-700 rounded-full md:me-0 focus:ring-2 focus:ring-primary-color-light" id="user-theme-button">
+          <button type="button" class="flex text-sm bg-blue-700 rounded-full md:me-0 focus:ring-2 focus:ring-primary-color-light  dark:bg-black dark:focus:ring-secondary-color-light " id="user-theme-button" (click)="ChangeTheme()">
             <span class="sr-only">Theme</span>
-            <mat-icon class="text-primary-color-extra-light">wb_sunny</mat-icon>
-            <mat-icon *ngIf="false">tonality</mat-icon>
+            <mat-icon *ngIf="GetThemeIcon()" class="text-white">wb_sunny</mat-icon>
+            <mat-icon *ngIf="!GetThemeIcon()" class="text-white">tonality</mat-icon>
           </button>
-        <button type="button" class="flex text-sm bg-blue-700 rounded-full md:me-0 focus:ring-2 focus:ring-primary-color-light" id="user-notification-button" aria-expanded="false" data-dropdown-toggle="notification-dropdown">
+        <button type="button" class="flex text-sm bg-blue-700 rounded-full md:me-0 focus:ring-2 focus:ring-primary-color-light  dark:bg-black dark:focus:ring-secondary-color-light" id="user-notification-button" aria-expanded="false" data-dropdown-toggle="notification-dropdown">
             <span class="sr-only">Open notification menu</span>
-            <mat-icon  mat-raised-button [matBadge]="notifications.length" matBadgePosition="after" matBadgeColor="warn" aria-hidden="false" class="text-primary-color-extra-light" >notifications</mat-icon>
+            <mat-icon  mat-raised-button [matBadge]="notifications.length" matBadgePosition="after" matBadgeColor="warn" aria-hidden="false" class="text-white" >notifications</mat-icon>
           </button>
-        <button type="button" class="flex text-sm bg-blue-700 rounded-full md:me-0 focus:ring-2 focus:ring-primary-color-light" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-trigger="hover">
+        <button type="button" class="flex text-sm bg-blue-700 rounded-full md:me-0 focus:ring-2 focus:ring-primary-color-light  dark:bg-black dark:focus:ring-secondary-color-light" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-trigger="hover">
           <span class="sr-only">Open user menu</span>
           <img class="w-8 h-8 rounded-full" [src]="getUserHeaderPhoto()" alt="user photo">
         </button>
     </div>
    
         <!-- User Dropdown menu -->
-        <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
+        <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-secondary-color-extra-light" id="user-dropdown">
           <div class="px-4 py-3">
             <span class="block text-sm text-gray-900 dark:text-white">{{user.name}}</span>
-            <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{user.email}}</span>
+            <span class="block text-sm  text-gray-500  dark:text-secondary-color-extra-light">{{user.email}}</span>
           </div>
           <ul class="py-2" aria-labelledby="user-menu-button">
             <li *ngIf="dashboardRole">
-              <a href="dashboard" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white flex items-center"><mat-icon class="text-sm">dashboard</mat-icon>Dashboard</a>
+              <a href="dashboard" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-secondary-color-extra-light dark:text-white flex items-center"><mat-icon class="text-sm ">dashboard</mat-icon>Dashboard</a>
               </li>
             <li>
-            <a href="/settings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white flex items-center"><mat-icon class="text-sm">settings</mat-icon>Ayarlar</a>
+            <a href="/settings" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-secondary-color-extra-light dark:text-white flex items-center"><mat-icon class="text-sm">settings</mat-icon>Ayarlar</a>
             </li>
             <li>
-              <span  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white cursor-pointer" (click)="signOut()">Çıkış Yap</span>
+              <span  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-secondary-color-extra-light dark:text-white cursor-pointer" (click)="signOut()">Çıkış Yap</span>
             </li>
           </ul>
         </div>
 
         <!-- Notification Dropdown Menu -->
-        <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="notification-dropdown" >
+        <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 dark:divide-secondary-color-extra-light rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="notification-dropdown" >
             <div class="px-4 py-3 cursor-pointer" *ngIf="notifications.length > 0"  >
-                <span class="block text-sm font-semibold text-blue-900 hover:text-blue-700 flex items-center space-x-0" (click)="DeleteAllNotification()"><mat-icon class="text-sm">clear</mat-icon> Bildirimleri Temizle</span>
+                <span class="block text-sm font-semibold text-blue-900 hover:text-blue-700 dark:text-white dark:hover:text-secondary-color-extra-light flex items-center space-x-0" (click)="DeleteAllNotification()"><mat-icon class="text-sm">clear</mat-icon> Bildirimleri Temizle</span>
            </div>
            <div class="px-4 py-3 cursor-pointer" *ngIf="notifications.length == 0">
-            <span class="block text-sm font-semibold text-slate-500 hover:text-slate-700 flex items-center space-x-0">Herhangi bir bildirimin yok..</span>
+            <span class="block text-sm font-semibold text-slate-500 hover:text-slate-700 dark:text-white flex items-center space-x-0">Herhangi bir bildirimin yok..</span>
        </div>
           <div *ngFor="let notification of notifications">
-              <div class="px-4 py-3 hover:bg-gray-100 cursor-pointer" *ngIf="notification.type == 1" (click)="DeleteNotificationById(notification)">
-                    <span class="block text-sm font-semibold text-gray-900 ">Bir Kullanıcı Takip Etti</span>
-                    <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{notification.userName}}</span>
+              <div class="px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer" *ngIf="notification.type == 1" (click)="DeleteNotificationById(notification)">
+                    <span class="block text-sm font-semibold text-gray-900 dark:text-secondary-color-light">Bir Kullanıcı Takip Etti</span>
+                    <span class="block text-sm  text-gray-500 truncate dark:text-gray-400 dark:text-secondary-color-extra-light">{{notification.userName}}</span>
               </div>
-              <div class="px-4 py-3 hover:bg-gray-100 cursor-pointer" *ngIf="notification.type == 2" (click)="DeleteNotificationById(notification)">
-                <span class="block text-sm font-semibold text-gray-900 ">Bir Kullanıcı Takipten Çıktı</span>
-                <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">{{notification.userName}}</span>
+              <div class="px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer" *ngIf="notification.type == 2" (click)="DeleteNotificationById(notification)">
+                <span class="block text-sm font-semibold dark:text-secondary-color-light text-gray-900 ">Bir Kullanıcı Takipten Çıktı</span>
+                <span class="block text-sm  text-gray-500 truncate dark:text-secondary-color-extra-light">{{notification.userName}}</span>
               </div>
-              <div class="px-4 py-3 hover:bg-gray-100 cursor-pointer" *ngIf="notification.type == 3" (click)="DeleteNotificationById(notification)">
-                <span class="block text-sm font-semibold text-gray-900 ">{{notification.userName}} Gönderinizi Beğendi</span>
-                <span class="block text-sm  text-gray-500 truncate dark:text-gray-400"></span>
+              <div class="px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer" *ngIf="notification.type == 3" (click)="DeleteNotificationById(notification)">
+                <span class="block text-sm font-semibold dark:text-secondary-color-light text-gray-900 ">{{notification.userName}} Gönderinizi Beğendi</span>
+                <span class="block text-sm  text-gray-500 truncate dark:text-secondary-color-extra-light"></span>
               </div>
-              <div class="px-4 py-3 hover:bg-gray-100 cursor-pointer" *ngIf="notification.type == 4" (click)="DeleteNotificationById(notification)">
-                <span class="block text-sm font-semibold text-gray-900 ">{{notification.userName}} Yorum Yaptı</span>
-                <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">Görülmeyen bir gönderi yorumu var.</span>
+              <div class="px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer" *ngIf="notification.type == 4" (click)="DeleteNotificationById(notification)">
+                <span class="block text-sm font-semibold dark:text-secondary-color-light text-gray-900 ">{{notification.userName}} Yorum Yaptı</span>
+                <span class="block text-sm  text-gray-500 truncate dark:text-secondary-color-extra-light">Görülmeyen bir gönderi yorumu var.</span>
               </div>
-              <div class="px-4 py-3 hover:bg-gray-100 cursor-pointer" *ngIf="notification.type == 5" (click)="DeleteNotificationById(notification)">
-                    <span class="block text-sm font-semibold text-gray-900 ">{{notification.userName}} Mesaj Gönderdi</span>
-                    <span class="block text-sm  text-gray-500 truncate dark:text-gray-400">Görülmeyen mesaj bildirimi var.</span>
+              <div class="px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer" *ngIf="notification.type == 5" (click)="DeleteNotificationById(notification)">
+                    <span class="block text-sm font-semibold dark:text-secondary-color-light text-gray-900 ">{{notification.userName}} Mesaj Gönderdi</span>
+                    <span class="block text-sm  text-gray-500 truncate dark:text-secondary-color-extra-light">Görülmeyen mesaj bildirimi var.</span>
               </div>
         </div>
 

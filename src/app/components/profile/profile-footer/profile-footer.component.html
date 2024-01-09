@@ -1,167 +1,189 @@
 <div class="px-10">
     <div class=" py-4 flex flex-row">
         <div
-            class="w-1/3 py-6 flex items-center justify-center bg-primary-color hover:bg-primary-color-dark cursor-pointer" (click)="changePostState(1)">
-            <span class="text-xl text-white">Gönderiler</span>
+            class="w-1/3 py-6 flex items-center justify-center rounded-tl-md rounded-bl-md bg-primary-color hover:bg-primary-color-dark cursor-pointer dark:bg-secondary-color-light dark:hover:bg-secondary-color-extra-light" (click)="changePostState(1)">
+            <span class="text-xl text-white dark:text-secondary-color-extra-dark">Gönderiler</span>
         </div>
         <div
-            class="w-1/3 py-6  flex items-center justify-center bg-primary-color hover:bg-primary-color-dark cursor-pointer" (click)="changePostState(2)">
-            <span class="text-xl text-white">Yorumlar</span>
+            class="w-1/3 py-6  flex items-center justify-center bg-primary-color hover:bg-primary-color-dark cursor-pointer dark:bg-secondary-color-light dark:hover:bg-secondary-color-extra-light" (click)="changePostState(2)">
+            <span class="text-xl text-white dark:text-secondary-color-extra-dark">Yorumlar</span>
         </div>
         <div
-            class="w-1/3 py-6 flex items-center justify-center bg-primary-color hover:bg-primary-color-dark cursor-pointer" (click)="changePostState(3)">
-            <span class="text-xl text-white">Beğeniler</span>
+            class="w-1/3 py-6 flex items-center justify-center rounded-tr-md rounded-br-md bg-primary-color hover:bg-primary-color-dark cursor-pointer dark:bg-secondary-color-light dark:hover:bg-secondary-color-extra-light" (click)="changePostState(3)">
+            <span class="text-xl text-white dark:text-secondary-color-extra-dark">Beğeniler</span>
         </div>
     </div>
 
     <div *ngIf="PostState == 1">
         <div class="flex justify-center py-2">
-            <span class="text-2xl font-semibold">Gönderiler</span>
+            <span class="text-2xl font-semibold dark:text-white">Gönderiler</span>
         </div>
         <div *ngIf="UserPostDetails.length > 0">
         <div *ngFor="let post of UserPostDetails" class="py-4">
-        <div class="px-10 py-8 bg-white" >
-            <div class=" pt-4 flex flex-row justify-between">
+        <div class=" py-8 bg-white rounded-md dark:bg-secondary-color " >
+            <div class="px-10 py-4 flex flex-row justify-between">
                 <div class="flex flex-row">
                     <img [src]="getPostProfileImage(post.profileImage)" width="50"
                         height="50" class="rounded-full pr-2 cursor-pointer hover:opacity-80" alt="image">
-                    <span class="text-xl">{{post.name}}</span>
+                    <span class="text-xl dark:text-white">{{post.name}}</span>
                 </div>
                 <div>
-                    <span class="text-slate-500 text-sm">{{post.creationDate |date:"dd/MMM/y"}}</span>
+                    <span class="text-slate-500 text-sm dark:text-white">{{post.creationDate |date:"dd/MMM/y"}}</span>
                 </div>
             </div>
+            <div class="w-full flex flex-row justify-center items-center">
+                <hr class="w-11/12 h-[1px] bg-primary-color-extra-light dark:bg-secondary-color-extra-dark">    
+            </div>
+            
             <div >
-            <div class="pl-10 ">
-                <p>
+            <div class="w-full py-4 cursor-pointer" routerLink="/posts/{{post.id}}">
+                <p class="pl-10 w-11/12 text-lg dark:text-white">
                     {{post.message}}
                 </p>
-                <div class="w-full" *ngIf="post.type > 1">
-                    <a  target="_blank"><img [src]="getPostContentImage(post.imagePath)" alt="post-image" class="w-4/5 rounded-lg cursor-pointer"></a>
+                <div class="pl-10 w-full flex justify-start" *ngIf="post.type > 1">
+                    <a  target="_blank"><img [src]="getPostContentImage(post.imagePath)" alt="post-image"  class="w-11/12 h-[600px] rounded-lg cursor-pointer"></a>
                 </div>
             </div>
+            </div>
+            <div class="w-full flex flex-row justify-center items-center">
+                <hr class="w-11/12 h-[1px] bg-primary-color-extra-light dark:bg-secondary-color-extra-dark">    
             </div>
             <div class="pl-10 pr-6 py-4 flex flex-row justify-around space-around">
                 <div >
-                    <mat-icon mat-raised-button [matBadge]="post.comment" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" class="cursor-pointer text-slate-700 hover:text-slate-500"> comment</mat-icon>
+                    <mat-icon mat-raised-button [matBadge]="post.comment" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" class="cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"> comment</mat-icon>
                 </div>
     
                 <div >
-                    <mat-icon mat-raised-button [matBadge]="post.fav.length" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" class="cursor-pointer text-slate-700 hover:text-slate-500"> favorite_border</mat-icon>
+                    <mat-icon mat-raised-button [matBadge]="getPostFavCount(post.id,post.fav.length,post.fav)" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" [class]="getPostFavClass(post.id)" (click)="favPostClick(post.id,post.userId)" > favorite_border</mat-icon>
                 </div>
                 <div >
-                    <mat-icon class="cursor-pointer text-slate-700 hover:text-slate-500"> share</mat-icon>
+                    <mat-icon class="cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light" (click)="copy(post.id)"> share</mat-icon>
                 </div>
                 <div >
-                    <mat-icon  class="cursor-pointer text-slate-700 hover:text-slate-500"> report</mat-icon>
+                    <mat-icon  class="cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"> report</mat-icon>
                 </div>
             </div>
         </div>
     </div>
     </div>
     <div class="flex flex-row justify-center flex-wrap px-10 py-4" *ngIf="UserPostDetails.length == 0">
-        <span class="text-slate-500 font-semibold text-sm" >Kullanıcının henüz gönderisi yok.</span>
+        <span class="text-slate-500 font-semibold text-sm dark:text-secondary-color-extra-light" >Kullanıcının henüz gönderisi yok.</span>
     </div>
     </div>
 
     <div *ngIf="PostState == 2">
         <div class="flex justify-center py-2">
-            <span class="text-2xl font-semibold">Yorumlar</span>
+            <span class="text-2xl font-semibold dark:text-white">Yorumlar</span>
         </div>
         <div *ngIf="UserCommentDetails.length > 0">
         <div class="pt-4" *ngFor="let comment of UserCommentDetails">
-        <div class="px-10 py-2 bg-white" >
+        <div class=" py-2 bg-white rounded-md dark:bg-secondary-color" >
             <div class="pt-4 flex flex-row justify-center">
-                <span  routerLink="/posts/{{comment.parentId}}" class="text-slate-500 hover:text-slate-700 cursor-pointer">Yorumlanan gönderi...</span>
+                <span  routerLink="/posts/{{comment.parentId}}" class="text-slate-500 hover:text-slate-700 cursor-pointer dark:text-secondary-color-light">Ana Gönderi</span>
             </div>
-            <div class=" pt-4 flex flex-row justify-between" >
+            <div class="px-10 py-4 flex flex-row justify-between" >
                 <div class="flex flex-row">
                     <img [src]="getPostProfileImage(comment.profileImage)" width="50"
                         height="50" class="rounded-full pr-2 cursor-pointer hover:opacity-80" alt="image">
-                    <span class="text-xl">{{comment.name}}</span>
+                    <span class="text-xl dark:text-white">{{comment.name}}</span>
                 </div>
                 <div>
-                    <span class="text-slate-500 text-sm">{{comment.creationDate |date:"dd/MMM/y"}}</span>
+                    <span class="text-slate-500 text-sm dark:text-white">{{comment.creationDate |date:"dd/MMM/y"}}</span>
                 </div>
+            </div>
+            <div class="w-full flex flex-row justify-center items-center">
+                <hr class="w-11/12 h-[1px] bg-primary-color-extra-light dark:bg-secondary-color-extra-dark">    
             </div>
             <div >
-            <div class="pl-10 ">
-                <p>
-                    {{comment.message}}
-                </p>
-                <div class="w-full" *ngIf="comment.type > 1">
-                    <a  target="_blank"><img [src]="getPostContentImage(comment.imagePath)" alt="post-image" class="w-4/5 rounded-lg cursor-pointer"></a>
+                <div class="w-full py-4 cursor-pointer" routerLink="/posts/{{comment.id}}">
+                    <p class="pl-10 w-11/12 text-lg dark:text-white">
+                        {{comment.message}}
+                    </p>
+                    <div class="pl-10 w-full flex justify-start" *ngIf="comment.type > 1">
+                        <a  target="_blank"><img [src]="getPostContentImage(comment.imagePath)" alt="post-image"  class="w-11/12 h-[600px] rounded-lg cursor-pointer"></a>
+                    </div>
                 </div>
             </div>
+            <div class="w-full flex flex-row justify-center items-center">
+                <hr class="w-11/12 h-[1px] bg-primary-color-extra-light dark:bg-secondary-color-extra-dark">    
             </div>
             <div class="pl-10 pr-6 py-4 flex flex-row justify-around space-around">
                 <div >
-                    <mat-icon mat-raised-button [matBadge]="comment.comment"  matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" class="cursor-pointer text-slate-700 hover:text-slate-500"> comment</mat-icon>
+                    <mat-icon mat-raised-button [matBadge]="comment.comment"  matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" class="cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"> comment</mat-icon>
                 </div>
     
                 <div >
-                    <mat-icon mat-raised-button [matBadge]="comment.fav.length" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" class="cursor-pointer text-slate-700 hover:text-slate-500"> favorite_border</mat-icon>
+                    <mat-icon mat-raised-button [matBadge]="getCommentFavCount(comment.id,comment.fav.length,comment.fav)" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" [class]="getCommentFavClass(comment.id)" (click)="favCommentClick(comment.id,comment.userId)" > favorite_border</mat-icon>
                 </div>
                 <div >
-                    <mat-icon class="cursor-pointer text-slate-700 hover:text-slate-500"> share</mat-icon>
+                    <mat-icon class="cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light" (click)="copy(comment.id)"> share</mat-icon>
                 </div>
                 <div >
-                    <mat-icon class="cursor-pointer text-slate-700 hover:text-slate-500"> report</mat-icon>
+                    <mat-icon class="cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"> report</mat-icon>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div class="flex flex-row justify-center flex-wrap px-10 py-4" *ngIf="UserCommentDetails.length == 0">
-    <span class="text-slate-500 font-semibold text-sm" >Kullanıcının henüz yorumu yok.</span>
+    <span class="text-slate-500 font-semibold text-sm dark:text-secondary-color-extra-light" >Kullanıcının henüz yorumu yok.</span>
 </div>
     </div>
     
     <div *ngIf="PostState == 3">
         <div class="flex justify-center py-2">
-            <span class="text-2xl font-semibold">Beğeniler</span>
+            <span class="text-2xl font-semibold dark:text-white">Beğeniler</span>
         </div>
-        <div *ngIf="UserFavDetails.length > 0">
-        <div class="px-10 py-2 bg-white" *ngFor="let favpost of UserFavDetails" >
-            <div class=" pt-4 flex flex-row justify-between">
+        <div  *ngIf="UserFavDetails.length > 0">
+            <div class="pt-4" *ngFor="let favpost of UserFavDetails">
+        <div class="py-2 bg-white rounded-md dark:bg-secondary-color"  >
+            <div class=" px-10 pt-4 flex flex-row justify-between">
                 <div class="flex flex-row">
                     <img [src]="getPostProfileImage(favpost.profileImage)" width="50"
                         height="50" class="rounded-full pr-2 cursor-pointer hover:opacity-80" alt="image">
-                    <span class="text-xl">{{favpost.name}}</span>
+                    <span class="text-xl dark:text-white">{{favpost.name}}</span>
                 </div>
                 <div>
-                    <span class="text-slate-500 text-sm">{{favpost.creationDate |date:"dd/MMM/y"}}</span>
+                    <span class="text-slate-500 text-sm dark:text-white">{{favpost.creationDate |date:"dd/MMM/y"}}</span>
                 </div>
             </div>
+            <div class="w-full flex flex-row justify-center items-center">
+                <hr class="w-11/12 h-[1px] bg-primary-color-extra-light dark:bg-secondary-color-extra-dark">    
+            </div>
+
             <div >
-            <div class="pl-10 ">
-                <p>
-                    {{favpost.message}}
-                </p>
-                <div class="w-full" *ngIf="favpost.type > 1">
-                    <a  target="_blank"><img [src]="getPostContentImage(favpost.imagePath)" alt="post-image" class="w-4/5 rounded-lg cursor-pointer"></a>
+                <div class="w-full py-4 cursor-pointer" routerLink="/posts/{{favpost.id}}">
+                    <p class="pl-10 w-11/12 text-lg dark:text-white">
+                        {{favpost.message}}
+                    </p>
+                    <div class="pl-10 w-full flex justify-start" *ngIf="favpost.type > 1">
+                        <a  target="_blank"><img [src]="getPostContentImage(favpost.imagePath)" alt="post-image"  class="w-11/12 h-[600px] rounded-lg cursor-pointer"></a>
+                    </div>
                 </div>
             </div>
+            <div class="w-full flex flex-row justify-center items-center">
+                <hr class="w-11/12 h-[1px] bg-primary-color-extra-light dark:bg-secondary-color-extra-dark">    
             </div>
             <div class="pl-10 pr-6 py-4 flex flex-row justify-around space-around">
                 <div >
-                    <mat-icon mat-raised-button [matBadge]="favpost.comment"  matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" class="cursor-pointer text-slate-700 hover:text-slate-500"> comment</mat-icon>
+                    <mat-icon mat-raised-button [matBadge]="favpost.comment"  matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" class="cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"> comment</mat-icon>
                 </div>
     
                 <div >
-                    <mat-icon mat-raised-button [matBadge]="favpost.fav.length" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" class="cursor-pointer text-slate-700 hover:text-slate-500"> favorite_border</mat-icon>
+                    <mat-icon mat-raised-button [matBadge]="getFavsFavCount(favpost.id,favpost.fav.length,favpost.fav)" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" [class]="getFavsFavClass(favpost.id)" (click)="favFavsClick(favpost.id,favpost.userId)" > favorite_border</mat-icon>
                 </div>
                 <div >
-                    <mat-icon class="cursor-pointer text-slate-700 hover:text-slate-500"> share</mat-icon>
+                    <mat-icon class="cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light" (click)="copy(favpost.id)"> share</mat-icon>
                 </div>
                 <div >
-                    <mat-icon  class="cursor-pointer text-slate-700 hover:text-slate-500"> report</mat-icon>
+                    <mat-icon  class="cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"> report</mat-icon>
                 </div>
             </div>
         </div>
     </div>
+    </div>
     <div class="flex flex-row justify-center flex-wrap px-10 py-4" *ngIf="UserFavDetails.length == 0">
-        <span class="text-slate-500 font-semibold text-sm" >Kullanıcının henüz beğenisi yok.</span>
+        <span class="text-slate-500 font-semibold text-sm dark:text-secondary-color-extra-light" >Kullanıcının henüz beğenisi yok.</span>
     </div>
     </div>
 

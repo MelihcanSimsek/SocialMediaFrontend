@@ -1,13 +1,13 @@
 <app-header></app-header>
-<div class="grid grid-cols-7 bg-primary-color-extra-light">
+<div class="grid grid-cols-7 bg-primary-color-extra-light dark:bg-secondary-color-extra-dark">
     <app-sidebar class="col-start-1 col-end-1 "></app-sidebar>
     <div class="col-start-2 col-span-6" *ngIf="dashboardRole == true" >
-        <div class="px-10 pt-4 flex flex-row justify-center space-x-3">
+        <div class=" px-10 pt-4  flex flex-row justify-center space-x-3">
             <div [className]="GetSelectedClass(false)" (click)="ChangeSelectedIndex(false)">
-                <span class="text-sm font-semibold text-white">Report</span>
+                <span class="text-sm font-semibold ">Report</span>
             </div>
             <div [className]="GetSelectedClass(true)" (click)="ChangeSelectedIndex(true)">
-                <span class="text-sm font-semibold text-white">Unban</span>
+                <span class="text-sm font-semibold ">Unban</span>
             </div>
         </div>
         <app-report *ngIf="!this.selectedItem"></app-report>

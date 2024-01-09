@@ -1,0 +1,22 @@
+.relative {
+    position: relative;
+}
+
+.bg-cover {
+    background-size: cover;
+}
+
+.bg-center {
+    background-position: center;
+}
+
+.bg-profile {
+    background-repeat: no-repeat;
+    background-size: inherit;
+    background-position: center;
+}
+
+.post-image-container {
+    width: 100%;
+    height: 100%;
+}

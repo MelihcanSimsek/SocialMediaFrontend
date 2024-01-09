@@ -160,6 +160,29 @@ export class HeaderComponent implements OnInit {
   }
 
 
+  GetThemeIcon(){
+    if(this.localStorageService.getItem("theme") !== "dark")
+    {
+      return false;
+    }
+    return true;
+  }
+
+
+  ChangeTheme()
+  {
+    if(this.localStorageService.getItem("theme") !== "dark")
+    {
+      this.localStorageService.setItem("theme","dark");
+      document.documentElement.classList.add("dark");
+    }
+    else
+    {
+      this.localStorageService.setItem("theme","light");
+      document.documentElement.classList.remove("dark");
+    }
+  }
+
 
  
 }

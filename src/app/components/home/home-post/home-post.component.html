@@ -1,43 +1,47 @@
-<div class="px-10 py-8 z-50">
+<div class="px-10 py-8 z-50 transition ease-in-out ">
     <div class="post w-full pb-10" *ngFor="let post of postDetail">
     <!-- post header section -->
-    <div class="bg-white w-full flex flex-row justify-between px-6 py-2 shadow-lg cursor-pointer "  >
+    <div class="bg-white dark:bg-secondary-color rounded-tl-md rounded-tr-md w-full flex flex-row justify-between px-6 py-2 shadow-lg cursor-pointer "  >
         <div class="flex flex-row gap-1">
         <img [src]="getUserProfileImage(post.profileImage)" alt="profile-image" class="rounded-full cursor-pointer hover:opacity-90" width="50" height="50" routerLink="/profile/{{post.userId}}">
-        <span class="bold text-lg text-black">{{post.name}}</span>
+        <span class="bold text-lg text-black dark:text-white">{{post.name}}</span>
         </div>
-        <span class="text-sm text-slate-900 mute">{{post.creationDate |date:"dd/MMM/y"}}</span>
+        <span class="text-sm text-slate-900 mute dark:text-white">{{post.creationDate |date:"dd/MMM/y"}}</span>
     </div>
-    <hr class="w-full h-1 bg-primary-color-extra-light">
+    <div class="w-full flex flex-row justify-center items-center">
+        <hr class="w-11/12 h-[1px] bg-primary-color-extra-light dark:bg-secondary-color-extra-dark">    
+    </div>
     <!-- post body section -->
-    <div class="bg-white w-full pb-4 shadow-lg cursor-pointer" routerLink="/posts/{{post.id}}" routerLinkActive="active">
+    <div class="bg-white dark:bg-secondary-color w-full pb-4 shadow-lg cursor-pointer" routerLink="/posts/{{post.id}}" routerLinkActive="active">
         <div class="w-full pl-10 pr-6 pt-4">
-            <p class="flex flex-wrap text-[1.1rem]">{{post.message}}</p>
+            <p class="flex flex-wrap text-[1.1rem] dark:text-white">{{post.message}}</p>
         </div>
         <div class="w-full pl-10 pr-6" *ngIf="post.type > 1">
-            <img [src]="getPostContentImage(post.imagePath)" alt="post-image" class="w-4/5 rounded-lg cursor-pointer">
+            <img [src]="getPostContentImage(post.imagePath)" alt="post-image" class="w-11/12 h-[600px]  rounded-lg cursor-pointer">
         </div>
     </div>
-    <hr class="w-full h-1 bg-primary-color-extra-light">
+    <div class="w-full flex flex-row justify-center items-center">
+        <hr class="w-11/12 h-[1px] bg-primary-color-extra-light dark:bg-secondary-color-extra-dark">    
+    </div>
     <!-- post footer section -->
-    <div class="bg-white w-full shadow-lg">
+    <div class="bg-white dark:bg-secondary-color w-full shadow-lg rounded-bl-md rounded-br-md">
         <div class="w-full pl-10 pr-6 py-4 flex flex-row justify-around space-around">
             <div >
-                <mat-icon mat-raised-button [matBadge]="post.comment" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" class="cursor-pointer text-slate-700 hover:text-slate-500"> comment</mat-icon>
+                <mat-icon mat-raised-button [matBadge]="post.comment" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" class="cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"> comment</mat-icon>
             </div>
             <div>
-                <mat-icon mat-raised-button [matBadge]="post.fav.length" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" class="cursor-pointer text-slate-700 hover:text-slate-500">favorite_border</mat-icon>
+                <mat-icon mat-raised-button [matBadge]="getPostFavCount(post.id,post.fav.length,post.fav)" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" [class]="getFavClass(post.id)" (click)="favClick(post.id,post.userId)">favorite_border</mat-icon>
             </div>
             <div>
-                <mat-icon  class="cursor-pointer text-slate-700 hover:text-slate-500">share</mat-icon>
+                <mat-icon  class="cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light" (click)="copy(post.id)">share</mat-icon>
             </div>
             <div>
                 <button type="button" [matMenuTriggerFor]="menu" >
-                    <mat-icon class="cursor-pointer text-slate-700 hover:text-slate-500" >report</mat-icon>
+                    <mat-icon class="cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light" >report</mat-icon>
                 </button>
-                <mat-menu #menu="matMenu" yPosition="above">
+                <mat-menu #menu="matMenu" yPosition="above" class="dark:bg-secondary-color  ">
                     <button mat-menu-item *ngFor="let rpt of reports" (click)="report(rpt.id,post.id)">
-                      <span>{{rpt.reason}}</span>
+                      <span class="dark:text-white">{{rpt.reason}}</span>
                     </button>
                 </mat-menu>
                
@@ -46,20 +50,20 @@
         
         <div class="w-full pl-10 pr-6 py-4">
             <div class="flex justify-center">
-                <span>Yorumlar</span>
+                <span class="dark:text-white">Yorumlar</span>
             </div>
             <div class="flex flex-row space-x-1 relative">
-                <textarea name="commentarea" id="comment-area" class="relative w-full peer placeholder-transparent focus:outline-none focus:borer-rose-600 text-gray-900" rows="3"></textarea>
-                <button type="button" class="relative px-2 py-4 bg-primary-color-dark hover:opacity-90 rounded-md text-white text-sm">Gönder</button>
+                <textarea name="commentarea" id="comment-area" class="relative w-full peer placeholder-transparent focus:outline-none focus:borer-rose-600 dark:bg-secondary-color dark:text-white text-gray-900" rows="3"></textarea>
+                <button type="button" class="relative px-2 py-4 bg-primary-color-dark hover:opacity-90 rounded-md text-white text-sm dark:bg-secondary-color-light dark:text-secondary-color-extra-dark">Gönder</button>
                 <div class="absolute w-full bottom-0 left-1">
                     
                     <div class="flex flex-row  divide-x divide-gray-400">
                         <div>
                             <input type="file" name="comment-image" id="comment-image-file" (change)="commentPostImageSelected($event,post.id)" accept=".png,.jpg" ngf-max-size="5MB" class="hidden">
-                            <mat-icon class="cursor-pointer text-primary-color-dark hover:text-primary-color hover:bg-gray-100" (click)="commentPhotoFileClick()" > insert_photo</mat-icon>
+                            <mat-icon class="cursor-pointer text-primary-color-dark hover:text-primary-color hover:bg-gray-100 dark:text-secondary-color-light dark:hover:bg-gray-500" (click)="commentPhotoFileClick()" > insert_photo</mat-icon>
                         </div>
                         
-                        <mat-icon class="cursor-pointer text-primary-color-dark hover:text-primary-color hover:bg-gray-100"> insert_emoticon</mat-icon>
+                        <mat-icon class="cursor-pointer text-primary-color-dark hover:text-primary-color hover:bg-gray-100  dark:text-secondary-color-light dark:hover:bg-gray-500"> insert_emoticon</mat-icon>
                     </div>
                 </div>
             </div>

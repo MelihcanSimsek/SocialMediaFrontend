@@ -55,7 +55,8 @@ export class ProfileHeaderComponent implements OnInit {
     private chatService:ChatService,
     private router:Router,
     private notificationService:NotificationService,
-    private signalrService:SignalService) {
+    private signalrService:SignalService,
+    ) {
     
     
   }
@@ -88,7 +89,7 @@ export class ProfileHeaderComponent implements OnInit {
     if(this.newBackgroundImage != undefined)
     {
       const imageUrl = URL.createObjectURL(this.newBackgroundImage);
-      return this.sanitizer.bypassSecurityTrustUrl(imageUrl);
+      return imageUrl;
     }
     else if(this.profile.backgroundImage != null)
     {

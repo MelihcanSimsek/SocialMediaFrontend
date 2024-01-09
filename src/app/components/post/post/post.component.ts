@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { ClipboardService } from 'ngx-clipboard';
 import { ToastrService } from 'ngx-toastr';
 import { PostDetailDto } from 'src/app/models/dtos/postDetailDto';
+import { Fav } from 'src/app/models/entities/fav';
 import { Notification } from 'src/app/models/entities/notification';
 import { Post } from 'src/app/models/entities/post';
 import { Report } from 'src/app/models/entities/report';
 import { UserReport } from 'src/app/models/entities/userReport';
 import { AuthService } from 'src/app/services/auth.service';
+import { FavService } from 'src/app/services/fav.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { PostService } from 'src/app/services/post.service';
 import { ReportService } from 'src/app/services/report.service';
@@ -27,6 +30,7 @@ export class PostComponent implements OnInit{
   commentImage:any = undefined;
   commentArea:string = "";
   reports:Report[];
+  favs:number[];
   constructor(private postService:PostService,
     private activatedRouter:ActivatedRoute,
     private sanitizer: DomSanitizer,
@@ -34,13 +38,17 @@ export class PostComponent implements OnInit{
     private authService:AuthService,
     private reportService:ReportService,
     private notificationService:NotificationService,
-    private signalrService:SignalService) {
+    private signalrService:SignalService,
+    private clipboardService: ClipboardService,
+    private favService:FavService
+     ) {
      
   }
 
   ngOnInit(): void {
     this.activatedRouter.params.subscribe(params=>{
       this.postid = Number(params["postid"]);
+      this.getUserFavs();
       this.getMainPost(this.postid);
       this.getCommentsPost(this.postid);
       this.getAllReports();
@@ -254,4 +262,86 @@ export class PostComponent implements OnInit{
     })
   }
 
+  getUserFavs()
+  {
+    this.favService.GetPostCommentsFav(this.authService.getUserInfo().id,this.postid).subscribe(response=>{
+      this.favs = response.data;
+    })
+  }
+
+  favClick(id:number,postUserId:number)
+  {
+    let entity:Fav = Object.assign({},{
+      id:0,
+      userId:this.authService.getUserInfo().id,
+      postId:id,
+      creationDate:new Date()
+    })
+
+    const notification:Notification = Object.assign({},{
+      id:uuidv4(),
+      userId:this.authService.getUserInfo().id,
+      targetId:postUserId,
+      notificationIntId:id,
+      notificationUniqueId:null,
+      type:3,
+      creationDate:new Date(),
+      isRead:false
+    });
+
+    if(!this.favs.includes(id))
+    {
+      this.favs.push(id);
+      this.favService.add(entity).subscribe(response=>{
+        this.notificationService.Add(notification).subscribe(newResponse=>{
+          this.signalrService.SendNotification(postUserId);
+        })
+      })
+    }
+    else{
+      this.favs.splice(this.favs.indexOf(id),1);
+      this.favService.delete(entity).subscribe(response=>{
+
+      })
+    }
+  }
+
+  getPostFavCount(id:number,count:number,favArray:number[]){
+
+    if(this.favs.includes(id) && this.favService.checkUserIsFav(this.authService.getUserInfo().id,favArray))
+    {
+      return count;
+    }
+    else if(!this.favs.includes(id) && this.favService.checkUserIsFav(this.authService.getUserInfo().id,favArray))
+    {
+      return count - 1;
+    }
+    else if(this.favs.includes(id) && !this.favService.checkUserIsFav(this.authService.getUserInfo().id,favArray))
+    {
+      return count + 1;
+    }
+    else{
+      return count;
+    }
+  
+  }
+
+  getFavClass(id:number)
+  {
+    
+    if(this.favs.includes(id))
+    {
+      return "cursor-pointer  text-red-700"
+    }
+    else
+    {
+      return "cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"
+    }
+  }
+
+  copy(id:number){
+    let postUrl = "http://localhost:4200/posts/"+id;
+    this.clipboardService.copyFromContent(postUrl);
+    this.toastrService.success("Gönderi bağlantısı kopyalandı");
+  }
 }
