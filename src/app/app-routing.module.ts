@@ -10,18 +10,19 @@ import { FriendsScreenComponent } from './screens/friends-screen/friends-screen.
 import { MessagesScreenComponent } from './screens/messages-screen/messages-screen.component';
 import { SearchScreenComponent } from './screens/search-screen/search-screen.component';
 import { SettingsScreenComponent } from './screens/settings-screen/settings-screen.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {path:"login",component:LoginScreenComponent},
   {path:"signup",component:RegisterScreenComponent},
-  {path:"home",component:HomeScreenComponent},
-  {path:"posts/:postid",component:PostScreenComponent},
-  {path:"profile/:profileid",component:ProfileScreenComponent},
-  {path:"dashboard",component:DashboardScreenComponent},
-  {path:"friends",component:FriendsScreenComponent},
-  {path:"messages",component:MessagesScreenComponent},
-  {path:"search",component:SearchScreenComponent},
-  {path:"settings",component:SettingsScreenComponent}
+  {path:"home",canActivate: [AuthGuard],component:HomeScreenComponent},
+  {path:"posts/:postid",canActivate: [AuthGuard],component:PostScreenComponent},
+  {path:"profile/:profileid",canActivate: [AuthGuard],component:ProfileScreenComponent},
+  {path:"dashboard",canActivate: [AuthGuard],component:DashboardScreenComponent},
+  {path:"friends",canActivate: [AuthGuard],component:FriendsScreenComponent},
+  {path:"messages",canActivate: [AuthGuard],component:MessagesScreenComponent},
+  {path:"search",canActivate: [AuthGuard],component:SearchScreenComponent},
+  {path:"settings",canActivate: [AuthGuard],component:SettingsScreenComponent}
 ];
 
 @NgModule({

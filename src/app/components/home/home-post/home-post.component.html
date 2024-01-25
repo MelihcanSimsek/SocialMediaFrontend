@@ -53,22 +53,22 @@
                 <span class="dark:text-white">Yorumlar</span>
             </div>
             <div class="flex flex-row space-x-1 relative">
-                <textarea name="commentarea" id="comment-area" class="relative w-full peer placeholder-transparent focus:outline-none focus:borer-rose-600 dark:bg-secondary-color dark:text-white text-gray-900" rows="3"></textarea>
-                <button type="button" class="relative px-2 py-4 bg-primary-color-dark hover:opacity-90 rounded-md text-white text-sm dark:bg-secondary-color-light dark:text-secondary-color-extra-dark">Gönder</button>
+                <textarea name="commentarea" id="comment-area" [(ngModel)]="this.commentDictionary[post.id].message" class="relative w-full peer placeholder-transparent focus:outline-none focus:borer-rose-600 dark:bg-secondary-color dark:text-white text-gray-900" rows="3"></textarea>
+                <button type="button" class="relative px-2 py-4 bg-primary-color-dark hover:opacity-90 rounded-md text-white text-sm dark:bg-secondary-color-light dark:text-secondary-color-extra-dark" (click)="Comment(post.id,post.userId)">Gönder</button>
                 <div class="absolute w-full bottom-0 left-1">
                     
                     <div class="flex flex-row  divide-x divide-gray-400">
                         <div>
-                            <input type="file" name="comment-image" id="comment-image-file" (change)="commentPostImageSelected($event,post.id)" accept=".png,.jpg" ngf-max-size="5MB" class="hidden">
-                            <mat-icon class="cursor-pointer text-primary-color-dark hover:text-primary-color hover:bg-gray-100 dark:text-secondary-color-light dark:hover:bg-gray-500" (click)="commentPhotoFileClick()" > insert_photo</mat-icon>
+                            <input type="file" name="comment-image" [id]="'comment-image-file-'+post.id" (change)="commentPostImageSelected($event,post.id)" accept=".png,.jpg" ngf-max-size="5MB" class="hidden">
+                            <mat-icon class="cursor-pointer text-primary-color-dark hover:text-primary-color hover:bg-gray-100 dark:text-secondary-color-light dark:hover:bg-gray-500" (click)="commentPhotoFileClick(post.id)" > insert_photo</mat-icon>
                         </div>
                         
                         <mat-icon class="cursor-pointer text-primary-color-dark hover:text-primary-color hover:bg-gray-100  dark:text-secondary-color-light dark:hover:bg-gray-500"> insert_emoticon</mat-icon>
                     </div>
                 </div>
             </div>
-            <div *ngIf="commentImage != undefined && commentImage.id == post.id">
-                <img [src]="commentGetPostImage()" alt="image" width="250"  height="250" class="cursor-pointer hover:opacity-90 border-2 border-solid border-stone-500" (click)="commentDeleteImage()">
+            <div *ngIf="this.commentDictionary[post.id].image != undefined && this.commentDictionary[post.id].id == post.id">
+                <img [src]="commentGetPostImage(post.id)" alt="image" width="250"  height="250" class="cursor-pointer hover:opacity-90 border-2 border-solid border-stone-500" (click)="commentDeleteImage(post.id)">
             </div>
         </div>
         

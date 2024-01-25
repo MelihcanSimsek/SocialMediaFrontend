@@ -186,7 +186,7 @@ export class MessageComponent implements OnInit {
 
   }
 
-  addNewChatRoom(chatId:string,): void {
+  addNewChatRoom(chatId:string): void {
     this.chatDictionary[chatId] = {image:undefined,message:""};
   }
 

@@ -43,9 +43,9 @@ export class PostService {
     return this.httpClient.post<ResponseModel>(newUrl,post);
   }
 
-  getAllPostDetail():Observable<ListResponseModel<PostDetailDto>>
+  getAllPostDetail(id:number):Observable<ListResponseModel<PostDetailDto>>
   {
-    let newUrl = this.apiUrl + '/getallpostdetail';
+    let newUrl = this.apiUrl + '/getallpostdetail?id='+id;
     return this.httpClient.get<ListResponseModel<PostDetailDto>>(newUrl);
   }
 
@@ -56,9 +56,9 @@ export class PostService {
   }
 
 
-  getAllCommentByPostId(id:number):Observable<ListResponseModel<PostDetailDto>>
+  getAllCommentByPostId(id:number,userId:number):Observable<ListResponseModel<PostDetailDto>>
   {
-    let newUrl = this.apiUrl + '/getallcommentbypostid?id='+id;
+    let newUrl = this.apiUrl + '/getallcommentbypostid?id='+id+'&userId='+userId;
     return this.httpClient.get<ListResponseModel<PostDetailDto>>(newUrl);
   }
 

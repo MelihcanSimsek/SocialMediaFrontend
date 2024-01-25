@@ -15,6 +15,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { Notification } from 'src/app/models/entities/notification';
 import { NotificationService } from 'src/app/services/notification.service';
 import { SignalService } from 'src/app/services/signal.service';
+import { Dictionary } from 'src/app/models/responsemodel/Dictionary';
+import { Item } from 'src/app/models/entities/Item';
+import { Post } from 'src/app/models/entities/post';
+import { CommentItem } from 'src/app/models/entities/commentItem';
 
 @Component({
   selector: 'app-home-post',
@@ -23,11 +27,12 @@ import { SignalService } from 'src/app/services/signal.service';
 })
 export class HomePostComponent implements OnInit {
 
-  commentImage:{image:any,id:number} = undefined;
+  
   postDetail:PostDetailDto[];
   imageUrl = "https://localhost:7223/Uploads/images/";
   reports:Report[];
   favs:number[];
+  commentDictionary:Dictionary<CommentItem>  = {};
   constructor(private sanitizer: DomSanitizer,
     private postService:PostService,
     private reportService:ReportService,
@@ -57,9 +62,12 @@ export class HomePostComponent implements OnInit {
 
   getAllPostDetail()
   {
-    this.postService.getAllPostDetail().subscribe(response=>{
+    this.postService.getAllPostDetail(this.authService.getUserInfo().id).subscribe(response=>{
 
       this.postDetail = response.data;
+      response.data.forEach(post=>{
+        this.commentDictionary[post.id] = {image:undefined,message:"",id:post.id};
+      })
     })
   }
 
@@ -68,29 +76,29 @@ export class HomePostComponent implements OnInit {
   return this.imageUrl + image;
   }
 
-  commentPhotoFileClick()
+  commentPhotoFileClick(id:number)
   {
-    document.getElementById("comment-image-file").click();
+    document.getElementById("comment-image-file-"+id).click();
   }
 
   commentPostImageSelected(event:any,id:number)
   {
     if (event.target.files && event.target.files.length) {
-      this.commentImage.image = event.target.files[0];
-      this.commentImage.id = id;
+        this.commentDictionary[id].image =  event.target.files[0];
+      
     }
   }
 
 
-  commentGetPostImage()
+  commentGetPostImage(id:number)
   {
-    const imageUrl = URL.createObjectURL(this.commentImage.image);
+    const imageUrl = URL.createObjectURL(this.commentDictionary[id].image);
     return this.sanitizer.bypassSecurityTrustUrl(imageUrl);
   }
 
-  commentDeleteImage()
+  commentDeleteImage(id:number)
   {
-    this.commentImage = undefined;
+    this.commentDictionary[id].image = undefined;
   }
 
   getUserProfileImage(image:string)
@@ -208,4 +216,121 @@ export class HomePostComponent implements OnInit {
     this.clipboardService.copyFromContent(postUrl);
     this.toastService.success("Gönderi bağlantısı kopyalandı");
   }
+
+  Comment(parentid:number,userId:number)
+  {
+    const entity:Notification = Object.assign({},{
+      id:uuidv4(),
+      userId:this.authService.getUserInfo().id,
+      targetId:userId,
+      notificationIntId:parentid,
+      notificationUniqueId:null,
+      type:4,
+      creationDate:new Date(),
+      isRead:false
+    });
+    
+    if(this.commentDictionary[parentid].image != undefined)
+    {
+      if(this.commentDictionary[parentid].message.length > 0)
+      {
+        let post:Post = Object.assign({},{
+          id:null,
+          userId:this.authService.getUserInfo().id,
+          parentId:parentid,
+          message:this.commentDictionary[parentid].message,
+          imagePath:"",
+          type:2,
+          creationDate:null
+        });
+
+        this.postService.Add(this.commentDictionary[parentid].image,post).subscribe(response=>{
+          this.commentDictionary[parentid].image = undefined;
+          this.commentDictionary[parentid].message = "";
+          this.toastService.info("Paylaşım yapıldı..");
+          if(this.authService.getUserInfo().id != userId)
+          {
+            this.notificationService.Add(entity).subscribe(newResponse=>{
+              this.signalR.SendNotification(userId);
+              
+            })  
+          }
+             
+        },responseError=>{
+          this.commentDictionary[parentid].image = undefined;
+          this.commentDictionary[parentid].message = "";
+          this.toastService.error();
+        })
+      }
+      else{
+        let post:Post = Object.assign({},{
+          id:null,
+          userId:this.authService.getUserInfo().id,
+          parentId:parentid,
+          message:this.commentDictionary[parentid].message,
+          imagePath:"",
+          type:3,
+          creationDate:null
+        });
+        this.postService.Add(this.commentDictionary[parentid].image,post).subscribe(response=>{
+          this.commentDictionary[parentid].image = undefined;
+          this.commentDictionary[parentid].message = "";
+          this.toastService.info("Paylaşım yapıldı..");
+
+          if(this.authService.getUserInfo().id != userId)
+          {
+            this.notificationService.Add(entity).subscribe(newResponse=>{
+              this.signalR.SendNotification(userId);
+            
+            })  
+          }
+          
+          
+        },responseError=>{
+          this.commentDictionary[parentid].image = undefined;
+          this.commentDictionary[parentid].message = "";
+          this.toastService.error();
+        })
+      }
+    }
+    else{
+      if(this.commentDictionary[parentid].message.length > 0)
+      {
+        let post:Post = Object.assign({},{
+          id:null,
+          userId:this.authService.getUserInfo().id,
+          parentId:parentid,
+          message:this.commentDictionary[parentid].message,
+          imagePath:"",
+          type:1,
+          creationDate:null
+        });
+
+        this.postService.Add(null,post).subscribe(response=>{
+          this.commentDictionary[parentid].image = undefined;
+          this.commentDictionary[parentid].message = "";
+          this.toastService.info("Paylaşım yapıldı..");
+          if(this.authService.getUserInfo().id != userId)
+          {
+            this.notificationService.Add(entity).subscribe(newResponse=>{
+              this.signalR.SendNotification(userId);
+              
+            })  
+          }
+         
+        },responseError=>{
+          this.commentDictionary[parentid].image = undefined;
+          this.commentDictionary[parentid].message = "";
+          this.toastService.error();
+        })
+      }
+      else{
+        this.toastService.error("Lütfen düşünceleriniz paylaşın..");
+      }
+    }
+  }
+
+
+ 
+
 }

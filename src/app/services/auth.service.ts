@@ -35,6 +35,8 @@ export class AuthService {
       return this.httpClient.post<SingleResponseModel<TokenModel>>(newUrl,registerModel);
     }
 
+    
+
     isAuthenticated()
     {
       if(this.localStorageService.getItem("token"))
