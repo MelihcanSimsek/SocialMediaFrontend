@@ -11,6 +11,7 @@ import { MessagesScreenComponent } from './screens/messages-screen/messages-scre
 import { SearchScreenComponent } from './screens/search-screen/search-screen.component';
 import { SettingsScreenComponent } from './screens/settings-screen/settings-screen.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AdvertiseScreenComponent } from './screens/advertise-screen/advertise-screen.component';
 
 const routes: Routes = [
   {path:"login",component:LoginScreenComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path:"posts/:postid",canActivate: [AuthGuard],component:PostScreenComponent},
   {path:"profile/:profileid",canActivate: [AuthGuard],component:ProfileScreenComponent},
   {path:"dashboard",canActivate: [AuthGuard],component:DashboardScreenComponent},
+  {path:"advertise",canActivate: [AuthGuard],component:AdvertiseScreenComponent},
   {path:"friends",canActivate: [AuthGuard],component:FriendsScreenComponent},
   {path:"messages",canActivate: [AuthGuard],component:MessagesScreenComponent},
   {path:"search",canActivate: [AuthGuard],component:SearchScreenComponent},

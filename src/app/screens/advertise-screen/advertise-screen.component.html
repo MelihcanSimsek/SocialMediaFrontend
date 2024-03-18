@@ -1,0 +1,20 @@
+<app-header></app-header>
+<div class="grid grid-cols-7 bg-primary-color-extra-light dark:bg-secondary-color-extra-dark">
+    <app-sidebar class="col-start-1 col-end-1 "></app-sidebar>
+    <div class="col-start-2 col-span-6" *ngIf="dashboardRole == true" >
+        <div class=" px-10 pt-4  flex flex-row justify-center space-x-3">
+            <div [className]="GetSelectedClass(false)" (click)="ChangeSelectedIndex(false)">
+                <span class="text-sm font-semibold ">Side Advertise</span>
+            </div>
+            <div [className]="GetSelectedClass(true)" (click)="ChangeSelectedIndex(true)">
+                <span class="text-sm font-semibold ">Main Advertise</span>
+            </div>
+        </div>
+        <app-side-advertise *ngIf="!this.selectedItem"></app-side-advertise>
+        <app-main-advertise *ngIf="this.selectedItem"></app-main-advertise>
+    </div>
+    
+    <div class="col-start-2 col-span-6 flex h-screen justify-center items-center flex-col" *ngIf="dashboardRole == false">
+        <p class="text-slate-700 text-2xl font-semibold">Erişim Başarısız</p>
+    </div>
+</div>

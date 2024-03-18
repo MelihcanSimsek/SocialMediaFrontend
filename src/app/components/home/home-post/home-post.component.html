@@ -30,7 +30,7 @@
                 <mat-icon mat-raised-button [matBadge]="post.comment" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" class="cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"> comment</mat-icon>
             </div>
             <div>
-                <mat-icon mat-raised-button [matBadge]="getPostFavCount(post.id,post.fav.length,post.fav)" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" [class]="getFavClass(post.id)" (click)="favClick(post.id,post.userId)">favorite_border</mat-icon>
+                <mat-icon mat-raised-button [matBadge]="getPostFavCount(post.id,post.fav.length,post.fav)" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" [class]="getFavClass(post.id)" (click)="favClick(post.id,post.userId,post.label)">favorite_border</mat-icon>
             </div>
             <div>
                 <mat-icon  class="cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light" (click)="copy(post.id)">share</mat-icon>
@@ -49,12 +49,17 @@
         </div>
         
         <div class="w-full pl-10 pr-6 py-4">
+            <div class="flex justify-start">
+                <div class="rounded-md shadow-2xl border-1">
+                    <span class="text-sm dark:text-white">{{post.label.toUpperCase()}}</span>
+                </div>
+            </div>
             <div class="flex justify-center">
                 <span class="dark:text-white">Yorumlar</span>
             </div>
             <div class="flex flex-row space-x-1 relative">
                 <textarea name="commentarea" id="comment-area" [(ngModel)]="this.commentDictionary[post.id].message" class="relative w-full peer placeholder-transparent focus:outline-none focus:borer-rose-600 dark:bg-secondary-color dark:text-white text-gray-900" rows="3"></textarea>
-                <button type="button" class="relative px-2 py-4 bg-primary-color-dark hover:opacity-90 rounded-md text-white text-sm dark:bg-secondary-color-light dark:text-secondary-color-extra-dark" (click)="Comment(post.id,post.userId)">Gönder</button>
+                <button type="button" class="relative px-2 py-4 bg-primary-color-dark hover:opacity-90 rounded-md text-white text-sm dark:bg-secondary-color-light dark:text-secondary-color-extra-dark" (click)="Comment(post.id,post.userId,post.label)">Gönder</button>
                 <div class="absolute w-full bottom-0 left-1">
                     
                     <div class="flex flex-row  divide-x divide-gray-400">

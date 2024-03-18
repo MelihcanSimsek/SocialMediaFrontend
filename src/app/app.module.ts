@@ -41,6 +41,10 @@ import { ProfileSearchComponent } from './components/profile/profile-search/prof
 import { SettingsScreenComponent } from './screens/settings-screen/settings-screen.component';
 import { PasswordComponent } from './components/settings/password/password.component';
 import { NotificationSettingsComponent } from './components/settings/notification-settings/notification-settings.component';
+import { AdvertisingComponent } from './components/advertising/advertising/advertising.component';
+import { AdvertiseScreenComponent } from './screens/advertise-screen/advertise-screen.component';
+import { SideAdvertiseComponent } from './components/advertising/side-advertise/side-advertise.component';
+import { MainAdvertiseComponent } from './components/advertising/main-advertise/main-advertise.component';
 
 
 
@@ -78,6 +82,10 @@ import { NotificationSettingsComponent } from './components/settings/notificatio
     SettingsScreenComponent,
     PasswordComponent,
     NotificationSettingsComponent,
+    AdvertisingComponent,
+    AdvertiseScreenComponent,
+    SideAdvertiseComponent,
+    MainAdvertiseComponent,
 
  
 

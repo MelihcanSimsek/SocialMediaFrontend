@@ -6,6 +6,7 @@ import { Observable, from } from 'rxjs';
 import { ListResponseModel } from '../models/responsemodel/listResponseModel';
 import { PostDetailDto } from '../models/dtos/postDetailDto';
 import { SingleResponseModel } from '../models/responsemodel/singleResponseModel';
+import { PredictedText } from '../models/entities/predictedText';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,17 @@ import { SingleResponseModel } from '../models/responsemodel/singleResponseModel
 export class PostService {
  
   constructor(private httpClient:HttpClient) { }
-  apiUrl:string = "https://localhost:7223/api/Posts";
 
-  Add(file:File,post:Post):Observable<ResponseModel>
+  apiUrl:string = "https://localhost:7223/api/Posts";
+  secondPredictCategoryAPI = "http://localhost:5000/predict_category";
+
+  PredictCategory(text:string):Observable<PredictedText>
+  {
+    const data = { text };
+    return this.httpClient.post<PredictedText>(this.secondPredictCategoryAPI, data);
+  }
+
+  Add(file:File,post:Post):Observable<SingleResponseModel<number>>
   {
     const newUrl = this.apiUrl +'/add';
     const formData = new FormData();
@@ -27,12 +36,12 @@ export class PostService {
     {
       formData.append("image",file);
       
-      return this.httpClient.post<ResponseModel>(newUrl,formData);
+      return this.httpClient.post<SingleResponseModel<number>>(newUrl,formData);
     }
     else
     {
       formData.append("image",null);
-      return this.httpClient.post<ResponseModel>(newUrl,formData);
+      return this.httpClient.post<SingleResponseModel<number>>(newUrl,formData);
     }
     
   }

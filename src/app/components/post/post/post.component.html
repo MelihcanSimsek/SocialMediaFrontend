@@ -30,7 +30,7 @@
                 <mat-icon mat-raised-button [matBadge]="post.comment" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" class="cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"> comment</mat-icon>
             </div>
             <div>
-                <mat-icon mat-raised-button [matBadge]="getPostFavCount(post.id,post.fav.length,post.fav)" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" [class]="getFavClass(post.id)" (click)="favClick(post.id,post.userId)">favorite_border</mat-icon>
+                <mat-icon mat-raised-button [matBadge]="getPostFavCount(post.id,post.fav.length,post.fav)" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" [class]="getFavClass(post.id)" (click)="favClick(post.id,post.userId,post.label)">favorite_border</mat-icon>
             </div>
             <div>
                 <mat-icon  class="cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light" (click)="copy(post.id)">share</mat-icon>
@@ -108,7 +108,7 @@
                             <mat-icon mat-raised-button [matBadge]="comment.comment" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" class="cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"> comment</mat-icon>
                         </div>
                         <div>
-                            <mat-icon mat-raised-button [matBadge]="getPostFavCount(comment.id,comment.fav.length,comment.fav)" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" [class]="getFavClass(comment.id)" (click)="favClick(comment.id,comment.userId)">favorite_border</mat-icon>
+                            <mat-icon mat-raised-button [matBadge]="getPostFavCount(comment.id,comment.fav.length,comment.fav)" matBadgeSize="small" matBadgePosition="below after" matBadgeColor="primary"  aria-hidden="false" [class]="getFavClass(comment.id)" (click)="favClick(comment.id,comment.userId,comment.label)">favorite_border</mat-icon>
                         </div>
                         <div>
                             <mat-icon  class="cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light" (click)="copy(comment.id)">share</mat-icon>

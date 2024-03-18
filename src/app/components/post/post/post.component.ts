@@ -7,14 +7,17 @@ import { PostDetailDto } from 'src/app/models/dtos/postDetailDto';
 import { Fav } from 'src/app/models/entities/fav';
 import { Notification } from 'src/app/models/entities/notification';
 import { Post } from 'src/app/models/entities/post';
+import { PostTag } from 'src/app/models/entities/postTag';
 import { Report } from 'src/app/models/entities/report';
 import { UserReport } from 'src/app/models/entities/userReport';
+import { UserTag } from 'src/app/models/entities/userTag';
 import { AuthService } from 'src/app/services/auth.service';
 import { FavService } from 'src/app/services/fav.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { PostService } from 'src/app/services/post.service';
 import { ReportService } from 'src/app/services/report.service';
 import { SignalService } from 'src/app/services/signal.service';
+import { TagService } from 'src/app/services/tag.service';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
@@ -40,7 +43,8 @@ export class PostComponent implements OnInit{
     private notificationService:NotificationService,
     private signalrService:SignalService,
     private clipboardService: ClipboardService,
-    private favService:FavService
+    private favService:FavService,
+    private tagService:TagService
      ) {
      
   }
@@ -60,6 +64,22 @@ export class PostComponent implements OnInit{
     })
   }
   
+  UpdateUserTag(post:PostDetailDto)
+  {
+    if(post.userId != this.authService.getUserInfo().id)
+    {
+      const userTag:UserTag = Object.assign({},{
+        id:0,
+        userId:this.authService.getUserInfo().id,
+        postId:post.id,
+        label:post.label,
+        creationDate:new Date()
+      });
+  
+      this.tagService.AddUserTag(userTag).subscribe();
+    }
+  }
+
   getAllReports()
   {
     this.reportService.GetAllReports().subscribe(response=>{
@@ -71,6 +91,7 @@ export class PostComponent implements OnInit{
   {
     this.postService.getPostDetailById(id).subscribe(response=>{
       this.post = response.data;
+      this.UpdateUserTag(response.data);
     })
   }
 
@@ -150,20 +171,31 @@ export class PostComponent implements OnInit{
         });
 
         this.postService.Add(this.commentImage,post).subscribe(response=>{
-          this.commentImage = undefined;
-          this.commentArea = "";
-          this.toastrService.info("Paylaşım yapıldı..");
-          if(this.authService.getUserInfo().id != userId)
-          {
-            this.notificationService.Add(entity).subscribe(newResponse=>{
-              this.signalrService.SendNotification(userId);
-              location.reload(); 
-            })  
-          }
-          else
-          {
-            location.reload(); 
-          }     
+          this.postService.PredictCategory(post.message).subscribe(newResponse=>{
+            let postTag:PostTag = Object.assign({},{
+              id:0,
+              postId:response.data,
+              label:newResponse.category,
+              creationDate:new Date()
+            })
+
+            this.tagService.AddPostTag(postTag).subscribe(responseNew=>{
+              this.commentImage = undefined;
+              this.commentArea = "";
+              this.toastrService.info("Paylaşım yapıldı..");
+              if(this.authService.getUserInfo().id != userId)
+              {
+                this.notificationService.Add(entity).subscribe(newNotificationResponse=>{
+                  this.signalrService.SendNotification(userId);
+                  location.reload(); 
+                })  
+              }
+              else
+              {
+                location.reload(); 
+              }   
+            });
+          });
         },responseError=>{
           this.commentImage = undefined;
           this.commentArea = "";
@@ -181,21 +213,33 @@ export class PostComponent implements OnInit{
           creationDate:null
         });
         this.postService.Add(this.commentImage,post).subscribe(response=>{
-          this.commentImage = undefined;
-          this.commentArea = "";
-          this.toastrService.info("Paylaşım yapıldı..");
+          this.postService.PredictCategory("").subscribe(newResponse=>{
+            let postTag:PostTag = Object.assign({},{
+              id:0,
+              postId:response.data,
+              label:newResponse.category,
+              creationDate:new Date()
+            })
 
-          if(this.authService.getUserInfo().id != userId)
-          {
-            this.notificationService.Add(entity).subscribe(newResponse=>{
-              this.signalrService.SendNotification(userId);
-              location.reload(); 
-            })  
-          }
-          else
-          {
-            location.reload(); 
-          }
+            this.tagService.AddPostTag(postTag).subscribe(responseNew=>{
+              this.commentImage = undefined;
+              this.commentArea = "";
+              this.toastrService.info("Paylaşım yapıldı..");
+              if(this.authService.getUserInfo().id != userId)
+              {
+                this.notificationService.Add(entity).subscribe(newNotificationResponse=>{
+                  this.signalrService.SendNotification(userId);
+                  location.reload(); 
+                })  
+              }
+              else
+              {
+                location.reload(); 
+              }   
+            });
+          });
+
+        
           
           
         },responseError=>{
@@ -219,20 +263,31 @@ export class PostComponent implements OnInit{
         });
 
         this.postService.Add(null,post).subscribe(response=>{
-          this.commentImage = undefined;
-          this.commentArea = "";
-          this.toastrService.info("Paylaşım yapıldı..");
-          if(this.authService.getUserInfo().id != userId)
-          {
-            this.notificationService.Add(entity).subscribe(newResponse=>{
-              this.signalrService.SendNotification(userId);
-              location.reload(); 
-            })  
-          }
-          else
-          {
-            location.reload(); 
-          }
+          this.postService.PredictCategory(post.message).subscribe(newResponse=>{
+            let postTag:PostTag = Object.assign({},{
+              id:0,
+              postId:response.data,
+              label:newResponse.category,
+              creationDate:new Date()
+            })
+
+            this.tagService.AddPostTag(postTag).subscribe(responseNew=>{
+              this.commentImage = undefined;
+              this.commentArea = "";
+              this.toastrService.info("Paylaşım yapıldı..");
+              if(this.authService.getUserInfo().id != userId)
+              {
+                this.notificationService.Add(entity).subscribe(newNotificationResponse=>{
+                  this.signalrService.SendNotification(userId);
+                  location.reload(); 
+                })  
+              }
+              else
+              {
+                location.reload(); 
+              }   
+            });
+          });
         },responseError=>{
           this.commentImage = undefined;
           this.commentArea = "";
@@ -269,12 +324,12 @@ export class PostComponent implements OnInit{
     })
   }
 
-  favClick(id:number,postUserId:number)
+  favClick(postId:number,postUserId:number,Label:string)
   {
     let entity:Fav = Object.assign({},{
       id:0,
       userId:this.authService.getUserInfo().id,
-      postId:id,
+      postId:postId,
       creationDate:new Date()
     })
 
@@ -282,16 +337,16 @@ export class PostComponent implements OnInit{
       id:uuidv4(),
       userId:this.authService.getUserInfo().id,
       targetId:postUserId,
-      notificationIntId:id,
+      notificationIntId:postId,
       notificationUniqueId:null,
       type:3,
       creationDate:new Date(),
       isRead:false
     });
 
-    if(!this.favs.includes(id))
+    if(!this.favs.includes(postId))
     {
-      this.favs.push(id);
+      this.favs.push(postId);
       this.favService.add(entity).subscribe(response=>{
         this.notificationService.Add(notification).subscribe(newResponse=>{
           this.signalrService.SendNotification(postUserId);
@@ -299,10 +354,23 @@ export class PostComponent implements OnInit{
       })
     }
     else{
-      this.favs.splice(this.favs.indexOf(id),1);
+      this.favs.splice(this.favs.indexOf(postId),1);
       this.favService.delete(entity).subscribe(response=>{
 
       })
+    }
+
+    if(postUserId != this.authService.getUserInfo().id)
+    {
+      const userTag:UserTag = Object.assign({},{
+        id:0,
+        userId:this.authService.getUserInfo().id,
+        postId:postId,
+        label:Label,
+        creationDate:new Date()
+      })
+  
+      this.tagService.AddUserTag(userTag).subscribe();
     }
   }
 

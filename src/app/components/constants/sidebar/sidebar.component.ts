@@ -6,6 +6,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { PostService } from 'src/app/services/post.service';
 import { Modal,initFlowbite } from 'flowbite';
 import { UserModel } from 'src/app/models/auth/userModel';
+import { PostTag } from 'src/app/models/entities/postTag';
+import { TagService } from 'src/app/services/tag.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -21,7 +23,8 @@ export class SidebarComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private toastrService:ToastrService,
     private postService:PostService,
-    private authService:AuthService) {
+    private authService:AuthService,
+    private tagService:TagService) {
     
     
   }
@@ -88,10 +91,21 @@ export class SidebarComponent implements OnInit {
         });
 
         this.postService.Add(this.postImage,post).subscribe(response=>{
-          this.postImage = undefined;
-          this.postarea = "";
-          this.toastrService.info("Paylaşım yapıldı..");
-          location.reload();
+          this.postService.PredictCategory(post.message).subscribe(newResponse=>{
+            let postTag:PostTag = Object.assign({},{
+              id:0,
+              postId:response.data,
+              label:newResponse.category,
+              creationDate:new Date()
+            })
+
+            this.tagService.AddPostTag(postTag).subscribe();
+
+            this.postImage = undefined;
+            this.postarea = "";
+            this.toastrService.info("Paylaşım yapıldı..");
+            location.reload();
+          })
         },responseError=>{
           this.postImage = undefined;
           this.postarea = "";
@@ -109,10 +123,22 @@ export class SidebarComponent implements OnInit {
           creationDate:null
         });
         this.postService.Add(this.postImage,post).subscribe(response=>{
-          this.postImage = undefined;
-          this.postarea = "";
-          this.toastrService.info("Paylaşım yapıldı..");
-          location.reload();
+          this.postService.PredictCategory("").subscribe(newResponse=>{
+            let postTag:PostTag = Object.assign({},{
+              id:0,
+              postId:response.data,
+              label:newResponse.category,
+              creationDate:new Date()
+            })
+
+            this.tagService.AddPostTag(postTag).subscribe();
+
+            this.postImage = undefined;
+            this.postarea = "";
+            this.toastrService.info("Paylaşım yapıldı..");
+            location.reload();
+          })
+
         },responseError=>{
           this.postImage = undefined;
           this.postarea = "";
@@ -134,10 +160,24 @@ export class SidebarComponent implements OnInit {
         });
 
         this.postService.Add(null,post).subscribe(response=>{
-          this.postImage = undefined;
-          this.postarea = "";
-          this.toastrService.info("Paylaşım yapıldı..");
-          location.reload();
+          this.postService.PredictCategory(post.message).subscribe(newResponse=>{
+            let postTag:PostTag = Object.assign({},{
+              id:0,
+              postId:response.data,
+              label:newResponse.category,
+              creationDate:new Date()
+            })
+
+            this.tagService.AddPostTag(postTag).subscribe(responseNew=>{
+              this.postImage = undefined;
+              this.postarea = "";
+              this.toastrService.info("Paylaşım yapıldı..");
+              location.reload();
+            });
+
+        
+          })
+      
         },responseError=>{
           this.postImage = undefined;
           this.postarea = "";

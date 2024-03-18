@@ -11,6 +11,6 @@ export interface PostDetailDto{
     imagePath:string | null;
     type:number;
     creationDate:Date;
-
+    label:string;
 }
 
