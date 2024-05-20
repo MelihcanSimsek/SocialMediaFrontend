@@ -9,7 +9,7 @@ export class LoginScreenComponent implements OnInit{
 
 
   constructor() {
-
+    sessionStorage.removeItem("page") 
     
   }
 

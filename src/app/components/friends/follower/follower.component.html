@@ -1,5 +1,5 @@
 <div class="px-10 py-4">
-    <div class="flex w-full justify-center items-center py-4">
+    <div class="flex w-full justify-start items-center py-4">
         <span class="text-2xl font-semibold text-slate-500">Takip Edilenler</span>
     </div>
 
@@ -10,9 +10,9 @@
             <span class="text-black text-sm font-semibold dark:text-white">{{followed.name}}</span>
         </div>
         <div class="flex flex-col space-y-1 px-4 justify-center items-center">
-            <div class="flex justify-center items-center py-4 px-6 bg-red-500 dark:bg-secondary-color-extra-light hover:opacity-90 cursor-pointer rounded-lg shadow-lg" routerLink="/profile/{{followed.userId}}">
+            <a class="flex justify-center items-center py-4 px-6 bg-primary-color-orange dark:bg-secondary-color-light hover:opacity-90 cursor-pointer rounded-lg shadow-lg" href="/profile/{{followed.userId}}">
                 <mat-icon class="text-2xl text-white dark:text-secondary-color-extra-dark">launch</mat-icon>
-            </div>
+            </a>
         </div>
     </div> 
     
@@ -24,7 +24,7 @@
 
 
 
-<div class="flex w-full justify-center items-center py-4">
+<div class="flex w-full justify-start items-center py-4">
     <span class="text-2xl font-semibold text-slate-500">Takipçi Listesi</span>
 </div>
 
@@ -35,9 +35,9 @@
         <span class="text-black text-sm font-semibold dark:text-white">{{follower.name}}</span>
     </div>
     <div class="flex flex-col space-y-1 px-4 justify-center items-center">
-        <div class="flex justify-center items-center py-4 px-6 bg-red-500 dark:bg-secondary-color-extra-light hover:opacity-90 cursor-pointer rounded-lg shadow-lg" routerLink="/profile/{{follower.userId}}">
+        <a class="flex justify-center items-center py-4 px-6 bg-primary-color-orange dark:bg-secondary-color-light hover:opacity-90 cursor-pointer rounded-lg shadow-lg" href="/profile/{{follower.userId}}">
             <mat-icon class="text-2xl text-white dark:text-secondary-color-extra-dark">launch</mat-icon>
-        </div>
+        </a>
     </div>
 </div> 
 

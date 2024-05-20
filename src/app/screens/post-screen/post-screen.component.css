@@ -1,0 +1,181 @@
+.main{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.left-side
+{
+ width: 15%;
+}
+
+.middle
+{
+ width: 70%;
+}
+
+.right-side{
+ width: 15%;
+}
+
+@media screen and (max-width: 1270px)
+{
+
+    .left-side
+    {
+     width: 15%;
+    }
+    
+    .middle
+    {
+     width: 73%;
+    }
+    
+    .right-side{
+     width: 12%;
+    }
+}
+
+@media screen and (max-width: 1100px)
+{
+
+    .left-side
+    {
+     width: 10%;
+    }
+    
+    .middle
+    {
+     width: 75%;
+    }
+    
+    .right-side{
+     width: 15%;
+    }
+}
+
+@media screen and (max-width: 1025px)
+{
+    .left-side
+    {
+     width: 10%;
+    }
+    
+    .middle
+    {
+     width: 78%;
+    }
+    
+    .right-side{
+     width: 12%;
+    }
+}
+
+
+
+@media screen and (max-width: 992px)
+{
+    .left-side
+    {
+     width: 10%;
+    }
+    
+    .middle
+    {
+     width: 80%;
+    }
+    
+    .right-side{
+     width: 10%;
+    }
+}
+
+@media screen and (max-width: 886px)
+{
+   
+   
+    .left-side
+    {
+     width: 7%;
+    }
+    
+    .middle
+    {
+     width: 83%;
+    }
+    
+    .right-side{
+     width: 10%;
+    }
+}
+
+@media screen and (max-width: 769px)
+{
+    .left-side
+    {
+     width: 7%;
+    }
+    
+    .middle
+    {
+     width: 86%;
+    }
+    
+    .right-side{
+     width: 7%;
+    }
+}
+
+
+
+@media screen and (max-width: 700px)
+{
+    .left-side
+    {
+     width: 5%;
+    }
+    
+    .middle
+    {
+     width: 90%;
+    }
+    
+    .right-side{
+     width: 5%;
+    }
+}
+
+@media screen and (max-width: 650px)
+{
+    .left-side
+    {
+     width: 3%;
+    }
+    
+    .middle
+    {
+     width: 95%;
+    }
+    
+    .right-side{
+     width: 2%;
+    }
+}
+
+@media screen and (max-width: 600px)
+{
+    .left-side
+    {
+     width: 4%;
+    }
+    
+    .middle
+    {
+     width: 96%;
+    }
+    
+    .right-side{
+     width: 0px;
+    }
+}
+

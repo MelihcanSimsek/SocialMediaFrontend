@@ -1,3 +1,235 @@
 textarea{
     resize: none;
 }
+
+
+.sidebar{
+    position: fixed;
+    height: 650px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid rgb(170, 170, 170);
+    border-bottom: 2px solid rgb(170, 170, 170);
+    border-top: 1px solid rgb(170, 170, 170);
+
+}
+
+
+
+.sidebar .sidebar-open{
+    display: none;
+}
+
+.sidebar-header{
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: visible;
+}
+
+.header-text{
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.sidebar-ul{
+    width: inherit;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sidebar-li a{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 75px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.sidebar-li:hover{
+    opacity: 75%;
+}
+
+.icon-text{
+    font-size: 1.9rem;
+   height: 100%;
+   width: 20%;
+   display: flex;
+   align-items: center;
+ 
+}
+
+
+.sidebar-li-btn{
+    display: flex;
+    justify-content: center;
+    height: 75px;
+}
+
+.page-text{
+    font-size:1.2rem;
+    width: 80%;
+}
+
+.btn-share{
+    width: 80%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: orange;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+.btn-share:hover{
+    background-color: rgb(241, 168, 33);
+    opacity: 60%;
+}
+
+.btn-share-icon{
+    font-size: 1.9rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.btn-share-text{
+    font-size: 1.2rem;
+}
+
+.main-icon{
+    display: flex;
+    flex: row;
+    justify-content:flex-end ;
+    width: 95%;
+}
+
+.close-icon{
+    font-size: 1.8rem;
+    cursor:pointer;
+}
+
+.close-icon:hover{
+    opacity: 75%;
+}
+
+.sidebar-mini{
+    height: 650px !important;
+    width: 25px !important;
+    border-right: 1px solid rgb(170, 170, 170);
+    border-bottom: 2px solid rgb(170, 170, 170);
+    border-top: 1px solid rgb(170, 170, 170);
+    border-top-right-radius: 50px !important;
+    border-bottom-right-radius: 50px !important;
+}
+
+
+.sidebar-mini .sidebar-header{
+    visibility: hidden !important;
+}
+
+.sidebar-mini .sidebar-open{
+    display: block !important;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.sidebar-mini .sidebar-open:hover{
+    opacity: 75%;
+}
+
+.sidebar-mini .main-icon{
+    display: none;
+}
+
+.sidebar-mini .sidebar-ul{
+    width: 50px !important;
+    margin-left: 25px;
+}
+
+.sidebar-mini .sidebar-li{
+    margin-top: 5px;
+}
+
+
+.sidebar-mini .sidebar-li:hover{
+    opacity: 100%;
+}
+
+.sidebar-mini .icon-text{
+    font-size: 1.5rem;
+   width: 100% !important;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   border-top-right-radius: 100%;
+   border-bottom-right-radius: 100%;
+   border-right: 1px solid rgb(170, 170, 170);
+}
+
+
+.sidebar-mini .icon-text:hover{
+    background-color: rgb(219, 218, 218);
+}
+
+
+.sidebar-mini .sidebar-li-btn{
+    height: 75px;
+    width: 100%;
+    margin-top: 5px;
+}
+
+.sidebar-mini .page-text{
+    display: none;
+}
+
+.sidebar-mini .btn-share{
+    width: 100%;
+}
+
+.sidebar-mini .btn-share:hover{
+    opacity: 100% !important;
+}
+
+.sidebar-mini .btn-share-icon{
+    font-size: 1.9rem;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-top-right-radius: 100%;
+    border-bottom-right-radius: 100%;
+    background-color: #ffa500;
+}
+
+.sidebar-mini .btn-share-icon:hover{
+    background-color: rgb(243, 165, 20);
+}
+
+.sidebar-mini .btn-share-text{
+    display: none !important;
+}
+
+
+
+
+
+@media screen and (max-width: 1110px)
+{
+    .sidebar-open{
+        visibility: hidden;
+    }
+
+}

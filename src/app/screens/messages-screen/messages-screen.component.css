@@ -1,0 +1,222 @@
+.main{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.left-side
+{
+ width: 15%;
+}
+
+.middle
+{
+ width: 85%;
+}
+
+
+
+@media screen and (max-width: 1350px)
+{
+
+ 
+    .left-side
+    {
+     width: 16%;
+    }
+    
+    .middle
+    {
+     width: 84%;
+    }
+    
+
+}
+
+@media screen and (max-width: 1280px)
+{
+
+   
+
+    .left-side
+    {
+     width: 17%;
+    }
+    
+    .middle
+    {
+     width: 83%;
+    }
+
+}
+
+@media screen and (max-width: 1200px)
+{
+    .left-side
+    {
+     width: 18%;
+    }
+    
+    .middle
+    {
+     width: 82%;
+    }
+
+}
+
+
+
+@media screen and (max-width: 1130px)
+{
+ 
+    .left-side
+    {
+     width: 19%;
+    }
+    
+    .middle
+    {
+     width: 81%;
+    }
+
+}
+
+@media screen and (max-width: 1110px)
+{
+   
+ 
+    .left-side
+    {
+     width: 5%;
+    }
+    
+    .middle
+    {
+     width:94%;
+     margin-left: 1%;
+    }
+
+}
+
+@media screen and (max-width: 840px)
+{
+
+    .left-side
+    {
+     width: 6%;
+    }
+    
+    .middle
+    {
+     width:93%;
+     margin-left: 1%;
+    }
+}
+
+@media screen and (max-width: 768px)
+{
+    .left-side
+    {
+     width: 7%;
+    }
+    
+    .middle
+    {
+     width:92%;
+     margin-left: 1%;
+    }
+}
+
+@media screen and (max-width: 650px)
+{
+    .left-side
+    {
+     width: 8%;
+    }
+    
+    .middle
+    {
+     width:91%;
+     margin-left: 1%;
+    }
+}
+
+@media screen and (max-width: 570px)
+{
+    .left-side
+    {
+     width: 9%;
+    }
+    
+    .middle
+    {
+     width:90%;
+     margin-left: 1%;
+    }
+}
+
+@media screen and (max-width: 530px)
+{
+    .left-side
+    {
+     width: 10%;
+    }
+    
+    .middle
+    {
+     width:90%;
+    }
+}
+
+@media screen and (max-width: 500px)
+{
+    .left-side
+    {
+     width: 11%;
+    }
+    
+    .middle
+    {
+     width:89%;
+    }
+}
+
+@media screen and (max-width: 450px)
+{
+ 
+    .left-side
+    {
+     width: 12%;
+    }
+    
+    .middle
+    {
+     width:88%;
+    }
+}
+
+@media screen and (max-width: 400px)
+{
+    .left-side
+    {
+     width: 13%;
+    }
+    
+    .middle
+    {
+     width:87%;
+    }
+}
+
+@media screen and (max-width: 375px)
+{
+    .left-side
+    {
+     width: 14%;
+    }
+    
+    .middle
+    {
+     width:86%;
+    }
+}

@@ -1,11 +1,13 @@
 <app-header></app-header>
-<div class="grid grid-cols-7 bg-primary-color-extra-light dark:bg-secondary-color-extra-dark transition ease-in-out">
-    <app-sidebar class="col-start-1 col-end-1 "></app-sidebar>
-    <div class="col-start-2 col-span-4">
+<div class="main bg-primary-color-light dark:bg-secondary-color-extra-dark transition ease-in-out">
+    <div class="left-side">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="middle">
         <app-profile-header></app-profile-header>
         <app-profile-footer></app-profile-footer>
     </div>
-    <div class="col-start-6 col-span-2">
+    <div class="right-side">
         <app-profile-search></app-profile-search>
         <app-advertising></app-advertising>
     </div>

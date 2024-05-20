@@ -9,7 +9,7 @@ export class SettingsScreenComponent implements OnInit {
 
   selectedSetting:boolean=false;
   constructor() {
-    
+    sessionStorage.removeItem("page") 
   }
 
   ngOnInit(): void {

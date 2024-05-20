@@ -399,11 +399,11 @@ export class PostComponent implements OnInit{
     
     if(this.favs.includes(id))
     {
-      return "cursor-pointer  text-red-700"
+      return "cursor-pointer icon-text text-red-700"
     }
     else
     {
-      return "cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"
+      return "cursor-pointer icon-text text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"
     }
   }
 

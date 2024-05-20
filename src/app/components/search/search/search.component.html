@@ -1,38 +1,40 @@
 <div class="flex flex-col items-center justify-center px-10 py-4">
     <div class="flex flex-row justify-center w-4/5  items-center pb-4">
         <input type="text" [(ngModel)]="searchInput" name="search" id="search-input" placeholder="Kullanıcı Ara" class="w-full font-semibold dark:bg-secondary-color dark:text-white" (ngModelChange)="Search()">
-        <div class="px-4 py-2 bg-primary-color-dark cursor-pointer hover:opacity-90 dark:bg-secondary-color-light" (click)="Search()">
-            <mat-icon class="text-2xl text-white dark:text-secondary-color-extra-dark">search</mat-icon>
+        <div class="px-4 py-2 bg-primary-color-orange cursor-pointer hover:opacity-90 dark:bg-secondary-color-light" (click)="Search()">
+            <mat-icon class="text-2xl text-white  dark:text-secondary-color-extra-dark">search</mat-icon>
         </div>
     </div>
     <div class="flex flex-col w-4/5 bg-white dark:bg-secondary-color divide-y-4 dark:divide-secondary-color-extra-dark" *ngIf="searchedUsers != undefined" >
-        <div class="flex flex-row justify-between w-full py-4 px-6 cursor-pointer transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 hover:bg-white dark:hover:bg-secondary-color duration-100 " routerLink="/profile/{{user.id}}"  *ngFor="let user of searchedUsers">
+        <a href="/profile/{{user.id}}" *ngFor="let user of searchedUsers">
+        <div class="flex flex-row justify-between w-full py-4 px-6 cursor-pointer transition ease-in-out delay-100 hover:-translate-y-1 hover:scale-110 hover:bg-white dark:hover:bg-secondary-color duration-100 " >
             <div class="flex flex-row space-x-2">
-                <img [src]="getUserAvatar(user.profileImage)" height="75" width="75" class="rounded-full" alt="avatar-image">
+                <img [src]="getUserAvatar(user.profileImage)"  class="rounded-full avatar-image" alt="avatar-image">
                 <div class="flex flex-col">
-                    <span class="text-xl font-semibold dark:text-white">{{user.name}}</span>
-                    <span class="text-sm text-slate-500 dark:text-secondary-color-extra-light">{{user.description}}</span>
+                    <span class="name-text font-semibold dark:text-white">{{user.name}}</span>
+                    <span class="description-text pt-2 text-slate-500 dark:text-secondary-color-extra-light">{{user.description}}</span>
                     <div *ngIf="checkLocationTrim(user.location)">
-                        <span  class="text-sm text-slate-500 dark:text-secondary-color-extra-light">Konum: {{user.location}}</span>
+                        <span  class="location-text text-slate-500 dark:text-secondary-color-extra-light">Konum: {{user.location}}</span>
                     </div>
                     
                 </div>
             </div>
             <div class="flex items-start">
-                <span class="text-sm text-slate-700 dark:text-white">{{user.creationDate |date:"dd/MMM/y"}} tarihinde katıldı.</span>
+                <span class="date-text text-slate-700 dark:text-white">{{user.creationDate |date:"dd/MMM/y"}} tarihinde katıldı.</span>
             </div>
-        </div>        
+        </div>  
+    </a>      
         
     </div>
     <div class="flex flex-row justify-around w-2/5 py-4" *ngIf="this.currentPage != 0">
         <button [class]="getPreviousClass()" (click)="pageChange(currentPage - 1)" >
-            <span class="text-sm font-semibold text-white dark:text-secondary-color-extra-dark">Önceki</span>
+            <span class="btn-text font-semibold text-white dark:text-secondary-color-extra-dark">Önceki</span>
         </button>
         <div class="flex flex-row items-center justify-center">
-            <span class="text-xl text-slate-500 font-semibold">{{currentPage}} / {{totalPage}}</span>
+            <span class="page-text text-slate-500 font-semibold">{{currentPage}} / {{totalPage}}</span>
         </div>
         <button [class]="getNextClass()" (click)="pageChange(currentPage + 1)" >
-            <span class="text-sm font-semibold text-white dark:text-secondary-color-extra-dark">Sonraki</span>
+            <span class="btn-text font-semibold text-white dark:text-secondary-color-extra-dark">Sonraki</span>
         </button>
     </div>
   

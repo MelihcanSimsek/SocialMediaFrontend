@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit,Directive } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
 import { Post } from 'src/app/models/entities/post';
@@ -32,7 +32,86 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     initFlowbite();
     this.getUser();
+    this.CheckSidebar();
   }
+
+  CheckSidebar()
+  {
+    const width = window.innerWidth;
+    if(localStorage.getItem("sidebar") != null && width > 1110)
+      {
+       this.updateInitialSwitchState(Number(localStorage.getItem("sidebar")));
+      }
+      else
+      {
+        const element =  document.getElementById("sidebar");
+        element.classList.add("sidebar-mini");
+      }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event:any) {
+    const width = window.innerWidth;
+    if(width <= 1110)
+      {
+      const element =  document.getElementById("sidebar");
+      element.classList.add("sidebar-mini");
+      }
+      else
+      {
+        if(localStorage.getItem("sidebar") != null)
+          {
+            this.updateInitialSwitchState(Number(localStorage.getItem("sidebar")));
+          }
+          else{
+            this.SwitchSidebar(true);
+          }
+      }
+  }
+
+  
+
+  setSelectedPage(number:string):string
+  {
+
+    if(sessionStorage.getItem("page") != null)
+      {
+        if(sessionStorage.getItem("page") == number)
+          {
+            return "sidebar-li border-l-4 border-selected-page-color"
+          }
+      }
+      return "sidebar-li"
+  }
+  
+  updateInitialSwitchState(state:number)
+  {
+    if(state == 1)
+    {
+      const element =  document.getElementById("sidebar");
+      element.classList.remove("sidebar-mini");
+    }
+    else{
+      const element =  document.getElementById("sidebar");
+      element.classList.add("sidebar-mini");
+    }
+  }
+
+ SwitchSidebar(status:boolean)
+ {
+  const width = window.innerWidth;
+  if(status && width > 1110)
+    {
+      const element =  document.getElementById("sidebar");
+      element.classList.remove("sidebar-mini");
+      localStorage.setItem("sidebar","1")
+    }
+    else{
+      const element =  document.getElementById("sidebar");
+      element.classList.add("sidebar-mini");
+      localStorage.setItem("sidebar","2")
+    }
+ }
 
   OpenPostModal()
   {

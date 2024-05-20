@@ -9,7 +9,7 @@ export class ProfileScreenComponent  implements OnInit{
 
   
   constructor() {
-    
+    sessionStorage.setItem("page","3");
     
   }
 

@@ -1,0 +1,25 @@
+.notification-padding{
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+
+
+
+@media screen and (max-width: 600px)
+{
+    .notification-padding{
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+    
+}
+
+@media screen and (max-width: 550px)
+{
+    .notification-padding{
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+    }
+    
+}

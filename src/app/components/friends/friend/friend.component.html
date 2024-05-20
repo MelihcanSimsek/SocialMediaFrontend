@@ -1,20 +1,20 @@
 <div class="px-10 py-4">
-    <div class="flex w-full justify-center items-center py-4">
+    <div class="flex w-full justify-start items-center py-4">
         <span class="text-2xl font-semibold text-slate-500">Arkadaş Listesi</span>
     </div>
 
     <div class="flex flex-row flex-wrap w-full " *ngIf="friendsList.length > 0">
     <div class="bg-white dark:bg-secondary-color shadow-lg flex flex-row items-center justify-center w-64 py-4  mx-2 my-2" *ngFor="let friend of friendsList | friendFilter:friendFilter">
-        <div class="flex flex-col items-center justify-center  ">
+        <div class="flex flex-col items-center justify-center  px-4">
             <img [src]="getUserAvatar(friend.profileImage)" alt="avatar" height="50" width="50" class="rounded-full">
             <span class="text-black text-sm font-semibold dark:text-white">{{friend.name}}</span>
             <!-- <span class="text-yellow-400 text-sm">Çevrim içi</span> -->
         </div>
         <div class="flex flex-col space-y-1 px-4 justify-center items-center">
-            <div class="flex justify-center items-center py-4 px-6 bg-red-500 dark:bg-secondary-color-extra-light hover:opacity-90 cursor-pointer rounded-lg shadow-lg" routerLink="/profile/{{friend.userId}}">
+            <a href="/profile/{{friend.userId}}" class="flex justify-center items-center py-4 px-6 bg-primary-color-orange dark:bg-secondary-color-light  hover:opacity-90 cursor-pointer rounded-lg shadow-lg">
                 <mat-icon class="text-2xl text-white dark:text-secondary-color-extra-dark">launch</mat-icon>
-            </div>
-            <div class="flex justify-center items-center py-4 px-6 bg-primary-color-dark dark:bg-secondary-color-light hover:opacity-90 cursor-pointer rounded-lg shadow-lg" (click)="SendMessage(friend.userId)">
+            </a>
+            <div class="flex justify-center items-center py-4 px-6 bg-primary-color-dark  hover:opacity-90 cursor-pointer dark:bg-secondary-color-extra-light rounded-lg shadow-lg" (click)="SendMessage(friend.userId)">
                 <mat-icon class="text-2xl text-white dark:text-secondary-color-extra-dark"> mail_outline</mat-icon>
             </div>
         </div>

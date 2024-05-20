@@ -10,7 +10,7 @@ export class FriendsScreenComponent implements OnInit {
   searchInput:string;
 
   constructor(private router:Router) {
-    
+    sessionStorage.setItem("page","4");
   }
 
   ngOnInit(): void {

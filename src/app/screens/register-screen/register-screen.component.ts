@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class RegisterScreenComponent {
 
+constructor() {
+  sessionStorage.removeItem("page") 
+}
 }

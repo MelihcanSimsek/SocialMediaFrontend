@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class MessagesScreenComponent {
 
+constructor() {
+  sessionStorage.setItem("page","5");
+  
+}
 }

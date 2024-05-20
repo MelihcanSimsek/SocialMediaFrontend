@@ -1,0 +1,214 @@
+.main{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.left-side
+{
+ width: 15%;
+}
+
+.middle
+{
+ width: 82%;
+}
+
+.right-side{
+ width: 3%;
+}
+
+@media screen and (max-width: 1270px)
+{
+
+    .left-side
+    {
+     width: 15%;
+    }
+    
+    .middle
+    {
+     width: 82%;
+    }
+    
+    .right-side{
+     width: 3%;
+    }
+}
+
+@media screen and (max-width: 1100px)
+{
+
+    .left-side
+    {
+     width: 10%;
+    }
+    
+    .middle
+    {
+     width: 87%;
+    }
+    
+    .right-side{
+     width: 3%;
+    }
+}
+
+@media screen and (max-width: 1025px)
+{
+    .left-side
+    {
+     width: 10%;
+    }
+    
+    .middle
+    {
+     width: 87%;
+    }
+    
+    .right-side{
+     width: 3%;
+    }
+}
+
+
+
+@media screen and (max-width: 992px)
+{
+    .left-side
+    {
+     width: 10%;
+    }
+    
+    .middle
+    {
+     width: 87%;
+    }
+    
+    .right-side{
+     width: 3%;
+    }
+}
+
+@media screen and (max-width: 886px)
+{
+   
+   
+    .left-side
+    {
+     width: 10%;
+    }
+    
+    .middle
+    {
+     width: 87%;
+    }
+    
+    .right-side{
+     width: 3%;
+    }
+}
+
+@media screen and (max-width: 769px)
+{
+    .left-side
+    {
+     width: 10%;
+    }
+    
+    .middle
+    {
+     width: 87%;
+    }
+    
+    .right-side{
+        width: 3%;
+    }
+}
+
+
+
+@media screen and (max-width: 700px)
+{
+    .left-side
+    {
+     width: 8%;
+    }
+    
+    .middle
+    {
+     width: 89%;
+    }
+    
+    .right-side{
+        width: 3%;
+    }
+}
+
+@media screen and (max-width: 650px)
+{
+    .left-side
+    {
+     width: 8%;
+    }
+    
+    .middle
+    {
+     width: 89%;
+    }
+    
+    .right-side{
+        width: 3%;
+    }
+}
+
+@media screen and (max-width: 600px)
+{
+    .left-side
+    {
+     width: 10%;
+    }
+    
+    .middle
+    {
+     width: 87%;
+    }
+    
+    .right-side{
+        width: 3%;
+    }
+}
+
+@media screen and (max-width: 510px)
+{
+    .left-side
+    {
+     width: 13%;
+    }
+    
+    .middle
+    {
+     width: 80%;
+    }
+    
+    .right-side{
+        width: 7%;
+    }
+}
+
+@media screen and (max-width: 430px)
+{
+    .left-side
+    {
+     width: 15%;
+    }
+    
+    .middle
+    {
+     width: 78%;
+    }
+    
+    .right-side{
+        width: 7%;
+    }
+}

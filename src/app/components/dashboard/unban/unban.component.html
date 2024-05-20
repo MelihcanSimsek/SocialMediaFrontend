@@ -1,23 +1,22 @@
-<div class="px-10 py-8">
+<div class="pl-10 pr-4 py-8">
     <div class="py-4 flex flex-row items-center space-x-1">
         <input type="text" class="dark:bg-secondary-color dark:text-white" [(ngModel)]="bannedFilter" placeholder="Kullanıcı Ara">
     </div>
+
     <div class="py-2 space-y-3" *ngFor="let user of bannedUsers |unban:bannedFilter">
-
-    
-    <div class="flex bg-white dark:bg-secondary-color py-4 px-6 flex flex-row justify-between">
-        <div class="flex flex-row space-x-2">
-            <img [src]="getUserAvatar(user.imagePath)" height="50" width="50" alt="avatar-image" class=" rounded-md">
-            <span class="text-lg font-semibold dark:text-white">{{user.userName}}</span>
-        </div>
-        <div class="flex flex-col items-center justify-center divide-y-2 divide-primary-color-dark dark:divide-secondary-color-extra-light">
-            <span class="text-lg dark:text-white">Yasaklanma Tarihi</span>
-            <span class="font-semibold text-lg dark:text-secondary-color-light">{{user.banDate |date:"dd/MMM/y"}}</span>
-        </div>
-        <div class="px-6 py-4 bg-red-500 cursor-pointer hover:bg-red-900 flex justify-center items-center rounded-md" (click)="Unban(user)">
-            <span class="text-sm text-white font-semibold">Yasak Kaldır</span>
+        <div class="content-flex bg-white dark:bg-secondary-color py-4 px-6 justify-between">
+            <div class="flex flex-row space-x-2">
+                <img [src]="getUserAvatar(user.imagePath)"  alt="avatar-image" class=" profile-image rounded-md">
+                <span class=" name-text font-semibold dark:text-white">{{user.userName}}</span>
+            </div>
+            <div class="flex flex-col items-center justify-center divide-y-2 divide-primary-color-dark dark:divide-secondary-color-extra-light">
+                <span class="date-text dark:text-white">Yasaklanma Tarihi</span>
+                <span class="font-semibold date-text dark:text-secondary-color-light">{{user.banDate |date:"dd/MMM/y"}}</span>
+            </div>
+            <div class="button-padding bg-red-500 cursor-pointer hover:bg-red-900 flex justify-center items-center rounded-md" (click)="Unban(user)">
+                <span class="unban-text text-white font-semibold">Yasak Kaldır</span>
+            </div>
         </div>
     </div>
 
-    </div>
 </div>

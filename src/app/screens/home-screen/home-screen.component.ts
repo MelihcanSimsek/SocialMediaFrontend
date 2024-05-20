@@ -11,7 +11,7 @@ export class HomeScreenComponent implements OnInit{
 
   user:UserModel;
   constructor(private authService:AuthService) {
-  
+    sessionStorage.setItem("page","1");
     
   }
 

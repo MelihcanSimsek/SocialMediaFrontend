@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class SearchScreenComponent {
 
+constructor() {
+  sessionStorage.setItem("page","2");
+  
+}
 }

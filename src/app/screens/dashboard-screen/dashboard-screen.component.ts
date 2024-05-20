@@ -13,7 +13,7 @@ export class DashboardScreenComponent implements OnInit {
   dashboardRole:boolean;
   constructor(private roleService:RoleService,
     private authService:AuthService) {
-    
+      sessionStorage.removeItem("page") 
   }
 
   ngOnInit(): void {
@@ -39,7 +39,7 @@ export class DashboardScreenComponent implements OnInit {
     }
     else
     {
-      return "px-6 py-4 bg-primary-color hover:opacity-90 rounded-lg text-white dark:bg-secondary-color-light dark:text-secondary-color-extra-dark cursor-pointer";
+      return "px-6 py-4 bg-primary-color-dark hover:opacity-90 rounded-lg text-white dark:bg-secondary-color-light dark:text-secondary-color-extra-dark cursor-pointer";
     }
   }
 }

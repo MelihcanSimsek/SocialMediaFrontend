@@ -1,7 +1,9 @@
 <app-header></app-header>
-<div class="grid grid-cols-7 bg-primary-color-extra-light dark:bg-secondary-color-extra-dark">
-    <app-sidebar class="col-start-1 col-end-1 "></app-sidebar>
-    <div class="col-start-2 col-span-6 pt-6 flex flex-col items-center ">
+<div class="main bg-primary-color-extra-light dark:bg-secondary-color-extra-dark">
+    <div class="left-side">
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="middle pt-6 flex flex-col items-center ">
         
         <div class="flex flex-row space-x-3 py-6 px-10 bg-white dark:bg-secondary-color  rounded-lg shadow-2xl ">
             <div [class]="GetSelectedClass(false)" (click)="changeSelectedSettings(false)">
@@ -15,6 +17,9 @@
         
         <app-password *ngIf="!selectedSetting"></app-password>
         <app-notification-settings *ngIf="selectedSetting"></app-notification-settings>
+    </div>
+    <div class="right-side">
+        
     </div>
     
 </div>

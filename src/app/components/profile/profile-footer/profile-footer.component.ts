@@ -167,11 +167,11 @@ export class ProfileFooterComponent implements OnInit {
     
     if(this.postFavs.includes(id))
     {
-      return "cursor-pointer  text-red-700"
+      return "icon-text cursor-pointer  text-red-700"
     }
     else
     {
-      return "cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"
+      return "icon-text cursor-pointer text-primary-color-dark hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"
     }
   }
 
@@ -239,11 +239,11 @@ export class ProfileFooterComponent implements OnInit {
     
     if(this.commentFavs.includes(id))
     {
-      return "cursor-pointer  text-red-700"
+      return "icon-text cursor-pointer  text-red-700"
     }
     else
     {
-      return "cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"
+      return "icon-text cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"
     }
   }
 
@@ -312,11 +312,11 @@ export class ProfileFooterComponent implements OnInit {
     
     if(this.favFavs.includes(id))
     {
-      return "cursor-pointer  text-red-700"
+      return "icon-text cursor-pointer  text-red-700"
     }
     else
     {
-      return "cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"
+      return "icon-text cursor-pointer text-slate-700 hover:text-slate-500 dark:text-white dark:hover:text-secondary-color-extra-light"
     }
   }
 

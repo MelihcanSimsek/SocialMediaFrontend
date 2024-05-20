@@ -10,26 +10,26 @@
                     <div class="relative bottom-20 flex flex-col items-center justify-center select-none space-y-1">
                         <img [src]="getUserProfileImage(profile.profileImage)"
                             width="150" height="150" class="rounded-full cursor-pointer" alt="avatar">
-                        <span class="text-2xl text-center dark:text-white">{{profile.name}}</span>
+                        <span class="profile-name-text text-center dark:text-white">{{profile.name}}</span>
                     </div>
                    <div class="flex flex-row space-x-3">
                       <div class="flex flex-col pt-2">
                         <div *ngIf="CheckUserIsFriend()" class="rounded-full bg-white px-3 py-3 text-black hover:bg-primary-color-extra-light hover:text-primary-color-dark dark:bg-secondary-color dark:hover:bg-secondary-color-dark dark:hover:text-secondary-color-light dark:text-white cursor-pointer" (click)="SendMessage()">
-                            <mat-icon class="text-2xl font-semibold "> mail_outline</mat-icon>
+                            <mat-icon class=" message-icon font-semibold "> mail_outline</mat-icon>
                         </div>
                       </div>
                     <div class="flex flex-col pt-2">
                         <div *ngIf="!CheckFollow() && !IsOwnProfile()"
-                            class="px-6 py-4 bg-primary-color-dark hover:opacity-90 flex flex-col items-center justify-center rounded-md cursor-pointer dark:bg-secondary-color-light" (click)="Follow()">
-                            <span class="text-white text-xl dark:text-secondary-color-extra-dark">Takip Et</span>
+                            class="button-padding-plus bg-primary-color-dark hover:opacity-90 flex flex-col items-center justify-center rounded-md cursor-pointer dark:bg-secondary-color-light" (click)="Follow()">
+                            <span class="text-white  profile-interact-btn-text-plus dark:text-secondary-color-extra-dark">Takip Et</span>
                         </div>
                         <div *ngIf="CheckFollow() && !IsOwnProfile()"
-                            class="px-6 py-4 bg-slate-500 hover:opacity-90 flex flex-col items-center justify-center rounded-md cursor-pointer" (click)="UnFollow()">
-                            <span class="text-white text-xl ">Takibi Bırak</span>
+                            class="button-padding  bg-slate-500 hover:opacity-90 flex flex-col items-center justify-center rounded-md cursor-pointer" (click)="UnFollow()">
+                            <span class="text-white  profile-interact-btn-text ">Takibi Bırak</span>
                         </div>
                         <div *ngIf="IsOwnProfile()"
-                            class="px-6 py-4 bg-primary-color-light hover:opacity-90 flex flex-col items-center justify-center rounded-md cursor-pointer dark:bg-secondary-color-extra-light " (click)="OpenProfileModal()">
-                            <span class="text-white text-xl dark:text-white ">Düzenle</span>
+                            class="button-padding-plus  bg-primary-color-orange hover:opacity-90 flex flex-col items-center justify-center rounded-md cursor-pointer dark:bg-secondary-color-extra-light " (click)="OpenProfileModal()">
+                            <span class="text-white dark:text-white  profile-interact-btn-text-plus">Düzenle</span>
                         </div>
                     </div>
                    </div>
@@ -40,7 +40,7 @@
         <div id="profile-header-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="p-4 w-full max-w-4xl max-h-full">
                 <!-- Modal content -->
-                <div class="bg-primary-color-extra-light rounded-lg dark:bg-secondary-color shadow">
+                <div class="bg-primary-color-light rounded-lg dark:bg-secondary-color shadow">
                    <div class="flex flex-row justify-end px-10 py-2">
                     <button (click)="closeProfileModal()"><mat-icon class="hover:bg-primary-color-light hover:text-white dark:text-white dark:hover:text-secondary-color-extra-dark dark:hover:bg-secondary-color rounded-md">close</mat-icon></button>
                    </div>
@@ -66,7 +66,7 @@
                                 <input type="text" id="location" formControlName="location"  maxlength="30" class="w-3/4 focus:outline-none focus:borer-rose-600 dark:bg-secondary-color dark:text-white">
                             </div>
                             <div class="flex flex-row justify-end py-4">
-                                <div class="px-6 py-4 flex justify-center items-center bg-primary-color-dark rounded-lg shadow-lg hover:opacity-80 cursor-pointer dark:bg-secondary-color-light  " (click)="UpdateProfile()">
+                                <div class="px-6 py-4 flex justify-center items-center bg-primary-color-orange rounded-lg shadow-lg hover:opacity-80 cursor-pointer dark:bg-secondary-color-light  " (click)="UpdateProfile()">
                                     <span class="text-xl text-white font-semibold dark:text-secondary-color-extra-dark">Kaydet</span>
                                 </div>
                             </div>
@@ -78,33 +78,33 @@
         </div>
         <!-- body -->
         <div class="flex justify-center">
-            <hr class="w-3/4 h-1 bg-primary-color-dark dark:bg-secondary-color-light">
+            <hr class="w-3/4 h-1 bg-primary-color-yellow dark:bg-secondary-color-light">
         </div>
         <div class="px-10  justify-start py-2 ">
             <div class="flex flex-row ">
                 <div class="flex flex-row items-center pr-4">
-                    <span class="px-1 text-lg dark:text-secondary-color-light">{{followedIds.length}}</span>
-                    <span class="text-slate-500 dark:text-white">Takip Edilen</span>
+                    <span class="px-1  info-text dark:text-secondary-color-light">{{followedIds.length}}</span>
+                    <span class="text-slate-500 dark:text-white info-text">Takip Edilen</span>
                 </div>
                 <div class="flex flex-row justify-around items-center">
-                    <span class="px-1 text-lg dark:text-secondary-color-light">{{followerIds.length}}</span>
-                    <span class="text-slate-500 dark:text-white">Takipçi</span>
+                    <span class="px-1 info-text dark:text-secondary-color-light">{{followerIds.length}}</span>
+                    <span class="text-slate-500 dark:text-white info-text">Takipçi</span>
                 </div>
             </div>
         </div>
         <div class="flex justify-center py-2">
-            <hr class="w-3/4 h-1 bg-primary-color-dark dark:bg-secondary-color-light">
+            <hr class="w-3/4 h-1 bg-primary-color-yellow dark:bg-secondary-color-light">
         </div>
         <div class="py-2">
-            <div class="px-10 flex flex-row items-start text-xl">
-                <span class="text-black font-semibold dark:text-white">Profil Açıklaması</span>
+            <div class="px-10 flex flex-row items-start ">
+                <span class="text-black info-page-text font-semibold dark:text-white">Profil Açıklaması</span>
             </div>
             <div class="px-10 py-2 flex flex-row flex-wrap">
-                <p class="text-slate-800 dark:text-white">{{profile.description}}</p>
+                <p class="text-slate-800 description-text dark:text-white">{{profile.description}}</p>
             </div>
             <div class="px-10 py-2 flex flex-row items-center" *ngIf="profile != undefined && profile.location.trim() !== ''">
-                <span  class="text-slate-400 text-2xl flex flex-row items-center dark:text-secondary-color-light"><mat-icon>location_on</mat-icon></span>
-                <span class="text-slate-800 dark:text-white">{{profile.location}}</span>
+                <span  class="text-slate-400 location-text flex flex-row items-center dark:text-secondary-color-light"><mat-icon>location_on</mat-icon></span>
+                <span class="text-slate-800 location-text dark:text-white">{{profile.location}}</span>
             </div>
         </div>
         <!-- footer -->

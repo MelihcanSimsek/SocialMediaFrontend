@@ -104,17 +104,17 @@ export class SearchComponent implements OnInit {
   {
     if(this.currentPage > 1)
     {
-      return "flex items-center justify-center px-6 py-4 bg-primary-color hover:opacity-90 rounded-lg cursor-pointer dark:bg-secondary-color-light"
+      return "flex btn items-center justify-center  bg-primary-color-orange hover:opacity-90 rounded-lg cursor-pointer dark:bg-secondary-color-light"
     }
-    return "flex items-center justify-center px-6 py-4 bg-primary-color hover:opacity-90 rounded-lg cursor-pointer  dark:bg-secondary-color-light invisible";
+    return "flex btn items-center justify-center  bg-primary-color-orange hover:opacity-90 rounded-lg cursor-pointer  dark:bg-secondary-color-light invisible";
   }
 
   getNextClass()
   {
     if(this.currentPage < this.totalPage)
     {
-      return "flex items-center justify-center px-6 py-4 bg-primary-color hover:opacity-90 rounded-lg  dark:bg-secondary-color-light cursor-pointer"
+      return "flex btn items-center justify-center bg-primary-color-orange hover:opacity-90 rounded-lg  dark:bg-secondary-color-light cursor-pointer"
     }
-    return "flex items-center justify-center px-6 py-4 bg-primary-color hover:opacity-90 rounded-lg cursor-pointer  dark:bg-secondary-color-light invisible";
+    return "flex btn items-center justify-center  bg-primary-color-orange hover:opacity-90 rounded-lg cursor-pointer  dark:bg-secondary-color-light invisible";
   }
 }
