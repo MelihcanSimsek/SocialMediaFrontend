@@ -1,7 +1,8 @@
-<div class="w-full flex justify-center" *ngIf="advertise != null">
-    <div class=" flex justify-center items-center">
-        <a [href]="advertise.url">
-        <img [src]="getAdvertiseImage(advertise.imagePath)" [alt]="advertise.brandName" >
-        </a>
+<div class="px-10 flex" *ngIf="advertise != null">
+    <a [href]="advertise.url">
+    <div class="advertise-image flex cursor-pointer  bg-cover bg-center bg-advertise" [style.background-image]="'url(' + getAdvertiseImage(advertise.imagePath)+ ')'" >
+        
+       
     </div>
+     </a>
 </div>

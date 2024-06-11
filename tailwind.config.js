@@ -20,6 +20,10 @@ module.exports = {
         "secondary-color-red":"#EF233C",
         "secondary-color-blue":"#00ABE7",
         "selected-page-color":"#ffa500"
+      },
+      fontFamily: {
+        'header':["Poetsen One","sans-serif"],
+        'other':["Roboto","sans-serif"]
       }
     },
   },

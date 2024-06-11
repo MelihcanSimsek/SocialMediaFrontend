@@ -44,15 +44,15 @@
         <mat-icon class="close-icon transition ease-in-out bg-white dark:bg-secondary-color text-black dark:text-white scale-x-[-1]" (click)="SwitchSidebar(false)">exit_to_app</mat-icon>
     </div>
     <div class="sidebar-header">
-        <span class="header-text dark:text-white">SocialMedia</span>
+        <span class="header-text dark:text-white font-header">SocialMedia</span>
     </div>
     <ul class="sidebar-ul">
         <li class="sidebar-li" (click)="SwitchSidebar(true)"><mat-icon class="sidebar-open transition ease-in-out bg-white dark:bg-secondary-color text-black dark:text-white">exit_to_app</mat-icon></li>
-        <li [ngClass]="setSelectedPage('1')"><a href="/home"> <mat-icon fontIcon="home" class="icon-text transition ease-in-out bg-white text-black dark:bg-secondary-color dark:text-white"></mat-icon> <span class="page-text  text-black  dark:text-white">Anasayfa</span></a></li>
-        <li  [ngClass]="setSelectedPage('2')"><a href="/search"> <mat-icon class="icon-text transition ease-in-out bg-white dark:bg-secondary-color text-black dark:text-white">search</mat-icon><span class="page-text  text-black dark:text-white">Ara</span></a></li>
-        <li  [ngClass]="setSelectedPage('3')"><a href="/profile/{{user.id}}"> <mat-icon class="icon-text transition ease-in-out bg-white dark:bg-secondary-color text-black dark:text-white">person</mat-icon><span class="page-text  text-black dark:text-white">Profil</span></a></li>
-        <li  [ngClass]="setSelectedPage('4')"><a href="/friends"> <mat-icon class="icon-text transition ease-in-out bg-white dark:bg-secondary-color text-black dark:text-white">public</mat-icon><span class="page-text  text-black dark:text-white">Arkadaşlar</span></a></li>
-        <li  [ngClass]="setSelectedPage('5')"><a href="/messages"> <mat-icon class="icon-text transition ease-in-out bg-white dark:bg-secondary-color text-black dark:text-white"> mail_outline</mat-icon><span class="page-text  text-black dark:text-white">Mesajlar</span></a></li>
+        <li [ngClass]="setSelectedPage('1')"><a href="/home"> <mat-icon fontIcon="home" class="icon-text transition ease-in-out bg-white text-black dark:bg-secondary-color dark:text-white"></mat-icon> <span class="page-text  text-black  dark:text-white font-other">Anasayfa</span></a></li>
+        <li  [ngClass]="setSelectedPage('2')"><a href="/search"> <mat-icon class="icon-text transition ease-in-out bg-white dark:bg-secondary-color text-black dark:text-white">search</mat-icon><span class="page-text  text-black dark:text-white font-other">Ara</span></a></li>
+        <li  [ngClass]="setSelectedPage('3')"><a href="/profile/{{user.id}}"> <mat-icon class="icon-text transition ease-in-out bg-white dark:bg-secondary-color text-black dark:text-white">person</mat-icon><span class="page-text  text-black dark:text-white font-other">Profil</span></a></li>
+        <li  [ngClass]="setSelectedPage('4')"><a href="/friends"> <mat-icon class="icon-text transition ease-in-out bg-white dark:bg-secondary-color text-black dark:text-white">public</mat-icon><span class="page-text  text-black dark:text-white font-other">Arkadaşlar</span></a></li>
+        <li  [ngClass]="setSelectedPage('5')"><a href="/messages"> <mat-icon class="icon-text transition ease-in-out bg-white dark:bg-secondary-color text-black dark:text-white"> mail_outline</mat-icon><span class="page-text  text-black dark:text-white font-other">Mesajlar</span></a></li>
         <li  class="sidebar-li-btn"><div (click)="OpenPostModal()" class="btn-share"><span class="btn-share-text">Paylaş</span> <mat-icon class="btn-share-icon">add</mat-icon></div></li>
     </ul>
 </div>
@@ -75,7 +75,7 @@
                     </button>
                 </div>
                 <div class="relative w-full h-full">
-                <textarea name="postarea" id="post-area"  rows="8" class="relative w-full h-full dark:bg-secondary-color dark:text-white rounded-md" placeholder="Fikirlerinizi paylaşın.." maxlength="255" [(ngModel)]="postarea"></textarea>
+                <textarea name="postarea" id="post-area"  rows="8" class="relative w-full h-full dark:bg-secondary-color dark:text-white rounded-md font-other" placeholder="Fikirlerinizi paylaşın.." maxlength="255" [(ngModel)]="postarea"></textarea>
                 <div class="absolute w-full bottom-3 left-1">
                     <hr class="text-gray-500 py-1">
                     <div class="flex flex-row  divide-x divide-gray-400">
@@ -92,7 +92,7 @@
                     <img [src]="getPostImage()" alt="image"  height="500" class="cursor-pointer hover:opacity-90 border-2 border-solid border-stone-500" (click)="deleteImage()">
                 </div>
                 <div class="flex flex-col items-end">
-                    <button type="button" class="rounded-md bg-primary-color-orange hover:bg-primary-color text-white px-8 py-4 dark:bg-secondary-color-light dark:text-secondary-color-extra-dark" (click)="Post()">Paylaş</button>
+                    <button type="button" class="rounded-md bg-primary-color-orange hover:bg-primary-color text-white px-8 py-4 dark:bg-secondary-color-light dark:text-secondary-color-extra-dark font-other" (click)="Post()">Paylaş</button>
                 </div>
             </div>
         </div>

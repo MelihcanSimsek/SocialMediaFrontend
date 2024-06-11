@@ -1,0 +1,12 @@
+.advertise-image{
+    width: 268px;
+    height: 500px;
+}
+
+
+
+.bg-advertise {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}

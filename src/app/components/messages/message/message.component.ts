@@ -140,9 +140,9 @@ export class MessageComponent implements OnInit {
   {
     if(this.CurrentChatProfile != undefined   && this.CurrentChatProfile.chatId == chatId)
     {
-      return "flex flex-col w-full py-2 px-2 cursor-pointer  bg-primary-color-dark dark:bg-secondary-color  text-white "
+      return "flex flex-col w-full py-2 px-2 cursor-pointer  bg-primary-color-dark dark:bg-gray-700 text-white "
     }
-    return "flex flex-col w-full py-2 px-2 bg-white cursor-pointer shadow-lg hover:bg-primary-color-dark dark:bg-secondary-color-extra-dark dark:hover:bg-secondary-color  hover:opacity-80 text-black hover:text-white"
+    return "flex flex-col w-full py-2 px-2 bg-white cursor-pointer shadow-lg hover:bg-primary-color-dark dark:bg-secondary-color dark:hover:bg-secondary-color-extra-light  hover:opacity-80 text-black hover:text-white"
   }
 
   OpenImageFile(){

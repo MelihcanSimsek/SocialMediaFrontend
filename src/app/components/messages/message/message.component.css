@@ -1,6 +1,96 @@
 textarea{
     resize: none;
 }
+.message-main{
+    height: 100vh;
+}
+
+.message-header{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    height: 10%;
+}
+
+.header-left{
+
+    width: 25%;
+}
+
+.header-right{
+    width: 75%;
+}
+
+.message-body{
+    width: 100%;
+    display:flex ;
+    flex-direction: row;
+    height: 90%;
+}
+
+.friend-list{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.chat-section{
+    width: 75%;
+    height: 100%;
+    border-left-width: 4px;
+}
+
+.message-section
+{
+    height: 75%;
+}
+
+.input-section{
+    height: 25%;
+}
+
+.user-name{
+    font-size: 0.875rem;
+}
+
+.user-message{
+    font-size: 0.875rem;
+}
+
+.user-message-date{
+    font-size: 0.875rem;
+}
+
+.send-button-text{
+    font-size: 0.875rem;
+}
+
+.message-content-left-date{
+    font-size: 0.875rem;
+}
+
+.message-content-right-date{
+    font-size: 0.875rem;
+}
+
+.message-content{
+    font-size: 0.875rem;
+}
+
+
+.send-image{
+    position: absolute;
+    right: 1%;
+    bottom: 16%;
+    
+}
+
+.send-image-size{
+    width: 200px;
+    height: 200px;
+}
 
 
 @media screen and (max-width: 1350px)
@@ -36,23 +126,109 @@ textarea{
 
 }
 
-@media screen and (max-width: 1110px)
+@media screen and (max-width: 950px)
 {
-   
+    .send-button-text{
+        font-size: 0.775rem;
+    }
  
    
 
 }
 
-@media screen and (max-width: 840px)
+@media screen and (max-width: 860px)
 {
+    .user-name{
+        font-size: 0.775rem;
+    }
+    
+    .user-message{
+        font-size: 0.775rem;
+    }
+    
+    .user-message-date{
+        font-size: 0.775rem;
+    }
 
+    .search-box{
+        display: none;
+    }
+
+    .send-button-text{
+        font-size: 0.675rem;
+    }
    
 }
 
-@media screen and (max-width: 768px)
+@media screen and (max-width: 767px)
 {
-   
+    .send-image{
+        position: absolute;
+        right: 1%;
+        bottom: 15%;
+        
+    }
+}
+
+
+
+@media screen and (max-width: 700px)
+{
+
+    .header-left{
+
+        width: 0;
+    }
+    
+    .header-right{
+        width: 100%;
+    }
+
+    .message-body{
+        flex-direction: column;
+    }
+
+    .friend-list{
+        height: 25%;
+        width: 100%;
+        flex-direction: row;
+        overflow-y: hidden;
+        overflow-x: auto;
+    }
+
+    .chat-section{
+        width: 100%;
+        height: 75%;
+        border-left-width: 0;
+        border-top-width: 4px;
+    }
+
+    .message-section{
+        border-left-width: 4px;
+    }
+
+    .user-name{
+        font-size: 0.775rem;
+    }
+    
+    .user-message{
+        font-size: 0.775rem;
+    }
+    
+    .user-message-date{
+        font-size: 0.775rem;
+    }
+
+    .right-date{
+       visibility: hidden;
+    }
+
+    .send-image{
+        position: absolute;
+        right: 2.5%;
+        bottom: 9%;
+        
+    }
 }
 
 @media screen and (max-width: 650px)
@@ -72,12 +248,31 @@ textarea{
 
 @media screen and (max-width: 500px)
 {
+    .message-content-left-date{
+        font-size: 0.65rem;
+    }
+    
+    .message-content-right-date{
+        font-size: 0.65rem;
+    }
+    
+    .message-content{
+        font-size: 0.775rem;
+    }
+
+
+    .send-image-size{
+        width: 150px;
+        height: 150px;
+    }
     
 }
 
-@media screen and (max-width: 450px)
+@media screen and (max-width: 480px)
 {
- 
+    .send-button-text{
+        font-size: 0.5rem;
+    }
    
 }
 
@@ -88,5 +283,26 @@ textarea{
 
 @media screen and (max-width: 375px)
 {
-   
+    .message-content-left-date{
+        font-size: 0.5rem;
+    }
+    
+    .message-content-right-date{
+        font-size: 0.5rem;
+    }
+    
+    .message-content{
+        font-size: 0.775rem;
+    }
+}
+
+
+@media screen and (max-width: 368px)
+{
+    .send-image{
+        position: absolute;
+        right: 3%;
+        bottom: 9%;
+        
+    }
 }
