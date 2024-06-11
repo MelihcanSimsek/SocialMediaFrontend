@@ -98,7 +98,7 @@
                 </div>
             </div>
             <div id="message-box-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                <div class="p-4 bg-primary-color-light dark:bg-secondary-color-dark rounded-lg w-full max-w-xl max-h-full">
+                <div class="p-4 bg-primary-color-light dark:bg-slate-700 rounded-lg w-full max-w-xl max-h-full">
                     <!-- Modal content -->
                     <div class="w-full flex flex-row justify-between">
                         <div class="flex w-full flex-row py-2 ">
@@ -109,14 +109,14 @@
                        </div>
                     </div>
                     <div class="w-full divide-y-2">
-                    <div class="px-4 py-4 bg-primary-color dark:bg-secondary-color-extra-light rounded-lg  w-full flex flex-row justify-between " *ngFor="let friend of FriendList |friendFilter:friendFilterText">
+                    <div class="px-4 py-4 bg-primary-color dark:bg-secondary-color-blue rounded-lg  w-full flex flex-row justify-between " *ngFor="let friend of FriendList |friendFilter:friendFilterText">
                         <div class="flex flex-row w-full justify-between">
                             <div class="flex flex-row space-x-2">
                                 <img [src]="GetUserAvatar(friend.profileImage)"
                         width="50" height="50" class="rounded-full cursor-pointer hover:opacity-90" alt="avatar">
-                                <span class="text-2xl  text-white">{{friend.name}}</span>
+                                <span class="text-2xl  text-black dark:text-white">{{friend.name}}</span>
                             </div>
-                            <div class="flex justify-center items-center px-6 py-2  bg-slate-100 hover:opacity-90  cursor-pointer dark:bg-secondary-color-light rounded-md" (click)="SendMessage(friend.userId)">
+                            <div class="flex justify-center items-center px-6 py-2  bg-primary-color-orange hover:opacity-90  cursor-pointer dark:bg-secondary-color-light rounded-md" (click)="SendMessage(friend.userId)">
                                 <mat-icon class="text-2xl text-black dark:text-secondary-color-extra-dark"> mail_outline</mat-icon>
                             </div>
                         </div>
